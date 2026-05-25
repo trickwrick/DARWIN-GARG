@@ -50,7 +50,6 @@ export default function BookPage() {
               <ExpandableDescription />
 
               <div className={styles.actionSection}>
-                <div className={styles.price}>Available on Amazon</div>
                 <a href={amazonLink} target="_blank" rel="noopener noreferrer" className={styles.buyButton}>
                   BUY NOW ON AMAZON
                 </a>
