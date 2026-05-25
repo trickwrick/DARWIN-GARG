@@ -10,9 +10,7 @@ export default function AboutCard() {
         <h2>ABOUT THE BOOK</h2>
         <div className={styles.divider}></div>
         <p>
-          The world isn't facing one crisis. It's facing ten — simultaneously. 
-          Misinformation floods every screen. Mental health crises touch nearly every family. 
-          The climate emergency accelerates. Authoritarianism rises.
+          The world isn&apos;t facing one crisis. It&apos;s facing ten — simultaneously. Misinformation floods every screen. Mental health crises touch nearly every family. The climate emergency accelerates. Authoritarianism rises.
         </p>
         <p>
           Thousands of years ago, Hindu tradition gave us the Dashavatar — ten avatars of Vishnu, 
