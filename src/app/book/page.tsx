@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AuthorSection from '@/components/AuthorSection';
+import ExpandableDescription from '@/components/ExpandableDescription';
 import styles from './page.module.css';
 
 export const metadata = {
@@ -16,20 +17,14 @@ export default function BookPage() {
       <Navbar />
 
       <main className={styles.bookPage}>
+        <div className={styles.pageHeader}>
+          <div className={styles.badge}>NEW RELEASE</div>
+          <h1 className={`${styles.title} text-gradient-gold`}>When Gods Must Return</h1>
+          <h2 className={styles.subtitle}>Ancient Wisdom for Modern Chaos</h2>
+          <div className={styles.divider}></div>
+        </div>
+
         <div className={styles.bookContainer}>
-
-          <div className={styles.pageHeader}>
-            <div className={styles.badge}>NEW RELEASE</div>
-            <h1 className={styles.title}>When Gods Must Return</h1>
-            <h2 className={styles.subtitle}>Ancient Wisdom for Modern Chaos</h2>
-            <div className={styles.authorContainer}>
-              <span className={styles.byText}>by</span>
-              <img src="/images/author.jpg" alt="Darwin Garg" className={styles.authorImage} />
-              <span className={styles.authorName}>Darwin Garg</span>
-            </div>
-            <div className={styles.divider}></div>
-          </div>
-
           <div className={styles.productWrapper}>
             <div className={styles.imageSection}>
               <div className={styles.imageContainer}>
@@ -38,13 +33,21 @@ export default function BookPage() {
             </div>
 
             <div className={styles.detailsSection}>
-              <div className={styles.description}>
-                <p>The world isn&apos;t facing one crisis. It&apos;s facing ten — simultaneously.</p>
-                <p>Misinformation floods every screen. Mental health crises touch nearly every family. The climate emergency accelerates. Authoritarianism rises. Corruption hollows out institutions. We face moral dilemmas with no clean answers. Addiction steals our presence. Technology reshapes the world faster than we can process it.</p>
-                <p>No single idea, leader, or movement can fix this. What we need isn&apos;t one answer. We need ten.</p>
-                <p>Thousands of years ago, Hindu tradition gave us the Dashavatar — ten avatars of Vishnu, each descending to Earth in a moment of crisis, each embodying a distinct form of wisdom the world urgently needed. They were never meant to be alternatives to each other. They were always meant to coexist.</p>
-                <p><strong>When Gods Must Return: Ancient Wisdom for Modern Chaos</strong> brings these ten ancient forms of wisdom into urgent conversation with the defining crises of our time.</p>
+              <div className={styles.amzHeader}>
+                <h1 className={styles.amzTitle}>When Gods Must Return: Ancient Wisdom for Modern Chaos <span className={styles.amzFormat}>Paperback</span></h1>
+                <div className={styles.amzDate}>– March 25, 2026</div>
+                <div className={styles.amzAuthor}>
+                  by <img src="/images/author.jpg" alt="Darwin Garg" className={styles.amzAuthorImg} /> <a href="#" className={styles.amzLink}>Darwin Garg</a> (Author)
+                </div>
+                <div className={styles.amzRating}>
+                  <span className={styles.ratingNumber}>5.0</span>
+                  <span className={styles.stars}>★★★★★</span>
+                  <a href="#" className={styles.amzLink}>(5)</a>
+                </div>
               </div>
+              <div className={styles.amzDivider}></div>
+
+              <ExpandableDescription />
 
               <div className={styles.actionSection}>
                 <div className={styles.price}>Available on Amazon</div>

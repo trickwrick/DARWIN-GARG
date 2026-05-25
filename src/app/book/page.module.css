@@ -1,5 +1,5 @@
 .bookPage {
-  padding: 60px 0;
+  padding-bottom: 60px;
   background-color: var(--primary-bg);
   min-height: calc(100vh - 80px);
 }
@@ -13,10 +13,14 @@
 
 .pageHeader {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: linear-gradient(to bottom, rgba(253, 251, 247, 0.7), rgba(253, 251, 247, 0.95)), url('https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  padding: 80px 20px 60px 20px;
 }
 
 .badge {
@@ -88,7 +92,7 @@
 }
 
 .imageSection {
-  flex: 1;
+  flex: 0.8;
   display: flex;
   justify-content: center;
 }
@@ -111,20 +115,127 @@
 }
 
 .detailsSection {
-  flex: 1.2;
+  flex: 1.5;
   display: flex;
   flex-direction: column;
 }
 
 .description {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  line-height: 1.8;
-  margin-bottom: 40px;
+  font-size: 0.95rem;
+  color: #0f1111;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
 .description p {
   margin-bottom: 15px;
+}
+
+.expandedContent {
+  margin-top: 15px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.avatarList {
+  margin-bottom: 20px;
+  padding-left: 20px;
+  list-style-type: square;
+}
+
+.avatarList li {
+  margin-bottom: 8px;
+  color: #0f1111;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.amzHeader {
+  margin-bottom: 10px;
+}
+
+.amzTitle {
+  font-family: var(--font-sans);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #0f1111;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.amzFormat {
+  color: #565959;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.amzDate {
+  font-size: 0.95rem;
+  color: #565959;
+  margin-bottom: 5px;
+}
+
+.amzAuthor {
+  font-size: 0.95rem;
+  color: #565959;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.amzAuthorImg {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.amzLink {
+  color: #007185;
+  text-decoration: none;
+}
+
+.amzLink:hover {
+  color: #c45500;
+  text-decoration: underline;
+}
+
+.amzRating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.95rem;
+}
+
+.stars {
+  color: #de7921;
+}
+
+.amzDivider {
+  height: 1px;
+  background-color: #e7e7e7;
+  margin: 15px 0;
+}
+
+.readMoreWrapper {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.reportIssue {
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+  color: #565959;
+}
+
+.reportIssue .amzLink {
+  color: #565959;
+}
+.reportIssue .amzLink:hover {
+  color: #c45500;
 }
 
 .actionSection {
@@ -175,6 +286,7 @@
 .buyButton:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 15px 30px rgba(255, 153, 0, 0.4);
+  color: #111;
 }
 
 .buyButton:hover::after {
