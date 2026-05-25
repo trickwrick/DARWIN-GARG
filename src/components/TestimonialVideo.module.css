@@ -1,0 +1,79 @@
+.testimonialContainer {
+  position: relative;
+  width: 100%;
+  padding: 100px 0;
+  background-image: url('/images/testimonial_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(10, 10, 10, 0.85); /* Dark transparent overlay */
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.description {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ddd;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.playBtn {
+  width: 70px;
+  height: 70px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.playBtn:hover {
+  transform: scale(1.05);
+  background-color: #f0f0f0;
+}
+
+.playIcon {
+  color: #111;
+  font-size: 1.8rem;
+  margin-left: 5px; /* Offset to center the triangle visually */
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  .description {
+    font-size: 1rem;
+  }
+}
