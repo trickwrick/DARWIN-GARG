@@ -7,7 +7,7 @@ export default function WelcomeSection() {
         <div className={styles.quoteBox}>
           <div className={styles.quoteIcon}>“</div>
           <p className={styles.quoteText}>
-            The world isn't facing one crisis. It's facing ten — simultaneously.
+            The world isn&apos;t facing one crisis. It&apos;s facing ten — simultaneously.
           </p>
           <div className={styles.quoteDivider}></div>
           <p className={styles.quoteAuthor}>Darwin Garg</p>
@@ -29,7 +29,7 @@ export default function WelcomeSection() {
           <li><strong>Narasimha</strong> — confronting authoritarianism and abuse of power</li>
           <li><strong>Vamana</strong> — humbling the ego that believes it knows best</li>
           <li><strong>Parashurama</strong> — dismantling deep institutional corruption</li>
-          <li><strong>Rama</strong> — doing what's right when it costs everything</li>
+          <li><strong>Rama</strong> — doing what&apos;s right when it costs everything</li>
           <li><strong>Krishna</strong> — choosing wisely when there are no good options</li>
           <li><strong>Buddha</strong> — breaking free from addiction and endless craving</li>
           <li><strong>Kalki</strong> — transforming systems that create these crises in the first place</li>
@@ -40,7 +40,7 @@ export default function WelcomeSection() {
         </p>
 
         <p>
-          This isn't a book that picks one solution for one crisis. Its deepest insight is that the crises are interconnected — and so must be the wisdom we bring to them. All ten avatars must return. Not as alternatives, but as one integrated whole.
+          This isn&apos;t a book that picks one solution for one crisis. Its deepest insight is that the crises are interconnected — and so must be the wisdom we bring to them. All ten avatars must return. Not as alternatives, but as one integrated whole.
         </p>
 
         <div className={styles.actionContainer}>
