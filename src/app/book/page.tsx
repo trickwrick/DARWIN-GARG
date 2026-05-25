@@ -16,6 +16,15 @@ export default function BookPage() {
 
       <main className={styles.bookPage}>
         <div className={styles.bookContainer}>
+          
+          <div className={styles.pageHeader}>
+            <div className={styles.badge}>NEW RELEASE</div>
+            <h1 className={styles.title}>When Gods Must Return</h1>
+            <h2 className={styles.subtitle}>Ancient Wisdom for Modern Chaos</h2>
+            <p className={styles.author}>by <strong>Darwin Garg</strong></p>
+            <div className={styles.divider}></div>
+          </div>
+
           <div className={styles.productWrapper}>
             <div className={styles.imageSection}>
               <div className={styles.imageContainer}>
@@ -24,17 +33,10 @@ export default function BookPage() {
             </div>
 
             <div className={styles.detailsSection}>
-              <div className={styles.badge}>NEW RELEASE</div>
-              <h1 className={styles.title}>When Gods Must Return</h1>
-              <h2 className={styles.subtitle}>Ancient Wisdom for Modern Chaos</h2>
-              <p className={styles.author}>by <strong>Darwin Garg</strong></p>
-
-              <div className={styles.divider}></div>
-
               <div className={styles.description}>
-                <p>The world isn't facing one crisis. It's facing ten — simultaneously.</p>
+                <p>The world isn&apos;t facing one crisis. It&apos;s facing ten — simultaneously.</p>
                 <p>Misinformation floods every screen. Mental health crises touch nearly every family. The climate emergency accelerates. Authoritarianism rises. Corruption hollows out institutions. We face moral dilemmas with no clean answers. Addiction steals our presence. Technology reshapes the world faster than we can process it.</p>
-                <p>No single idea, leader, or movement can fix this. What we need isn't one answer. We need ten.</p>
+                <p>No single idea, leader, or movement can fix this. What we need isn&apos;t one answer. We need ten.</p>
                 <p>Thousands of years ago, Hindu tradition gave us the Dashavatar — ten avatars of Vishnu, each descending to Earth in a moment of crisis, each embodying a distinct form of wisdom the world urgently needed. They were never meant to be alternatives to each other. They were always meant to coexist.</p>
                 <p><strong>When Gods Must Return: Ancient Wisdom for Modern Chaos</strong> brings these ten ancient forms of wisdom into urgent conversation with the defining crises of our time.</p>
               </div>
