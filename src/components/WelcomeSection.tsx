@@ -10,12 +10,19 @@ export default function WelcomeSection() {
             The world isn&apos;t facing one crisis. It&apos;s facing ten — simultaneously.
           </p>
           <div className={styles.quoteDivider}></div>
-          <p className={styles.quoteAuthor}>Darwin Garg</p>
+          <div className={styles.authorInfo}>
+            <img src="/images/author.jpg" alt="Darwin Garg" className={styles.authorImage} />
+            <p className={styles.quoteAuthor}>Darwin Garg</p>
+          </div>
         </div>
       </div>
 
       <div className={styles.contentSide}>
-        <h2 className={styles.heading}>ANCIENT WISDOM FOR MODERN CHAOS</h2>
+        <h2 className={styles.heading}>
+          <span className={styles.ancientText}>ANCIENT WISDOM</span>
+          <span className={styles.forText}> FOR </span>
+          <span className={styles.modernText}>MODERN CHAOS</span>
+        </h2>
         <div className={styles.headingDivider}></div>
 
         <p>
@@ -44,7 +51,7 @@ export default function WelcomeSection() {
         </p>
 
         <div className={styles.actionContainer}>
-          <a href="/book" className={styles.outlineBtn}>
+          <a href="/book" className="btn-primary">
             <span className={styles.playIcon}>▶</span> PRE-ORDER BOOK
           </a>
         </div>

@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AuthorSection from '@/components/AuthorSection';
 import styles from './page.module.css';
 
 export const metadata = {
@@ -16,12 +17,16 @@ export default function BookPage() {
 
       <main className={styles.bookPage}>
         <div className={styles.bookContainer}>
-          
+
           <div className={styles.pageHeader}>
             <div className={styles.badge}>NEW RELEASE</div>
             <h1 className={styles.title}>When Gods Must Return</h1>
             <h2 className={styles.subtitle}>Ancient Wisdom for Modern Chaos</h2>
-            <p className={styles.author}>by <strong>Darwin Garg</strong></p>
+            <div className={styles.authorContainer}>
+              <span className={styles.byText}>by</span>
+              <img src="/images/author.jpg" alt="Darwin Garg" className={styles.authorImage} />
+              <span className={styles.authorName}>Darwin Garg</span>
+            </div>
             <div className={styles.divider}></div>
           </div>
 
@@ -49,6 +54,11 @@ export default function BookPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Meet the Author Section */}
+        <div style={{ marginTop: '60px' }}>
+          <AuthorSection />
         </div>
       </main>
 

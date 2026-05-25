@@ -47,10 +47,32 @@
   margin-bottom: 15px;
 }
 
-.author {
+.authorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.byText {
   font-size: 1.1rem;
   color: var(--text-muted);
-  margin-bottom: 25px;
+}
+
+.authorImage {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-gold);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.authorName {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-main);
 }
 
 .divider {
@@ -122,24 +144,41 @@
 }
 
 .buyButton {
-  display: inline-block;
-  background-color: #ff9900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%);
   color: #111;
-  text-align: center;
   padding: 16px 40px;
   font-size: 1.1rem;
-  font-weight: 700;
-  border-radius: 8px;
+  font-weight: 800;
+  border-radius: 50px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3);
+  letter-spacing: 1.5px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 20px rgba(255, 153, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.buyButton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: all 0.5s ease;
 }
 
 .buyButton:hover {
-  background-color: #e68a00;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(255, 153, 0, 0.4);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(255, 153, 0, 0.4);
+}
+
+.buyButton:hover::after {
+  left: 100%;
 }
 
 @media (max-width: 992px) {
