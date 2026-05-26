@@ -9,14 +9,21 @@ const slides = [
     title: "WHEN GODS MUST RETURN",
     subtitle: "Ancient Wisdom for Modern Chaos",
     cta: "PRE-ORDER NOW",
-    bgImage: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1920&q=80"
+    bgImage: "/images/slider%201.jpeg"
   },
   {
     id: 2,
     title: "TEN CRISES. TEN AVATARS.",
     subtitle: "Discover the alternatives we urgently need.",
     cta: "LEARN MORE",
-    bgImage: "https://images.unsplash.com/photo-1473221326025-9183b464bb7e?auto=format&fit=crop&w=1920&q=80"
+    bgImage: "/images/slider%202.jpeg"
+  },
+  {
+    id: 3,
+    title: "EMBRACE THE JOURNEY",
+    subtitle: "Find stability in a world spinning out of control.",
+    cta: "READ THE BLOG",
+    bgImage: "/images/slider%203.jpeg"
   }
 ];
 

@@ -7,9 +7,12 @@ import BlogCard from '@/components/BlogCard';
 import FAQAccordion from '@/components/FAQAccordion';
 import BookShowcase from '@/components/BookShowcase';
 import Link from 'next/link';
+import { getBlogs } from '@/app/actions/blogActions';
 import styles from './page.module.css';
 
-export default function Home() {
+export default async function Home() {
+  const blogs = await getBlogs();
+  const latestBlogs = blogs.slice(0, 3);
   const dummyBlogs = [
     {
       title: "The Return of the Dashavatar",
@@ -58,9 +61,13 @@ export default function Home() {
             <h2 className={styles.sectionHeading}>Latest Insights</h2>
             <div className={styles.sectionDivider}></div>
             <div className={styles.blogGrid}>
-              {dummyBlogs.map((blog, idx) => (
-                <BlogCard key={idx} {...blog} />
-              ))}
+              {latestBlogs.length === 0 ? (
+                <p style={{ textAlign: 'center', width: '100%' }}>No blogs published yet.</p>
+              ) : (
+                latestBlogs.map((blog) => (
+                  <BlogCard key={blog._id} {...blog} />
+                ))
+              )}
             </div>
             <div style={{ textAlign: 'center', marginTop: '50px' }}>
               <Link href="/blog" className="btn-primary">View More Articles</Link>
