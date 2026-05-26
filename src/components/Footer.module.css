@@ -13,14 +13,7 @@
   margin-bottom: 40px;
 }
 
-.footerSection h3 {
-  font-family: var(--font-serif);
-  color: var(--accent-gold);
-  margin-bottom: 15px;
-  position: relative;
-  padding-bottom: 10px;
-}
-
+.footerSection h3,
 .footerSection h4 {
   font-family: var(--font-sans);
   color: var(--accent-gold);

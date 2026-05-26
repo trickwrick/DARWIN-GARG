@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className={`container ${styles.navContainer}`}>
         <div className={styles.logo}>
           <Link href="/">
-            WGMR
+            DARWIN GARG
           </Link>
         </div>
         <ul className={`${styles.navLinks} ${isOpen ? styles.active : ''}`}>

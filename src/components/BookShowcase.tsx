@@ -14,7 +14,7 @@ export default function BookShowcase({ showBuyButton = true }: BookShowcaseProps
 
   return (
     <div className={styles.bookContainer}>
-      <div className={styles.productWrapper}>
+      <div className={`${styles.productWrapper} ${showBuyButton ? styles.alignTop : styles.alignCenter}`}>
         <div className={styles.imageSection}>
           <div className={styles.imageContainer}>
             <img src={activeImg} alt="When Gods Must Return Book Cover" className={styles.bookImage} />
