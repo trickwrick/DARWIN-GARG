@@ -31,7 +31,7 @@ const faqs: FAQ[] = [
 ];
 
 export default function FAQAccordion() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -45,7 +45,7 @@ export default function FAQAccordion() {
         {faqs.map((faq, index) => (
           <div key={index} className={styles.item}>
             <button 
-              className={styles.question} 
+              className={`${styles.question} ${activeIndex === index ? styles.active : ''}`} 
               onClick={() => toggleAccordion(index)}
               aria-expanded={activeIndex === index}
             >

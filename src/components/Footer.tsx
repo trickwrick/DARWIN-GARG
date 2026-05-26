@@ -7,6 +7,9 @@ export default function Footer() {
       <div className={`container ${styles.footerContainer}`}>
         <div className={styles.footerSection}>
           <h3>WHEN GODS MUST RETURN</h3>
+          <p style={{ marginTop: '15px', marginBottom: '15px', lineHeight: '1.6', fontSize: '0.9rem' }}>
+            When Gods Must Return: Ancient Wisdom for Modern Chaos brings these ten ancient forms of wisdom into urgent conversation with the defining crises of our time.
+          </p>
           <p>Ancient Wisdom for Modern Chaos.</p>
         </div>
         <div className={styles.footerSection}>

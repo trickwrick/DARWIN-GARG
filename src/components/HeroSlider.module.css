@@ -83,11 +83,23 @@
 }
 
 @media (max-width: 768px) {
+  .sliderContainer {
+    height: 70vh;
+    min-height: 400px;
+  }
+
+  .slideContent {
+    padding: 0 20px;
+  }
+
   .title {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
   }
 
   .subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 }

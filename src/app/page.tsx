@@ -1,12 +1,11 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroSlider from '@/components/HeroSlider';
-import WelcomeSection from '@/components/WelcomeSection';
 import TestimonialVideo from '@/components/TestimonialVideo';
-import AboutCard from '@/components/AboutCard';
 import AuthorSection from '@/components/AuthorSection';
 import BlogCard from '@/components/BlogCard';
 import FAQAccordion from '@/components/FAQAccordion';
+import BookShowcase from '@/components/BookShowcase';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -41,12 +40,11 @@ export default function Home() {
           <HeroSlider />
         </section>
 
-        {/* Welcome Section */}
-        <section id="welcome" className="section">
-          <div className="container">
-            <WelcomeSection />
-          </div>
+        {/* Book Showcase Section */}
+        <section id="book-showcase" className="section" style={{ backgroundColor: 'var(--primary-bg)' }}>
+          <BookShowcase showBuyButton={false} />
         </section>
+
 
         {/* Testimonial/Video Section */}
         <section id="testimonial">
@@ -73,12 +71,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About Us Section */}
-        <section id="about" className={`section ${styles.aboutSection}`}>
-          <div className="container">
-            <AboutCard />
-          </div>
-        </section>
 
         {/* Author Section */}
         <section id="author">

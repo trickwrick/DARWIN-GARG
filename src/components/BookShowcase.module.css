@@ -1,0 +1,254 @@
+.bookContainer {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.productWrapper {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.imageSection {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+}
+
+.imageContainer {
+  position: relative;
+  max-width: 450px;
+  width: 100%;
+}
+
+.bookImage {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease;
+}
+
+.bookImage:hover {
+  transform: translateY(-5px);
+}
+
+.thumbnails {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.thumbnail {
+  width: 60px;
+  height: 85px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 2px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.thumbnail:hover,
+.activeThumb {
+  border-color: #007185;
+  box-shadow: 0 4px 10px rgba(0,113,133,0.3);
+}
+
+.detailsSection {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #0f1111;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.description p {
+  margin-bottom: 15px;
+}
+
+.expandedContent {
+  margin-top: 15px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.avatarList {
+  margin-bottom: 20px;
+  padding-left: 20px;
+  list-style-type: square;
+}
+
+.avatarList li {
+  margin-bottom: 8px;
+  color: #0f1111;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.amzHeader {
+  margin-bottom: 10px;
+}
+
+.amzTitle {
+  font-family: var(--font-sans);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #0f1111;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.amzFormat {
+  color: #565959;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.amzDate {
+  font-size: 0.95rem;
+  color: #565959;
+  margin-bottom: 5px;
+}
+
+.amzAuthor {
+  font-size: 0.95rem;
+  color: #565959;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.amzAuthorImg {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.amzLink {
+  color: #007185;
+  text-decoration: none;
+}
+
+.amzLink:hover {
+  color: #c45500;
+  text-decoration: underline;
+}
+
+.amzRating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.95rem;
+}
+
+.stars {
+  color: #de7921;
+}
+
+.amzDivider {
+  height: 1px;
+  background-color: #e7e7e7;
+  margin: 15px 0;
+}
+
+.readMoreWrapper {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.reportIssue {
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+  color: #565959;
+}
+
+.reportIssue .amzLink {
+  color: #565959;
+}
+.reportIssue .amzLink:hover {
+  color: #c45500;
+}
+
+.actionSection {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.price {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.buyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff9900 0%, #e68a00 100%);
+  color: #111;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 20px rgba(255, 153, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.buyButton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: all 0.5s ease;
+}
+
+.buyButton:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(255, 153, 0, 0.4);
+  color: #111;
+  border-color: #111;
+}
+
+.buyButton:hover::after {
+  left: 100%;
+}
+
+@media (max-width: 992px) {
+  .productWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}

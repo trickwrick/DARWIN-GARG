@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import styles from '@/app/book/page.module.css';
-
+import styles from './BookShowcase.module.css';
 export default function ExpandableDescription() {
   const [isExpanded, setIsExpanded] = useState(false);
 

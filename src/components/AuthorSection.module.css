@@ -65,6 +65,8 @@
 @media (max-width: 768px) {
   .imageWrapper {
     margin-top: 0;
+    justify-content: center;
+    width: 100%;
   }
   .container {
     flex-direction: column;
