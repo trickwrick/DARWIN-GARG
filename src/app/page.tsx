@@ -6,6 +6,7 @@ import AuthorSection from '@/components/AuthorSection';
 import BlogCard from '@/components/BlogCard';
 import FAQAccordion from '@/components/FAQAccordion';
 import BookShowcase from '@/components/BookShowcase';
+import Link from 'next/link';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -60,6 +61,9 @@ export default function Home() {
               {dummyBlogs.map((blog, idx) => (
                 <BlogCard key={idx} {...blog} />
               ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+              <Link href="/blog" className="btn-primary">View More Articles</Link>
             </div>
           </div>
         </section>

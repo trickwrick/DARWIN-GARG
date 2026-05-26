@@ -18,7 +18,7 @@ export default function Navbar() {
           <li><Link href="/" onClick={() => setIsOpen(false)}>HOME</Link></li>
           <li><Link href="/#about" onClick={() => setIsOpen(false)}>ABOUT US</Link></li>
           <li><Link href="/contact" onClick={() => setIsOpen(false)}>CONTACT US</Link></li>
-          <li><Link href="/#blog" onClick={() => setIsOpen(false)}>BLOG</Link></li>
+          <li><Link href="/blog" onClick={() => setIsOpen(false)}>BLOG</Link></li>
           <li className={styles.mobileOnlyBtn}>
             <Link href="/book" className="btn-primary" onClick={() => setIsOpen(false)}>GET THE BOOK</Link>
           </li>
