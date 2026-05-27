@@ -44,15 +44,19 @@ export default async function Home() {
           <HeroSlider />
         </section>
 
-        {/* Book Showcase Section */}
-        <section id="book-showcase" className="section" style={{ backgroundColor: 'var(--primary-bg)' }}>
-          <BookShowcase showBuyButton={false} />
+        {/* Author Section */}
+        <section id="author">
+          <AuthorSection />
         </section>
-
 
         {/* Testimonial/Video Section */}
         <section id="testimonial">
           <TestimonialVideo />
+        </section>
+
+        {/* Book Showcase Section */}
+        <section id="book-showcase" className="section" style={{ backgroundColor: 'var(--primary-bg)' }}>
+          <BookShowcase showBuyButton={false} />
         </section>
 
         {/* Blog Section */}
@@ -83,10 +87,7 @@ export default async function Home() {
         </section>
 
 
-        {/* Author Section */}
-        <section id="author">
-          <AuthorSection />
-        </section>
+
       </main>
 
       <Footer />
