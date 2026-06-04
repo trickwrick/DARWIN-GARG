@@ -1,96 +1,30 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import HeroSlider from '@/components/HeroSlider';
-import TestimonialVideo from '@/components/TestimonialVideo';
-import AuthorSection from '@/components/AuthorSection';
-import BlogCard from '@/components/BlogCard';
-import FAQAccordion from '@/components/FAQAccordion';
-import BookShowcase from '@/components/BookShowcase';
-import Link from 'next/link';
-import { getBlogs } from '@/app/actions/blogActions';
-import styles from './page.module.css';
+import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/home/HeroSection";
+import BookSection from "@/components/home/BookSection";
+import JourneySection from "@/components/home/JourneySection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import AboutSection from "@/components/home/AboutSection";
+import HomeFooter from "@/components/home/HomeFooter";
 
-export default async function Home() {
-  const blogs = await getBlogs();
-  const latestBlogs = blogs.slice(0, 3);
-  const dummyBlogs = [
-    {
-      title: "The Return of the Dashavatar",
-      excerpt: "Why ancient forms of wisdom are more relevant today than ever before. Exploring the philosophical roots of When Gods Must Return.",
-      date: "MARCH 15, 2026",
-      image: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      title: "Navigating Modern Chaos",
-      excerpt: "From misinformation to climate emergency, how can we use ancient archetypes to find stability in a world seemingly spinning out of control?",
-      date: "FEBRUARY 28, 2026",
-      image: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      title: "Author Interview: Darwin Garg",
-      excerpt: "A deep dive into the inspiration behind the book and the process of connecting ten ancient avatars with ten contemporary global crises.",
-      date: "JANUARY 10, 2026",
-      image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80"
-    }
-  ];
+export const metadata: Metadata = {
+  title: "Darwin Garg | When Gods Must Return",
+  description:
+    "Author Darwin Garg writes at the meeting of ancient stories and modern chaos.",
+};
 
+export default function Home() {
   return (
     <>
       <Navbar />
-      
-      <main>
-        {/* Hero Section */}
-        <section id="home">
-          <HeroSlider />
-        </section>
-
-        {/* Author Section */}
-        <section id="author">
-          <AuthorSection />
-        </section>
-
-        {/* Testimonial/Video Section */}
-        <section id="testimonial">
-          <TestimonialVideo />
-        </section>
-
-        {/* Book Showcase Section */}
-        <section id="book-showcase" className="section" style={{ backgroundColor: 'var(--primary-bg)' }}>
-          <BookShowcase showBuyButton={false} />
-        </section>
-
-        {/* Blog Section */}
-        <section id="blog" className={`section ${styles.blogSection}`}>
-          <div className="container">
-            <h2 className={styles.sectionHeading}>Latest Insights</h2>
-            <div className={styles.sectionDivider}></div>
-            <div className={styles.blogGrid}>
-              {latestBlogs.length === 0 ? (
-                <p style={{ textAlign: 'center', width: '100%' }}>No blogs published yet.</p>
-              ) : (
-                latestBlogs.map((blog) => (
-                  <BlogCard key={blog._id} {...blog} />
-                ))
-              )}
-            </div>
-            <div style={{ textAlign: 'center', marginTop: '50px' }}>
-              <Link href="/blog" className="btn-primary">View More Articles</Link>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faq" className={`section ${styles.faqSection}`}>
-          <div className="container">
-            <FAQAccordion />
-          </div>
-        </section>
-
-
-
+      <main className="min-h-screen bg-cream">
+        <HeroSection />
+        <BookSection />
+        <JourneySection />
+        <TestimonialsSection />
+        <AboutSection />
       </main>
-
-      <Footer />
+      <HomeFooter />
     </>
   );
 }

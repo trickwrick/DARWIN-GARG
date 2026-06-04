@@ -1,0 +1,27 @@
+.placeholder,
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(360px, 50vw, 480px);
+  background-color: #ebe4d6;
+}
+
+.placeholderLabel {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: rgba(45, 36, 30, 0.5);
+  text-align: center;
+  padding: 1rem;
+}
+
+.image {
+  object-fit: cover;
+}

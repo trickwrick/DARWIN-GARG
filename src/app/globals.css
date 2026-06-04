@@ -1,14 +1,39 @@
-:root {
-  --primary-bg: #FDFBF7;
-  --secondary-bg: #F2E8D5;
-  --text-main: #111111;
-  --text-muted: #444444;
-  --accent-gold: #D4AF37;
-  --accent-gold-dark: #B5952F;
-  --border-color: #E2D3B3;
+@import "tailwindcss";
 
-  --font-serif: var(--font-playfair);
-  --font-sans: var(--font-inter);
+@theme {
+  /* Headlines: Cormorant Garamond */
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  /* Body: Inter */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-sans);
+  --font-headline: var(--font-serif);
+
+  --color-cream: #f5f1e6;
+  --color-cream-dark: #f3ede3;
+  --color-beige: #e8dfd0;
+  --color-beige-dark: #ddd2c0;
+  --color-charcoal: #2d241e;
+  --color-charcoal-muted: #5c5248;
+  --color-espresso: #1a1311;
+  --color-footer: #1a1311;
+  --color-bronze: #8b7355;
+  --color-bronze-light: #a68b5b;
+}
+
+:root {
+  --primary-bg: #f5f1e6;
+  --page-bg: #f5f1e6;
+  --secondary-bg: #e8dfd0;
+  --text-main: #2c2419;
+  --text-muted: #5c5248;
+  --accent-gold: #8b7355;
+  --accent-gold-dark: #6d5a44;
+  --border-color: #ddd2c0;
+
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-sans);
+  --font-headline: var(--font-serif);
 }
 
 * {
@@ -17,21 +42,34 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   height: 100%;
 }
 
 body {
-  font-family: var(--font-sans);
-  background-color: var(--primary-bg);
-  color: var(--text-main);
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+}
+
+p,
+li,
+dd,
+dt,
+label,
+input,
+textarea,
+select,
+button {
+  font-family: var(--font-body);
 }
 
 h1,
@@ -39,28 +77,19 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 1rem;
+h6,
+.font-headline {
+  font-family: var(--font-headline);
+  font-weight: 500;
+}
+
+.font-body {
+  font-family: var(--font-body);
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: var(--accent-gold);
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
 }
 
 img {
@@ -69,6 +98,7 @@ img {
   display: block;
 }
 
+/* Legacy pages (book, blog, contact, admin) */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -80,46 +110,24 @@ img {
   padding: 80px 0;
 }
 
-/* Common UI Elements */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
-  color: #fff;
+  background: var(--color-charcoal);
+  color: var(--color-cream);
   padding: 14px 36px;
-  font-weight: 700;
-  font-size: 1rem;
-  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border-radius: 0;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  letter-spacing: 0.2em;
+  transition: all 0.3s ease;
   font-family: var(--font-sans);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
-  position: relative;
-  overflow: hidden;
-  border: 2px solid transparent;
-}
-
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: all 0.5s ease;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 15px 25px rgba(212, 175, 55, 0.4);
-  color: #fff;
-  border-color: #111;
-}
-
-.btn-primary:hover::after {
-  left: 100%;
+  background: var(--color-espresso);
+  color: var(--color-cream);
+  transform: translateY(-2px);
 }

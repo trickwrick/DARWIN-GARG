@@ -1,39 +1,52 @@
-import Link from 'next/link';
-import styles from './Footer.module.css';
+import Link from "next/link";
+import { PageContainer } from "@/components/home/editorial";
+
+const AMAZON_LINK =
+  "https://www.amazon.com/dp/B0GSTW86RV?ref=cm_sw_r_ffobk_cso_cp_apin_dp_NKMTKPK611WNMXVQFFMZ";
+
+const footerPills = [
+  { href: "#", label: "LinkedIn", external: false },
+  { href: AMAZON_LINK, label: "Buy on Amazon", external: true },
+  { href: "#", label: "Flipkart", external: false },
+  { href: "/book", label: "All editions →", external: false },
+];
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <div className={`container ${styles.footerContainer}`}>
-        <div className={styles.footerSection}>
-          <h3>WHEN GODS MUST RETURN</h3>
-          <p style={{ marginTop: '15px', marginBottom: '15px', lineHeight: '1.6', fontSize: '0.9rem' }}>
-            When Gods Must Return: Ancient Wisdom for Modern Chaos brings these ten ancient forms of wisdom into urgent conversation with the defining crises of our time.
-          </p>
-          <p>Ancient Wisdom for Modern Chaos.</p>
+    <footer className="bg-footer text-cream">
+      <PageContainer className="py-20 text-center md:py-24 lg:py-28">
+        <p className="mx-auto max-w-2xl font-serif text-xl leading-relaxed text-cream/95 md:text-2xl md:leading-relaxed">
+          If you&apos;ve made it this far, thank you. The book is out in the
+          world now, finding its readers across countries and conversations.
+        </p>
+
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-3 md:mt-14 md:gap-4">
+          {footerPills.map((pill) => {
+            const className =
+              "inline-flex h-9 items-center justify-center rounded-full border border-cream/35 px-5 font-sans text-[0.58rem] uppercase tracking-[0.18em] text-cream/90 transition-colors hover:border-cream/60 hover:bg-cream/5";
+
+            if (pill.external) {
+              return (
+                <a
+                  key={pill.label}
+                  href={pill.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={className}
+                >
+                  {pill.label}
+                </a>
+              );
+            }
+
+            return (
+              <Link key={pill.label} href={pill.href} className={className}>
+                {pill.label}
+              </Link>
+            );
+          })}
         </div>
-        <div className={styles.footerSection}>
-          <h4>Links</h4>
-          <ul>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/#about">About</Link></li>
-            <li><Link href="/book">The Book</Link></li>
-            <li><Link href="/blog">Blog</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-          </ul>
-        </div>
-        <div className={styles.footerSection}>
-          <h4>Connect</h4>
-          <ul>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">LinkedIn</a></li>
-          </ul>
-        </div>
-      </div>
-      <div className={styles.copy}>
-        <p>&copy; {new Date().getFullYear()} Darwin Garg. All rights reserved.</p>
-      </div>
+      </PageContainer>
     </footer>
   );
 }

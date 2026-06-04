@@ -1,0 +1,140 @@
+.section {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f5f1e6;
+  padding-left: clamp(2rem, 8vw, 7.5rem);
+  padding-right: clamp(2rem, 8vw, 7.5rem);
+  padding-top: 0;
+  padding-bottom: 4.5rem;
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid rgba(45, 36, 30, 0.1);
+  margin: 0 0 3.5rem;
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(45, 36, 30, 0.5);
+}
+
+.title {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #2d241e;
+}
+
+.subtitle {
+  margin: 0.65rem 0 0;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: rgba(45, 36, 30, 0.75);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  width: 100%;
+}
+
+.cover {
+  width: 220px;
+  max-width: 100%;
+  aspect-ratio: 3 / 4;
+  margin: 0 auto;
+  background-color: #e8e2d4;
+  border: 1px dashed rgba(45, 36, 30, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(45, 36, 30, 0.55);
+  flex-shrink: 0;
+}
+
+.content {
+  max-width: 36rem;
+  text-align: center;
+}
+
+.description {
+  margin: 1.25rem 0 0;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: rgba(45, 36, 30, 0.9);
+}
+
+.moreLink {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: #2d241e;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(45, 36, 30, 0.35);
+  transition: opacity 0.2s ease;
+}
+
+.moreLink:hover {
+  opacity: 0.65;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-bottom: 5.5rem;
+  }
+
+  .rule {
+    margin-bottom: 4rem;
+  }
+
+  .grid {
+    grid-template-columns: auto 1fr;
+    gap: 4.5rem;
+    align-items: start;
+  }
+
+  .cover {
+    width: 240px;
+    margin: 0;
+    align-self: start;
+  }
+
+  .content {
+    text-align: left;
+    padding-top: 0;
+  }
+
+  .description {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    gap: 5.5rem;
+  }
+
+  .cover {
+    width: 255px;
+  }
+}

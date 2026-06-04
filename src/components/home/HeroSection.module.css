@@ -1,0 +1,140 @@
+.hero {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f5f1e6;
+  padding-left: clamp(2rem, 8vw, 7.5rem);
+  padding-right: clamp(2rem, 8vw, 7.5rem);
+  padding-top: 2.75rem;
+  padding-bottom: 4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+.portrait {
+  width: 220px;
+  max-width: 100%;
+  aspect-ratio: 3 / 4;
+  margin: 0 auto;
+  background-color: #e8e2d4;
+  border: 1px dashed rgba(45, 36, 30, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(45, 36, 30, 0.55);
+}
+
+.content {
+  max-width: 34rem;
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(45, 36, 30, 0.5);
+}
+
+.heading {
+  margin: 1.25rem 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2.35rem, 5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #2d241e;
+}
+
+.tagline {
+  margin: 1.25rem 0 0;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: rgba(45, 36, 30, 0.85);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btnPrimary,
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.75rem;
+  padding: 0 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btnPrimary {
+  background-color: #2d241e;
+  color: #f5f1e6;
+}
+
+.btnPrimary:hover {
+  background-color: #1a1311;
+}
+
+.btnOutline {
+  background-color: #f5f1e6;
+  color: #2d241e;
+  border: 1px solid #2d241e;
+}
+
+.btnOutline:hover {
+  background-color: rgba(45, 36, 30, 0.05);
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-top: 3.25rem;
+    padding-bottom: 5rem;
+  }
+
+  .grid {
+    grid-template-columns: auto 1fr;
+    gap: 4.5rem;
+    align-items: center;
+  }
+
+  .portrait {
+    width: 240px;
+    margin: 0;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    gap: 5.5rem;
+  }
+
+  .portrait {
+    width: 255px;
+  }
+}

@@ -1,37 +1,93 @@
-'use client';
-import { useState } from 'react';
-import Link from 'next/link';
-import styles from './Navbar.module.css';
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import styles from "./Navbar.module.css";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/book", label: "The Book" },
+  { href: "/journey", label: "The Journey" },
+  { href: "/blog", label: "Writings" },
+  { href: "/contact", label: "Connect" },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    if (href.startsWith("/#")) return false;
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
-    <nav className={styles.navbar}>
-      <div className={`container ${styles.navContainer}`}>
-        <div className={styles.logo}>
-          <Link href="/">
-            DARWIN GARG
-          </Link>
-        </div>
-        <ul className={`${styles.navLinks} ${isOpen ? styles.active : ''}`}>
-          <li><Link href="/" onClick={() => setIsOpen(false)}>HOME</Link></li>
-          <li><Link href="/#about" onClick={() => setIsOpen(false)}>ABOUT US</Link></li>
-          <li><Link href="/contact" onClick={() => setIsOpen(false)}>CONTACT US</Link></li>
-          <li><Link href="/blog" onClick={() => setIsOpen(false)}>BLOG</Link></li>
-          <li className={styles.mobileOnlyBtn}>
-            <Link href="/book" className="btn-primary" onClick={() => setIsOpen(false)}>GET THE BOOK</Link>
-          </li>
+    <header className={styles.header}>
+      <nav className={styles.nav} aria-label="Main navigation">
+        <Link
+          href="/"
+          className={styles.logo}
+          onClick={() => setIsOpen(false)}
+        >
+          Darwin Garg
+        </Link>
+
+        <ul className={styles.links}>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={cn(
+                  styles.link,
+                  isActive(link.href) && styles.linkActive
+                )}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
-        <div className={styles.actionBtn}>
-          <Link href="/book" className="btn-primary">GET THE BOOK</Link>
+
+        <button
+          type="button"
+          className={styles.menuBtn}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+        >
+          {isOpen ? (
+            <X size={20} strokeWidth={1.25} />
+          ) : (
+            <Menu size={20} strokeWidth={1.25} />
+          )}
+        </button>
+      </nav>
+
+      {isOpen && (
+        <div className={styles.mobileMenu}>
+          <ul className={styles.mobileLinks}>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    styles.mobileLink,
+                    isActive(link.href) && styles.linkActive
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className={styles.hamburger} onClick={() => setIsOpen(!isOpen)}>
-          <span className={`${styles.bar} ${isOpen ? styles.open1 : ''}`}></span>
-          <span className={`${styles.bar} ${isOpen ? styles.open2 : ''}`}></span>
-          <span className={`${styles.bar} ${isOpen ? styles.open3 : ''}`}></span>
-        </div>
-      </div>
-    </nav>
+      )}
+    </header>
   );
 }
