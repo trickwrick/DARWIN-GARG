@@ -32,7 +32,12 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${cormorant.variable}`}
     >
-      <body className="font-body antialiased">{children}</body>
+      <body className="font-body antialiased">
+        <div className="deploy-test-banner" role="status">
+          Site update test — this banner will be removed shortly.
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
