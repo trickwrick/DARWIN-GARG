@@ -62,6 +62,100 @@ export const bookFaq = [
   },
 ] as const;
 
+const BOOK_SEARCH = "when+gods+must+return+darwin+garg";
+
+export type RetailerCity = {
+  name: string;
+  region: "IN" | "US";
+  href: string;
+  inStock: boolean;
+};
+
+export type RetailerWithCities = {
+  label: string;
+  href: string;
+  accent: "amazon" | "barnes" | "flipkart";
+  cities: readonly RetailerCity[];
+};
+
+export const retailersWithCities: readonly RetailerWithCities[] = [
+  {
+    label: "Amazon",
+    href: AMAZON_LINK,
+    accent: "amazon",
+    cities: [
+      {
+        name: "New Delhi",
+        region: "IN",
+        href: `https://www.amazon.in/s?k=${BOOK_SEARCH}`,
+        inStock: true,
+      },
+      {
+        name: "Mumbai",
+        region: "IN",
+        href: `https://www.amazon.in/s?k=${BOOK_SEARCH}`,
+        inStock: true,
+      },
+      {
+        name: "Bengaluru",
+        region: "IN",
+        href: `https://www.amazon.in/s?k=${BOOK_SEARCH}`,
+        inStock: true,
+      },
+    ],
+  },
+  {
+    label: "Barnes & Noble",
+    href: "https://www.barnesandnoble.com/s/when%20gods%20must%20return",
+    accent: "barnes",
+    cities: [
+      {
+        name: "New York",
+        region: "US",
+        href: "https://www.barnesandnoble.com/s/when%20gods%20must%20return",
+        inStock: true,
+      },
+      {
+        name: "Chicago",
+        region: "US",
+        href: "https://www.barnesandnoble.com/s/when%20gods%20must%20return",
+        inStock: true,
+      },
+      {
+        name: "Los Angeles",
+        region: "US",
+        href: "https://www.barnesandnoble.com/s/when%20gods%20must%20return",
+        inStock: true,
+      },
+    ],
+  },
+  {
+    label: "Flipkart",
+    href: "https://www.flipkart.com/search?q=when+gods+must+return+darwin+garg",
+    accent: "flipkart",
+    cities: [
+      {
+        name: "New Delhi",
+        region: "IN",
+        href: "https://www.flipkart.com/search?q=when+gods+must+return+darwin+garg",
+        inStock: true,
+      },
+      {
+        name: "Mumbai",
+        region: "IN",
+        href: "https://www.flipkart.com/search?q=when+gods+must+return+darwin+garg",
+        inStock: true,
+      },
+      {
+        name: "Hyderabad",
+        region: "IN",
+        href: "https://www.flipkart.com/search?q=when+gods+must+return+darwin+garg",
+        inStock: true,
+      },
+    ],
+  },
+];
+
 export const retailers = [
   { label: "Amazon", href: AMAZON_LINK, external: true },
   {

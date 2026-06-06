@@ -1,6 +1,5 @@
-import Link from "next/link";
 import SiteFooterBar from "@/components/SiteFooterBar";
-import { AMAZON_LINK } from "@/data/book";
+import RetailerButtons from "@/components/retailers/RetailerButtons";
 import styles from "./HomeFooter.module.css";
 
 export default function HomeFooter() {
@@ -13,23 +12,7 @@ export default function HomeFooter() {
         </p>
 
         <div className={styles.buttons}>
-          <a
-            href={AMAZON_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.btnPrimary}
-          >
-            Amazon
-          </a>
-          <a href="#" className={styles.btnOutline}>
-            Barnes &amp; Noble
-          </a>
-          <a href="#" className={styles.btnOutline}>
-            Flipkart
-          </a>
-          <Link href="/book" className={styles.btnOutline}>
-            All retailers &rarr;
-          </Link>
+          <RetailerButtons showAllLink />
         </div>
       </div>
 

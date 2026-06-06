@@ -5,7 +5,11 @@ const AMAZON_LINK =
   "https://www.amazon.com/dp/B0GSTW86RV?ref=cm_sw_r_ffobk_cso_cp_apin_dp_NKMTKPK611WNMXVQFFMZ";
 
 const footerPills = [
-  { href: "#", label: "LinkedIn", external: false },
+  {
+    href: "https://www.linkedin.com/in/darwingarg/",
+    label: "LinkedIn",
+    external: true,
+  },
   { href: AMAZON_LINK, label: "Buy on Amazon", external: true },
   { href: "#", label: "Flipkart", external: false },
   { href: "/book", label: "All editions →", external: false },

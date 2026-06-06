@@ -9,8 +9,8 @@ import {
   bookExcerpt,
   bookFaq,
   bookReviews,
-  retailers,
 } from "@/data/book";
+import RetailerButtons from "@/components/retailers/RetailerButtons";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -280,21 +280,7 @@ export default function BookPage() {
           Paperback &middot; Hardcover &middot; Ebook
         </p>
 
-        <div className={styles.retailerButtons}>
-          {retailers.map((retailer, index) => (
-            <a
-              key={retailer.label}
-              href={retailer.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={
-                index === 0 ? styles.retailerPrimary : styles.retailerOutline
-              }
-            >
-              {retailer.label}
-            </a>
-          ))}
-        </div>
+        <RetailerButtons showExtraRetailers className={styles.retailerButtons} />
       </section>
 
       <footer>

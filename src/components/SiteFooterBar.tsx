@@ -1,3 +1,4 @@
+import { socialLinks } from "@/data/social";
 import styles from "./SiteFooterBar.module.css";
 
 export default function SiteFooterBar() {
@@ -7,26 +8,23 @@ export default function SiteFooterBar() {
     <div className={styles.bar}>
       <p className={styles.copyright}>&copy; Darwin Garg &middot; {year}</p>
       <ul className={styles.links}>
-        <li>
-          <a href="#">Instagram</a>
-        </li>
-        <li className={styles.dot} aria-hidden>
-          &middot;
-        </li>
-        <li>
-          <a href="#">Facebook</a>
-        </li>
-        <li className={styles.dot} aria-hidden>
-          &middot;
-        </li>
-        <li>
-          <a href="#">LinkedIn</a>
-        </li>
-        <li className={styles.dot} aria-hidden>
-          &middot;
-        </li>
-        <li>
-          <a href="#">Newsletter</a>
+        {socialLinks.map((link, index) => (
+          <li key={link.label} className={styles.linkGroup}>
+            {index > 0 ? (
+              <span className={styles.dot} aria-hidden>
+                &middot;
+              </span>
+            ) : null}
+            <a href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.label}
+            </a>
+          </li>
+        ))}
+        <li className={styles.linkGroup}>
+          <span className={styles.dot} aria-hidden>
+            &middot;
+          </span>
+          <a href="/#newsletter">Newsletter</a>
         </li>
       </ul>
     </div>

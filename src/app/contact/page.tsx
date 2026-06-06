@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import HomeFooter from "@/components/home/HomeFooter";
+import { socialLinks } from "@/data/social";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -25,13 +26,6 @@ const contactCards = [
     description:
       "Reviews, features, interviews. Press kit available on request.",
   },
-];
-
-const socialLinks = [
-  { name: "Instagram", handle: "@WhenGodsMustReturn", href: "#" },
-  { name: "Facebook", handle: "/WhenGodsMustReturn", href: "#" },
-  { name: "LinkedIn", handle: "Darwin Garg", href: "#" },
-  { name: "Goodreads", handle: "Author profile", href: "#" },
 ];
 
 export default function ContactPage() {
@@ -147,13 +141,13 @@ export default function ContactPage() {
           <div className={styles.socialGrid}>
             {socialLinks.map((item) => (
               <a
-                key={item.name}
+                key={item.label}
                 href={item.href}
                 className={styles.socialCard}
-                target={item.href !== "#" ? "_blank" : undefined}
-                rel={item.href !== "#" ? "noopener noreferrer" : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <p className={styles.socialName}>{item.name}</p>
+                <p className={styles.socialName}>{item.label}</p>
                 <p className={styles.socialHandle}>{item.handle}</p>
               </a>
             ))}

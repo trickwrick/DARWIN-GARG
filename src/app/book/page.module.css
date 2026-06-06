@@ -560,46 +560,9 @@
 }
 
 .retailerButtons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.65rem;
   margin-top: 2.25rem;
-}
-
-.retailerPrimary,
-.retailerOutline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  padding: 0 1.25rem;
-  font-family: var(--font-sans);
-  font-size: 0.88rem;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: opacity 0.2s ease, background-color 0.2s ease;
-  white-space: nowrap;
-}
-
-.retailerPrimary {
-  color: #2d241e;
-  background-color: #faf9f6;
-  border: 1px solid #faf9f6;
-}
-
-.retailerPrimary:hover {
-  opacity: 0.92;
-}
-
-.retailerOutline {
-  color: #f5f1e6;
-  background-color: transparent;
-  border: 1px solid rgba(245, 241, 230, 0.65);
-}
-
-.retailerOutline:hover {
-  background-color: rgba(245, 241, 230, 0.08);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(245, 241, 230, 0.12);
 }
 
 @media (min-width: 640px) {

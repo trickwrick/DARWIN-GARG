@@ -29,6 +29,12 @@
   list-style: none;
 }
 
+.linkGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .links a {
   color: rgba(201, 178, 148, 0.9);
   text-decoration: none;
