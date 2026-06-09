@@ -65,10 +65,13 @@ export const bookFaq = [
 ] as const;
 
 const BOOK_SEARCH = "when+gods+must+return+darwin+garg";
+const BOOK_SEARCH_SPACES = "when%20gods%20must%20return%20darwin%20garg";
 
-export type RetailerCity = {
+export type RetailerRegion = "US" | "IN" | "UK";
+
+export type RetailerMarket = {
   name: string;
-  region: "IN" | "US";
+  region: RetailerRegion;
   href: string;
   inStock: boolean;
 };
@@ -77,7 +80,7 @@ export type RetailerWithCities = {
   label: string;
   href: string;
   accent: "amazon" | "barnes" | "flipkart";
-  cities: readonly RetailerCity[];
+  markets: readonly RetailerMarket[];
 };
 
 export const retailersWithCities: readonly RetailerWithCities[] = [
@@ -85,23 +88,23 @@ export const retailersWithCities: readonly RetailerWithCities[] = [
     label: "Amazon",
     href: AMAZON_LINK,
     accent: "amazon",
-    cities: [
+    markets: [
       {
-        name: "New Delhi",
+        name: "United States",
+        region: "US",
+        href: AMAZON_LINK,
+        inStock: true,
+      },
+      {
+        name: "India",
         region: "IN",
         href: `https://www.amazon.in/s?k=${BOOK_SEARCH}`,
         inStock: true,
       },
       {
-        name: "Mumbai",
-        region: "IN",
-        href: `https://www.amazon.in/s?k=${BOOK_SEARCH}`,
-        inStock: true,
-      },
-      {
-        name: "Bengaluru",
-        region: "IN",
-        href: `https://www.amazon.in/s?k=${BOOK_SEARCH}`,
+        name: "United Kingdom",
+        region: "UK",
+        href: `https://www.amazon.co.uk/s?k=${BOOK_SEARCH}`,
         inStock: true,
       },
     ],
@@ -110,23 +113,23 @@ export const retailersWithCities: readonly RetailerWithCities[] = [
     label: "Barnes & Noble",
     href: "https://www.barnesandnoble.com/s/when%20gods%20must%20return",
     accent: "barnes",
-    cities: [
+    markets: [
       {
-        name: "New York",
+        name: "United States",
         region: "US",
         href: "https://www.barnesandnoble.com/s/when%20gods%20must%20return",
         inStock: true,
       },
       {
-        name: "Chicago",
-        region: "US",
-        href: "https://www.barnesandnoble.com/s/when%20gods%20must%20return",
+        name: "India",
+        region: "IN",
+        href: "https://notionpress.com/india/search?query=When%20Gods%20Must%20Return",
         inStock: true,
       },
       {
-        name: "Los Angeles",
-        region: "US",
-        href: "https://www.barnesandnoble.com/s/when%20gods%20must%20return",
+        name: "United Kingdom",
+        region: "UK",
+        href: `https://www.blackwells.co.uk/bookshop/search?keyword=${BOOK_SEARCH_SPACES}`,
         inStock: true,
       },
     ],
@@ -135,23 +138,23 @@ export const retailersWithCities: readonly RetailerWithCities[] = [
     label: "Flipkart",
     href: "https://www.flipkart.com/search?q=when+gods+must+return+darwin+garg",
     accent: "flipkart",
-    cities: [
+    markets: [
       {
-        name: "New Delhi",
+        name: "India",
         region: "IN",
         href: "https://www.flipkart.com/search?q=when+gods+must+return+darwin+garg",
         inStock: true,
       },
       {
-        name: "Mumbai",
-        region: "IN",
-        href: "https://www.flipkart.com/search?q=when+gods+must+return+darwin+garg",
+        name: "United States",
+        region: "US",
+        href: AMAZON_LINK,
         inStock: true,
       },
       {
-        name: "Hyderabad",
-        region: "IN",
-        href: "https://www.flipkart.com/search?q=when+gods+must+return+darwin+garg",
+        name: "United Kingdom",
+        region: "UK",
+        href: `https://www.amazon.co.uk/s?k=${BOOK_SEARCH}`,
         inStock: true,
       },
     ],

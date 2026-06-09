@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import type { RetailerCity, RetailerWithCities } from "@/data/book";
+import type { RetailerMarket, RetailerRegion, RetailerWithCities } from "@/data/book";
 import styles from "./RetailerButtons.module.css";
 
 type RetailerHoverButtonProps = {
@@ -9,9 +9,10 @@ type RetailerHoverButtonProps = {
   variant?: "primary" | "outline";
 };
 
-const REGION_FLAG: Record<RetailerCity["region"], string> = {
+const REGION_FLAG: Record<RetailerRegion, string> = {
   IN: "🇮🇳",
   US: "🇺🇸",
+  UK: "🇬🇧",
 };
 
 const ICON_CLASS: Record<RetailerWithCities["accent"], string> = {
@@ -30,7 +31,7 @@ export default function RetailerHoverButton({
   retailer,
   variant = "outline",
 }: RetailerHoverButtonProps) {
-  const { label, href, accent, cities } = retailer;
+  const { label, href, accent, markets } = retailer;
   const [open, setOpen] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -124,22 +125,22 @@ export default function RetailerHoverButton({
         role={isTouch ? "region" : "tooltip"}
         aria-label={`${label} availability`}
       >
-        <p className={styles.cityDropdownLabel}>Available in</p>
+        <p className={styles.cityDropdownLabel}>Shop by country</p>
         <ul className={styles.cityList}>
-          {cities.map((city) => (
-            <li key={city.name} className={styles.cityItem}>
+          {markets.map((market: RetailerMarket) => (
+            <li key={market.name} className={styles.cityItem}>
               <a
-                href={city.href}
+                href={market.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.cityLink}
                 onClick={() => setOpen(false)}
               >
                 <span className={styles.cityFlag} aria-hidden="true">
-                  {REGION_FLAG[city.region]}
+                  {REGION_FLAG[market.region]}
                 </span>
-                <span className={styles.cityName}>{city.name}</span>
-                {city.inStock ? (
+                <span className={styles.cityName}>{market.name}</span>
+                {market.inStock ? (
                   <span className={styles.stockBadge}>In stock</span>
                 ) : null}
               </a>
