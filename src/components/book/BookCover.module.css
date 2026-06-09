@@ -23,5 +23,8 @@
 }
 
 .image {
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background-color: #f5f1e6;
 }

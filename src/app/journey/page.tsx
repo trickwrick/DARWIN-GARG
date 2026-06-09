@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import { BOOK_PHYSICAL, journeyCoverDrafts } from "@/data/images";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -18,8 +20,8 @@ type JourneyChapter = {
   emphasisWord?: string;
   quote?: string;
   readerQuote?: string;
-  imageCaption?: string;
-  coverDrafts?: { caption: string }[];
+  image?: { src: string; alt: string; caption: string };
+  coverDrafts?: readonly { src: string; alt: string; caption: string }[];
 };
 
 function renderProse(text: string, emphasisWord?: string) {
@@ -57,8 +59,11 @@ const chapters: JourneyChapter[] = [
     year: "[Year]",
     title: "The writing years",
     body: `[Placeholder: what writing a book while leading a corporate life actually looked like. Early mornings, weekends, the discipline. The chapters that came easily. The ones that didn't.]`,
-    imageCaption:
-      "Photo placeholder — manuscript, notes, or your writing desk",
+    image: {
+      src: BOOK_PHYSICAL,
+      alt: "Physical copy of When Gods Must Return",
+      caption: "The finished book on the desk",
+    },
   },
   {
     label: "Chapter Four",
@@ -73,11 +78,7 @@ const chapters: JourneyChapter[] = [
     year: "[Year]",
     title: "A face for the book",
     body: "[Placeholder: the cover design journey. Drafts, decisions, what you wanted the cover to say without saying it.]",
-    coverDrafts: [
-      { caption: "Cover draft 1" },
-      { caption: "Cover draft 2" },
-      { caption: "Final cover" },
-    ],
+    coverDrafts: journeyCoverDrafts,
   },
   {
     label: "Chapter Six",
@@ -155,11 +156,19 @@ export default function JourneyPage() {
                       <p>&ldquo;{chapter.readerQuote}&rdquo;</p>
                     </blockquote>
                   )}
-                  {chapter.imageCaption && (
+                  {chapter.image && (
                     <figure className={styles.chapterFigure}>
-                      <div className={styles.chapterPhoto} aria-hidden="true" />
+                      <div className={styles.chapterPhoto}>
+                        <Image
+                          src={chapter.image.src}
+                          alt={chapter.image.alt}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 640px"
+                          className={styles.chapterPhotoImage}
+                        />
+                      </div>
                       <figcaption className={styles.chapterPhotoCaption}>
-                        {chapter.imageCaption}
+                        {chapter.image.caption}
                       </figcaption>
                     </figure>
                   )}
@@ -167,7 +176,15 @@ export default function JourneyPage() {
                     <div className={styles.coverGrid}>
                       {chapter.coverDrafts.map((draft) => (
                         <figure key={draft.caption} className={styles.coverCard}>
-                          <div className={styles.coverPhoto} aria-hidden="true" />
+                          <div className={styles.coverPhoto}>
+                            <Image
+                              src={draft.src}
+                              alt={draft.alt}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 280px"
+                              className={styles.coverPhotoImage}
+                            />
+                          </div>
                           <figcaption className={styles.coverCaption}>
                             {draft.caption}
                           </figcaption>

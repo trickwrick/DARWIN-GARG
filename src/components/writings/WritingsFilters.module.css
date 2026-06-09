@@ -1,6 +1,6 @@
 .filters {
   margin-bottom: 0;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.75rem;
   border-bottom: 1px solid rgba(45, 36, 30, 0.1);
 }
 
@@ -8,7 +8,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.25rem 1.75rem;
+  gap: 0.55rem 0.75rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -16,36 +16,65 @@
 
 .filter,
 .filterActive {
-  padding: 0;
+  position: relative;
+  padding: 0.5rem 0.9rem;
   font-family: var(--font-sans);
-  font-size: 0.65rem;
-  font-weight: 400;
+  font-size: 0.64rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: rgba(45, 36, 30, 0.55);
-  background: none;
-  border: none;
+  background: rgba(45, 36, 30, 0.03);
+  border: 1px solid rgba(45, 36, 30, 0.08);
+  border-radius: 999px;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
 }
 
 .filter:hover {
   color: #2d241e;
+  background-color: rgba(139, 115, 85, 0.08);
+  border-color: rgba(139, 115, 85, 0.25);
+  transform: translateY(-1px);
 }
 
 .filterActive {
-  color: #2d241e;
-  text-decoration: underline;
-  text-underline-offset: 6px;
-  text-decoration-color: rgba(45, 36, 30, 0.55);
+  color: #f5f1e6;
+  background-color: #2d241e;
+  border-color: #2d241e;
+  box-shadow: 0 4px 14px rgba(45, 36, 30, 0.18);
+}
+
+.filterActive:hover {
+  color: #f5f1e6;
+  background-color: #1a1311;
+  border-color: #1a1311;
+  transform: translateY(-1px);
 }
 
 @media (min-width: 768px) {
   .filters {
-    padding-bottom: 2rem;
+    padding-bottom: 2.25rem;
   }
 
   .list {
-    gap: 2rem;
+    gap: 0.65rem 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filter,
+  .filterActive {
+    transition: none;
+  }
+
+  .filter:hover,
+  .filterActive:hover {
+    transform: none;
   }
 }

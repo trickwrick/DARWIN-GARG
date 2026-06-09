@@ -11,7 +11,7 @@ export default function WelcomeSection() {
           </p>
           <div className={styles.quoteDivider}></div>
           <div className={styles.authorInfo}>
-            <img src="/images/author.jpg" alt="Darwin Garg" className={styles.authorImage} />
+            <img src="/images/author/darwin-garg.png" alt="Darwin Garg" className={styles.authorImage} />
             <p className={styles.quoteAuthor}>Darwin Garg</p>
           </div>
         </div>

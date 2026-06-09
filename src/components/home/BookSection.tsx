@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import { BOOK_COVER_FRONT } from "@/data/images";
 import styles from "./BookSection.module.css";
 
 export default function BookSection() {
@@ -7,8 +9,15 @@ export default function BookSection() {
       <hr className={styles.rule} />
 
       <div className={styles.grid}>
-        <div className={styles.cover} aria-hidden>
-          Book cover (placeholder)
+        <div className={styles.cover}>
+          <Image
+            src={BOOK_COVER_FRONT}
+            alt="When Gods Must Return book cover"
+            width={400}
+            height={600}
+            sizes="(max-width: 768px) 220px, 255px"
+            className={styles.coverImage}
+          />
         </div>
 
         <div className={styles.content}>

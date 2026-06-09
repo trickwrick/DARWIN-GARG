@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import BookCover from "@/components/book/BookCover";
 import SiteFooterBar from "@/components/SiteFooterBar";
+import { AVATAR_IMAGES } from "@/data/images";
 import {
   AMAZON_LINK,
   avatarCrises,
@@ -149,6 +151,15 @@ export default function BookPage() {
           <div className={styles.avatarGrid}>
             {avatarCrises.map((item) => (
               <div key={item.name} className={styles.avatarCard}>
+                <div className={styles.avatarImageWrap}>
+                  <Image
+                    src={AVATAR_IMAGES[item.name]}
+                    alt={`${item.name} avatar illustration`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, 180px"
+                    className={styles.avatarImage}
+                  />
+                </div>
                 <p className={styles.avatarName}>{item.name}</p>
                 <p className={styles.avatarCrisis}>{item.crisis}</p>
               </div>

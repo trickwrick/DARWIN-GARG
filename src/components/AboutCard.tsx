@@ -10,7 +10,7 @@ export default function AboutCard() {
       
       <div className={styles.aboutContent}>
         <div className={styles.imageContainer}>
-          <img src="/images/real_book_cover.jpg" alt="When Gods Must Return Book Cover" className={styles.image} />
+          <img src="/images/book/front-cover.png" alt="When Gods Must Return Book Cover" className={styles.image} />
         </div>
         <div className={styles.textContainer}>
           <p>

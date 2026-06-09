@@ -1,32 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { writingCategories, type WritingFilter } from "@/data/writings";
 import styles from "./WritingsFilters.module.css";
 
-const categories = [
-  "All",
-  "Essays",
-  "Excerpts",
-  "Behind the book",
-  "Interviews",
-] as const;
+type WritingsFiltersProps = {
+  active: WritingFilter;
+  onChange: (category: WritingFilter) => void;
+};
 
-type Category = (typeof categories)[number];
-
-export default function WritingsFilters() {
-  const [active, setActive] = useState<Category>("All");
-
+export default function WritingsFilters({
+  active,
+  onChange,
+}: WritingsFiltersProps) {
   return (
     <nav className={styles.filters} aria-label="Filter writings by category">
       <ul className={styles.list}>
-        {categories.map((category) => (
+        {writingCategories.map((category) => (
           <li key={category}>
             <button
               type="button"
               className={
                 active === category ? styles.filterActive : styles.filter
               }
-              onClick={() => setActive(category)}
+              onClick={() => onChange(category)}
               aria-current={active === category ? "true" : undefined}
             >
               {category}

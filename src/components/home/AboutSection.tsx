@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import { AUTHOR_IMAGE } from "@/data/images";
 import styles from "./AboutSection.module.css";
 
 export default function AboutSection() {
@@ -7,8 +9,15 @@ export default function AboutSection() {
       <hr className={styles.rule} />
 
       <div className={styles.grid}>
-        <div className={styles.photo} aria-hidden>
-          Photo (placeholder)
+        <div className={styles.photo}>
+          <Image
+            src={AUTHOR_IMAGE}
+            alt="Darwin Garg portrait"
+            width={340}
+            height={340}
+            sizes="170px"
+            className={styles.photoImage}
+          />
         </div>
 
         <div className={styles.content}>

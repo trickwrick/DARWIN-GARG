@@ -94,8 +94,11 @@ a {
 
 img {
   max-width: 100%;
-  height: auto;
   display: block;
+}
+
+img:not([style*="position: absolute"]) {
+  height: auto;
 }
 
 /* Legacy pages (book, blog, contact, admin) */

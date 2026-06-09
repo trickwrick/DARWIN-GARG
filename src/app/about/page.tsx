@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import SiteFooterBar from "@/components/SiteFooterBar";
+import { AUTHOR_IMAGE, aboutPhotos } from "@/data/images";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -26,8 +28,15 @@ export default function AboutPage() {
         </header>
 
         <section className={styles.body} aria-label="About the author">
-          <div className={styles.portrait} aria-hidden="true">
-            <span className={styles.portraitLabel}>Author portrait (placeholder)</span>
+          <div className={styles.portrait}>
+            <Image
+              src={AUTHOR_IMAGE}
+              alt="Darwin Garg portrait"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 420px"
+              className={styles.portraitImage}
+            />
           </div>
 
           <div className={styles.prose}>
@@ -79,14 +88,20 @@ export default function AboutPage() {
           <h2 className={styles.photosTitle}>A few moments along the way</h2>
 
           <div className={styles.photoGrid}>
-            {[
-              "Photo placeholder (e.g. with the book)",
-              "Photo placeholder (e.g. at the desk)",
-              "Photo placeholder (e.g. with family / readers)",
-            ].map((caption) => (
-              <figure key={caption} className={styles.photoCard}>
-                <div className={styles.photoBox} aria-hidden="true" />
-                <figcaption className={styles.photoCaption}>{caption}</figcaption>
+            {aboutPhotos.map((photo) => (
+              <figure key={photo.src} className={styles.photoCard}>
+                <div className={styles.photoBox}>
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    className={styles.photoImage}
+                  />
+                </div>
+                <figcaption className={styles.photoCaption}>
+                  {photo.caption}
+                </figcaption>
               </figure>
             ))}
           </div>

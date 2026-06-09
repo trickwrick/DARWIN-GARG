@@ -8,7 +8,7 @@ interface BookShowcaseProps {
 }
 
 export default function BookShowcase({ showBuyButton = true }: BookShowcaseProps = {}) {
-  const [activeImg, setActiveImg] = useState('/images/real_book_cover.jpg');
+  const [activeImg, setActiveImg] = useState('/images/book/front-cover.png');
   
   const amazonLink = "https://www.amazon.com/dp/B0GSTW86RV?ref=cm_sw_r_ffobk_cso_cp_apin_dp_NKMTKPK611WNMXVQFFMZ&ref_=cm_sw_r_ffobk_cso_cp_apin_dp_NKMTKPK611WNMXVQFFMZ&social_share=cm_sw_r_ffobk_cso_cp_apin_dp_NKMTKPK611WNMXVQFFMZ&bestFormat=true&rsd=hqg5xwqYng5RCp/lnKaDx8l38NcZnENxBwYj3XQZX8k/z6hZnXJvunNP/m0ZucBH7/S0QJESGciBmGm6lF4PR6+GvmUM329z58oLrDd1hmRv&edk=AQIDAHi1lw/M8UbbSMD9ScOOFEmBMHMthHeEhqDaQYPJUAX3jQFXEt8qpz0kO4BIQ8kJ3NBpAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMs/XGvuilmlJ4EXLCAgEQgDuyUuzPkCjCtWnwwk8nyGXQClvKa4f7x2NCl+N9uP7XmUH7/IuR8s82hyjs+XmEMPZxR1KhWYfToBSC0A==";
 
@@ -20,18 +20,18 @@ export default function BookShowcase({ showBuyButton = true }: BookShowcaseProps
             <img src={activeImg} alt="When Gods Must Return Book Cover" className={styles.bookImage} />
             <div className={styles.thumbnails}>
               <div 
-                className={`${styles.thumbnail} ${activeImg === '/images/real_book_cover.jpg' ? styles.activeThumb : ''}`}
-                onMouseEnter={() => setActiveImg('/images/real_book_cover.jpg')}
-                onClick={() => setActiveImg('/images/real_book_cover.jpg')}
+                className={`${styles.thumbnail} ${activeImg === '/images/book/front-cover.png' ? styles.activeThumb : ''}`}
+                onMouseEnter={() => setActiveImg('/images/book/front-cover.png')}
+                onClick={() => setActiveImg('/images/book/front-cover.png')}
               >
-                <img src="/images/real_book_cover.jpg" alt="Front Cover" />
+                <img src="/images/book/front-cover.png" alt="Front Cover" />
               </div>
-              <div 
-                className={`${styles.thumbnail} ${activeImg === '/images/god secound.jpg' ? styles.activeThumb : ''}`}
-                onMouseEnter={() => setActiveImg('/images/god secound.jpg')}
-                onClick={() => setActiveImg('/images/god secound.jpg')}
+              <div
+                className={`${styles.thumbnail} ${activeImg === '/images/book/back-cover.png' ? styles.activeThumb : ''}`}
+                onMouseEnter={() => setActiveImg('/images/book/back-cover.png')}
+                onClick={() => setActiveImg('/images/book/back-cover.png')}
               >
-                <img src="/images/god secound.jpg" alt="Back Cover" />
+                <img src="/images/book/back-cover.png" alt="Back Cover" />
               </div>
             </div>
           </div>
@@ -41,7 +41,7 @@ export default function BookShowcase({ showBuyButton = true }: BookShowcaseProps
           <div className={styles.amzHeader}>
             <h1 className={styles.amzTitle}>When Gods Must Return: Ancient Wisdom for Modern Chaos</h1>
             <div className={styles.amzAuthor}>
-              by <a href="#author"><img src="/images/author.jpg" alt="Darwin Garg" className={styles.amzAuthorImg} /></a> <a href="#author" className={styles.amzLink}>Darwin Garg</a> (Author)
+              by <a href="#author"><img src="/images/author/darwin-garg.png" alt="Darwin Garg" className={styles.amzAuthorImg} /></a> <a href="#author" className={styles.amzLink}>Darwin Garg</a> (Author)
               <span style={{ color: '#ddd', margin: '0 8px' }}>|</span>
               <span className={styles.amzFormat}>Format: <strong>Paperback</strong></span>
             </div>

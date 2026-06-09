@@ -1,7 +1,9 @@
+import { BOOK_COVER_FRONT } from "@/data/images";
+
 export const AMAZON_LINK =
   "https://www.amazon.com/dp/B0GSTW86RV?ref=cm_sw_r_ffobk_cso_cp_apin_dp_NKMTKPK611WNMXVQFFMZ";
 
-export const BOOK_COVER_SRC = "/images/real_book_cover.jpg";
+export const BOOK_COVER_SRC = BOOK_COVER_FRONT;
 
 export const avatarCrises = [
   { name: "Matsya", crisis: "Navigating the flood of misinformation" },

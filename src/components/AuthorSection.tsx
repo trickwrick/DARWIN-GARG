@@ -5,7 +5,7 @@ export default function AuthorSection() {
     <div className={styles.authorSection}>
       <div className={styles.container}>
         <div className={styles.imageWrapper}>
-          <img src="/images/author.jpg" alt="Darwin Garg" className={styles.authorImage} />
+          <img src="/images/author/darwin-garg.png" alt="Darwin Garg" className={styles.authorImage} />
         </div>
         <div className={styles.contentWrapper}>
           <h2 className={styles.title}>Meet the Author</h2>

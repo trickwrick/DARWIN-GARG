@@ -1,37 +1,46 @@
 .newsletter {
   margin-top: 4rem;
-  padding-top: 3.5rem;
+  padding: 3rem 1.5rem;
   border-top: 1px solid rgba(45, 36, 30, 0.1);
+  border-radius: 3px;
   text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(240, 235, 226, 0.45) 0%,
+    rgba(245, 241, 230, 0) 100%
+  );
 }
 
 .eyebrow {
   margin: 0;
   font-family: var(--font-sans);
   font-size: 0.68rem;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.28em;
-  color: rgba(45, 36, 30, 0.5);
+  letter-spacing: 0.32em;
+  color: #8b7355;
 }
 
 .title {
   margin: 1rem 0 0;
   font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.18;
   letter-spacing: -0.02em;
   color: #2d241e;
 }
 
 .note {
-  margin: 1rem 0 0;
+  margin: 1rem auto 0;
+  max-width: 26rem;
   font-family: var(--font-sans);
   font-size: 1rem;
+  font-weight: 400;
   font-style: italic;
-  line-height: 1.65;
-  color: rgba(45, 36, 30, 0.75);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  color: rgba(45, 36, 30, 0.72);
 }
 
 .form {
@@ -45,40 +54,57 @@
 .input {
   flex: 1;
   min-width: 0;
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1rem;
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
   color: #2d241e;
-  background-color: #f5f1e6;
-  border: 1px solid rgba(45, 36, 30, 0.18);
-  border-radius: 2px;
+  background-color: #faf8f3;
+  border: 1px solid rgba(45, 36, 30, 0.16);
+  border-radius: 3px;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .input::placeholder {
-  color: rgba(45, 36, 30, 0.4);
+  color: rgba(45, 36, 30, 0.38);
+}
+
+.input:hover {
+  border-color: rgba(139, 115, 85, 0.35);
 }
 
 .input:focus {
-  border-color: rgba(45, 36, 30, 0.45);
+  border-color: rgba(139, 115, 85, 0.55);
+  background-color: #fffdf8;
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.12);
 }
 
 .button {
   flex-shrink: 0;
-  padding: 0.85rem 1.5rem;
+  padding: 0.9rem 1.6rem;
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   color: #f5f1e6;
   background-color: #2d241e;
   border: none;
-  border-radius: 2px;
+  border-radius: 3px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
 }
 
 .button:hover {
   background-color: #1a1311;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(45, 36, 30, 0.2);
 }
 
 .srOnly {
@@ -109,10 +135,21 @@
 @media (min-width: 768px) {
   .newsletter {
     margin-top: 5rem;
-    padding-top: 4rem;
+    padding: 3.5rem 2rem;
   }
 
   .form {
     margin-top: 2.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .button {
+    transition: none;
+  }
+
+  .button:hover {
+    transform: none;
   }
 }
