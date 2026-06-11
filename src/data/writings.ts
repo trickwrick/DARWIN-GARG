@@ -29,7 +29,7 @@ export const featuredWriting = {
   title: "Why our age needs ten wisdoms, not one",
   excerpt:
     "The world isn't facing one crisis. It's facing ten — simultaneously. No single idea, leader, or movement can fix this. What we need isn't one answer. We need ten — working together.",
-  href: "/book",
+  href: "/blog/why-our-age-needs-ten-wisdoms",
   image: BOOK_PHYSICAL_LIFESTYLE,
   imageAlt: "When Gods Must Return on a balcony table",
 };
@@ -42,7 +42,7 @@ export const writings = [
     title: "Opening lines: ten crises at once",
     description:
       "The first pages of When Gods Must Return — naming misinformation, mental health, climate, and the crises that arrive together.",
-    href: "/book",
+    href: "/blog/opening-excerpt",
     image: BOOK_COVER_FRONT,
     imageAlt: "When Gods Must Return front cover",
   },
@@ -53,7 +53,7 @@ export const writings = [
     title: "How the Dashavatar framework found me",
     description:
       "The moment the ten avatars stopped being stories and became a map for modern chaos — and why the book had to hold all ten at once.",
-    href: "/journey",
+    href: "/blog/dashavatar-framework",
     image: BOOK_PHYSICAL,
     imageAlt: "Physical copy of When Gods Must Return",
   },
@@ -64,7 +64,7 @@ export const writings = [
     title: "Writing between the boardroom and the Bhagavata",
     description:
       "On building a book while leading in the corporate world — and why ancient stories still speak to quarterly goals and global noise.",
-    href: "/about",
+    href: "/blog/corporate-and-myth",
     image: AUTHOR_IMAGE,
     imageAlt: "Darwin Garg portrait",
   },
@@ -75,7 +75,7 @@ export const writings = [
     title: "Matsya and the flood of misinformation",
     description:
       "What the first avatar teaches about navigation when every screen is a storm — and why discernment is a collective act, not a solo virtue.",
-    href: "/book",
+    href: "/blog/matsya-misinformation",
     image: AVATAR_IMAGES.Matsya,
     imageAlt: "Matsya avatar illustration",
   },

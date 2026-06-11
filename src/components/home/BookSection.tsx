@@ -10,14 +10,16 @@ export default function BookSection() {
 
       <div className={styles.grid}>
         <div className={styles.cover}>
-          <Image
-            src={BOOK_COVER_FRONT}
-            alt="When Gods Must Return book cover"
-            width={400}
-            height={600}
-            sizes="(max-width: 768px) 220px, 255px"
-            className={styles.coverImage}
-          />
+          <div className={styles.coverFrame}>
+            <Image
+              src={BOOK_COVER_FRONT}
+              alt="When Gods Must Return book cover"
+              width={400}
+              height={600}
+              sizes="(max-width: 768px) 220px, 255px"
+              className={styles.coverImage}
+            />
+          </div>
         </div>
 
         <div className={styles.content}>

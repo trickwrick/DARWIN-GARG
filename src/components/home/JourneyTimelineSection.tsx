@@ -9,11 +9,11 @@ import {
 } from "@/components/home/editorial";
 
 const chapters = [
-  { label: "Chapter One", title: "The seed of an idea" },
-  { label: "Chapter Two", title: "Finding the framework" },
-  { label: "Chapter Three", title: "The writing years" },
-  { label: "Chapter Four", title: "The discipline of restraint" },
-  { label: "Chapter Five", title: "A face for the book" },
+  { label: "Level One", title: "The seed of an idea" },
+  { label: "Level Two", title: "Finding the framework" },
+  { label: "Level Three", title: "The writing years" },
+  { label: "Level Four", title: "The discipline of restraint" },
+  { label: "Level Five", title: "A face for the book" },
 ];
 
 export default function JourneyTimelineSection() {
@@ -25,7 +25,7 @@ export default function JourneyTimelineSection() {
         <FadeIn>
           <div className="text-center">
             <Eyebrow>The Making Of</Eyebrow>
-            <h2 className="mt-4 font-serif text-4xl font-medium tracking-tight text-charcoal md:text-5xl lg:text-[3.25rem]">
+            <h2 className="mt-4 font-headline text-4xl font-medium tracking-tight text-charcoal md:text-5xl lg:text-[3.25rem]">
               A book takes a road to find you
             </h2>
           </div>

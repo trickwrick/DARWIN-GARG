@@ -59,7 +59,9 @@ export default function BookPage() {
       <main className={styles.main}>
         <section className={styles.hero} aria-label="The book">
           <div className={styles.cover}>
-            <BookCover />
+            <div className={styles.coverFrame}>
+              <BookCover />
+            </div>
           </div>
 
           <div className={styles.content}>

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  /* Headlines: Cormorant Garamond */
-  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  /* Titles: Playfair Display */
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
   /* Body: Inter */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-sans);
@@ -30,10 +30,14 @@
   --accent-gold-dark: #6d5a44;
   --border-color: #ddd2c0;
 
-  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-sans);
   --font-headline: var(--font-serif);
+}
+
+.font-headline {
+  font-family: var(--font-headline);
 }
 
 * {
@@ -81,6 +85,8 @@ h6,
 .font-headline {
   font-family: var(--font-headline);
   font-weight: 500;
+  font-style: normal;
+  letter-spacing: -0.01em;
 }
 
 .font-body {

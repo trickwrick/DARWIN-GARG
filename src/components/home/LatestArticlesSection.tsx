@@ -119,7 +119,7 @@ function ArticleCard({ article, href }: { article: BlogItem; href: string }) {
         <time className="font-sans text-[0.65rem] uppercase tracking-[0.25em] text-bronze">
           {article.date}
         </time>
-        <h3 className="mt-3 font-serif text-xl font-medium leading-snug text-charcoal">
+        <h3 className="mt-3 font-headline text-xl font-medium leading-snug text-charcoal">
           {article.title}
         </h3>
         <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-charcoal-muted">

@@ -125,6 +125,9 @@ export default function RetailerHoverButton({
         role={isTouch ? "region" : "tooltip"}
         aria-label={`${label} availability`}
       >
+        {!isTouch ? (
+          <span className={styles.cityDropdownBridge} aria-hidden="true" />
+        ) : null}
         <p className={styles.cityDropdownLabel}>Shop by country</p>
         <ul className={styles.cityList}>
           {markets.map((market: RetailerMarket) => (

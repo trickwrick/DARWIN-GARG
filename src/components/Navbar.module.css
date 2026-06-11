@@ -1,8 +1,8 @@
 .header {
   width: 100%;
   box-sizing: border-box;
-  background-color: #f5f1e6;
-  border-bottom: 1px solid rgba(45, 36, 30, 0.1);
+  background-color: #3d342c;
+  border-bottom: 1px solid rgba(232, 223, 208, 0.15);
   /* viewport-based — screen edge se hamesha gap */
   padding-left: clamp(2rem, 8vw, 7.5rem);
   padding-right: clamp(2rem, 8vw, 7.5rem);
@@ -18,13 +18,20 @@
 }
 
 .logo {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #2d241e;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f5f1e6;
   text-decoration: none;
   white-space: nowrap;
+  transition: color 0.2s ease, letter-spacing 0.2s ease;
+}
+
+.logo:hover {
+  color: #e8dfd0;
+  letter-spacing: 0.2em;
 }
 
 .links {
@@ -41,20 +48,21 @@
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: #2d241e;
+  color: #f5f1e6;
   text-decoration: none;
   white-space: nowrap;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .link:hover {
-  opacity: 0.65;
+  color: #e8dfd0;
+  opacity: 0.9;
 }
 
 .linkActive {
   text-decoration: underline;
   text-underline-offset: 5px;
-  text-decoration-color: rgba(45, 36, 30, 0.55);
+  text-decoration-color: #a68b5b;
 }
 
 .menuBtn {
@@ -62,12 +70,12 @@
   padding: 0.5rem;
   background: none;
   border: none;
-  color: #2d241e;
+  color: #f5f1e6;
   cursor: pointer;
 }
 
 .mobileMenu {
-  border-top: 1px solid rgba(45, 36, 30, 0.08);
+  border-top: 1px solid rgba(232, 223, 208, 0.15);
   padding: 2rem 0;
 }
 
@@ -84,11 +92,15 @@
 .mobileLink {
   font-family: var(--font-sans);
   font-size: 1.125rem;
-  color: #2d241e;
+  color: #f5f1e6;
   text-decoration: none;
 }
 
 @media (min-width: 768px) {
+  .logo {
+    font-size: 0.84rem;
+  }
+
   .links {
     display: flex;
   }

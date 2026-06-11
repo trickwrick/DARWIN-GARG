@@ -8,15 +8,17 @@ export default function HeroSection() {
     <section id="home" className={styles.hero}>
       <div className={styles.grid}>
         <div className={styles.portrait}>
-          <Image
-            src={AUTHOR_IMAGE}
-            alt="Darwin Garg, author of When Gods Must Return"
-            width={510}
-            height={680}
-            priority
-            sizes="(max-width: 768px) 220px, 255px"
-            className={styles.portraitImage}
-          />
+          <div className={styles.portraitFrame}>
+            <Image
+              src={AUTHOR_IMAGE}
+              alt="Darwin Garg, author of When Gods Must Return"
+              width={510}
+              height={680}
+              priority
+              sizes="(max-width: 768px) 220px, 255px"
+              className={styles.portraitImage}
+            />
+          </div>
         </div>
 
         <div className={styles.content}>

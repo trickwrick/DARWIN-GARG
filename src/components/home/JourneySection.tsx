@@ -2,11 +2,11 @@ import Link from "next/link";
 import styles from "./JourneySection.module.css";
 
 const chapters = [
-  { label: "Chapter One", title: "The seed of an idea" },
-  { label: "Chapter Two", title: "Finding the framework" },
-  { label: "Chapter Three", title: "The writing years" },
-  { label: "Chapter Four", title: "The discipline of restraint" },
-  { label: "Chapter Five", title: "A face for the book" },
+  { label: "Level One", title: "The seed of an idea" },
+  { label: "Level Two", title: "Finding the framework" },
+  { label: "Level Three", title: "The writing years" },
+  { label: "Level Four", title: "The discipline of restraint" },
+  { label: "Level Five", title: "A face for the book" },
 ];
 
 export default function JourneySection() {

@@ -18,7 +18,7 @@ export default function FeaturedBookSection() {
         <FadeIn>
           <div className="text-center">
             <Eyebrow>The Book</Eyebrow>
-            <h2 className="mt-4 font-serif text-4xl font-medium tracking-tight text-charcoal md:text-5xl lg:text-[3.25rem]">
+            <h2 className="mt-4 font-headline text-4xl font-medium tracking-tight text-charcoal md:text-5xl lg:text-[3.25rem]">
               When Gods Must Return
             </h2>
             <p className="mx-auto mt-4 max-w-lg font-serif text-lg italic text-charcoal/75 md:text-xl">

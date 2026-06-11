@@ -9,15 +9,17 @@ export default function AboutSection() {
       <hr className={styles.rule} />
 
       <div className={styles.grid}>
-        <div className={styles.photo}>
-          <Image
-            src={AUTHOR_IMAGE}
-            alt="Darwin Garg portrait"
-            width={340}
-            height={340}
-            sizes="170px"
-            className={styles.photoImage}
-          />
+        <div className={styles.photoFrame}>
+          <div className={styles.photo}>
+            <Image
+              src={AUTHOR_IMAGE}
+              alt="Darwin Garg portrait"
+              width={340}
+              height={340}
+              sizes="170px"
+              className={styles.photoImage}
+            />
+          </div>
         </div>
 
         <div className={styles.content}>

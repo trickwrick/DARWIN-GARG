@@ -28,15 +28,17 @@ export default function AboutPage() {
         </header>
 
         <section className={styles.body} aria-label="About the author">
-          <div className={styles.portrait}>
-            <Image
-              src={AUTHOR_IMAGE}
-              alt="Darwin Garg portrait"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 420px"
-              className={styles.portraitImage}
-            />
+          <div className={styles.portraitFrame}>
+            <div className={styles.portrait}>
+              <Image
+                src={AUTHOR_IMAGE}
+                alt="Darwin Garg portrait"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 420px"
+                className={styles.portraitImage}
+              />
+            </div>
           </div>
 
           <div className={styles.prose}>

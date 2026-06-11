@@ -7,10 +7,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  min-height: calc(100vh - 5.5rem);
-  padding: 2rem clamp(2rem, 8vw, 7.5rem) 4rem;
+  padding: 1.25rem clamp(2rem, 8vw, 7.5rem) 0.5rem;
   max-width: 52rem;
   margin: 0 auto;
   box-sizing: border-box;
@@ -27,196 +25,20 @@
 }
 
 .title {
-  margin: 1.25rem 0 0;
-  font-family: var(--font-serif);
+  margin: 0.85rem 0 0;
   font-size: clamp(2.25rem, 5vw, 3.75rem);
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.02em;
-  color: #2d241e;
-}
-
-.subtitle {
-  margin: 1.5rem 0 0;
-  font-family: var(--font-sans);
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  font-style: italic;
-  line-height: 1.7;
-  color: rgba(45, 36, 30, 0.8);
-}
-
-.chapters {
-  padding: 0 clamp(2rem, 8vw, 7.5rem) 0;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.chapter {
-  border-top: 1px solid rgba(45, 36, 30, 0.1);
-  padding: 3rem 0;
-}
-
-.chapterGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-.chapterMeta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.chapterLabel {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 0.65rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: rgba(45, 36, 30, 0.55);
-}
-
-.chapterYear {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 0.65rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  color: rgba(45, 36, 30, 0.45);
-}
-
-.chapterContent {
-  min-width: 0;
-}
-
-.chapterTitle {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: #2d241e;
 }
 
-.chapterQuote {
-  margin: 1.25rem 0 0;
+.subtitle {
+  margin: 1rem 0 0;
   font-family: var(--font-sans);
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: #2d241e;
-}
-
-.chapterProse {
-  margin: 1.25rem 0 0;
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.75;
-  color: #2d241e;
-}
-
-.chapterBody {
-  margin: 1.25rem 0 0;
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.75;
-  color: rgba(45, 36, 30, 0.75);
-}
-
-.chapterProse + .chapterBody {
-  margin-top: 1.5rem;
-}
-
-.chapterFigure {
-  position: relative;
-  margin: 2rem 0 0;
-  width: 100%;
-  min-height: clamp(220px, 40vw, 420px);
-  padding: 0;
-}
-
-.chapterPhoto {
-  position: relative;
-  width: 100%;
-  min-height: inherit;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background-color: #ebe4d6;
-  border-radius: 2px;
-}
-
-.chapterPhotoImage {
-  object-fit: cover;
-  object-position: center;
-}
-
-.chapterPhotoCaption {
-  position: absolute;
-  right: 1.25rem;
-  bottom: 1rem;
-  margin: 0;
-  max-width: 16rem;
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  font-style: italic;
-  line-height: 1.5;
-  text-align: right;
-  color: rgba(45, 36, 30, 0.5);
-}
-
-.coverGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.coverCard {
-  margin: 0;
-  padding: 0;
-}
-
-.coverPhoto {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  background-color: #ebe4d6;
-  border-radius: 2px;
-}
-
-.coverPhotoImage {
-  object-fit: cover;
-  object-position: center;
-}
-
-.coverCaption {
-  margin: 0.65rem 0 0;
-  font-family: var(--font-sans);
-  font-size: 0.82rem;
-  font-style: italic;
-  line-height: 1.5;
-  text-align: center;
-  color: rgba(45, 36, 30, 0.5);
-}
-
-.readerQuote {
-  margin: 1.75rem 0 0;
-  padding: 1.35rem 1.25rem 1.35rem 1.5rem;
-  max-width: 42rem;
-  background-color: #f0ebe2;
-  border-left: 2px solid rgba(45, 36, 30, 0.25);
-}
-
-.readerQuote p {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
   font-style: italic;
   line-height: 1.7;
-  color: #2d241e;
+  color: rgba(45, 36, 30, 0.8);
 }
 
 .cta {
@@ -257,41 +79,12 @@
 
 @media (min-width: 768px) {
   .hero {
-    padding-bottom: 5rem;
+    padding-top: 1.75rem;
+    padding-bottom: 0.75rem;
   }
 
   .cta {
     padding-top: 4rem;
     padding-bottom: 4rem;
-  }
-
-  .chapter {
-    padding: 3.5rem 0;
-  }
-
-  .chapterGrid {
-    grid-template-columns: minmax(7rem, 10rem) 1fr;
-    gap: 2.5rem;
-    align-items: start;
-  }
-
-  .chapterBody {
-    margin-top: 1.5rem;
-    max-width: 42rem;
-  }
-
-  .chapterQuote + .chapterBody,
-  .chapterQuote + .chapterProse {
-    margin-top: 1.5rem;
-  }
-
-  .chapterProse,
-  .chapterBody {
-    max-width: 42rem;
-  }
-
-  .coverGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.85rem;
   }
 }
