@@ -30,9 +30,6 @@ export default function AdminLogin() {
       <div className={styles.loginBox}>
         <p className={styles.loginEyebrow}>Darwin Garg</p>
         <h1 className={styles.loginTitle}>Admin Login</h1>
-        <p className={styles.loginSubtitle}>
-          Sign in to manage homepage, book, journey, and writings content.
-        </p>
         {error && <p className={styles.loginError}>{error}</p>}
         <form onSubmit={handleLogin}>
           <div className={styles.formGroup}>
