@@ -1,52 +1,49 @@
+import Link from 'next/link';
 import styles from './admin.module.css';
+
+const sections = [
+  {
+    title: 'Homepage',
+    description: 'Hero, book section, journey levels, about, testimonials',
+    href: '/admin/homepage',
+  },
+  {
+    title: 'The Book',
+    description: 'Book page copy, avatars, reviews, FAQ, retailers',
+    href: '/admin/book',
+  },
+  {
+    title: 'The Journey',
+    description: 'Timeline levels, chapter content, images, CTA',
+    href: '/admin/journey',
+  },
+  {
+    title: 'Writings',
+    description: 'Featured essay, writings list, essay pages',
+    href: '/admin/writings',
+  },
+];
 
 export default function AdminDashboard() {
   return (
     <div>
       <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Dashboard Overview</h1>
+        <div>
+          <h1 className={styles.pageTitle}>Dashboard</h1>
+          <p className={styles.pageDescription}>
+            Choose a section from the sidebar to start editing site content.
+          </p>
+        </div>
       </div>
 
       <div className={styles.statsGrid}>
-        <div className={styles.statCard}>
-          <div className={styles.statValue}>12</div>
-          <div className={styles.statLabel}>Total Blogs</div>
-        </div>
-        <div className={styles.statCard}>
-          <div className={styles.statValue}>8</div>
-          <div className={styles.statLabel}>Active FAQs</div>
-        </div>
-        <div className={styles.statCard}>
-          <div className={styles.statValue}>45</div>
-          <div className={styles.statLabel}>User Queries</div>
-        </div>
-      </div>
-
-      <div className={styles.tableContainer}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Recent Queries</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Rahul Rathor - Book inquiry</td>
-              <td>Oct 24, 2026</td>
-              <td><span style={{ color: 'orange' }}>Pending</span></td>
-              <td><button className={styles.actionBtn}>View</button></td>
-            </tr>
-            <tr>
-              <td>John Doe - Speaking engagement</td>
-              <td>Oct 23, 2026</td>
-              <td><span style={{ color: 'green' }}>Resolved</span></td>
-              <td><button className={styles.actionBtn}>View</button></td>
-            </tr>
-          </tbody>
-        </table>
+        {sections.map((section) => (
+          <Link key={section.href} href={section.href} className={styles.sectionCard}>
+            <h2 className={styles.sectionCardTitle}>{section.title}</h2>
+            <p className={styles.sectionCardText}>{section.description}</p>
+            <span className={styles.sectionCardLink}>Open editor &rarr;</span>
+          </Link>
+        ))}
       </div>
     </div>
   );

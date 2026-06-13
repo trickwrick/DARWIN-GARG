@@ -2,7 +2,7 @@ import AdminSidebar from '@/components/AdminSidebar';
 import styles from './admin.module.css';
 
 export const metadata = {
-  title: 'Admin Dashboard - Gods Book',
+  title: 'Admin Dashboard - Darwin Garg',
   description: 'Admin panel for content management',
 };
 
@@ -14,9 +14,7 @@ export default function AdminLayout({
   return (
     <div className={styles.adminLayout}>
       <AdminSidebar />
-      <main className={styles.mainContent}>
-        {children}
-      </main>
+      <main className={styles.mainContent}>{children}</main>
     </div>
   );
 }

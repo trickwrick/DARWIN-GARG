@@ -4,6 +4,21 @@ import { usePathname } from 'next/navigation';
 import { logoutAdmin } from '@/app/actions/authActions';
 import styles from '@/app/admin/admin.module.css';
 
+const navItems = [
+  { name: 'Dashboard', path: '/admin' },
+  { name: 'Homepage', path: '/admin/homepage' },
+  { name: 'The Book', path: '/admin/book' },
+  { name: 'The Journey', path: '/admin/journey' },
+  { name: 'Writings', path: '/admin/writings' },
+];
+
+function isNavActive(pathname: string, path: string) {
+  if (path === '/admin') {
+    return pathname === '/admin';
+  }
+  return pathname.startsWith(path);
+}
+
 export default function AdminSidebar() {
   const pathname = usePathname();
 
@@ -11,24 +26,18 @@ export default function AdminSidebar() {
     return null;
   }
 
-  const navItems = [
-    { name: 'Dashboard', path: '/admin' },
-    { name: 'Manage Blogs', path: '/admin/blogs' },
-    { name: 'Manage FAQs', path: '/admin/faqs' },
-    { name: 'Queries', path: '/admin/queries' },
-  ];
-
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
+        <p className={styles.sidebarEyebrow}>Darwin Garg</p>
         <h2 className={styles.sidebarTitle}>Admin Panel</h2>
       </div>
       <nav className={styles.sidebarNav}>
         {navItems.map((item) => {
-          const isActive = pathname === item.path;
+          const isActive = isNavActive(pathname, item.path);
           return (
-            <Link 
-              key={item.path} 
+            <Link
+              key={item.path}
               href={item.path}
               className={`${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}
             >
@@ -36,9 +45,9 @@ export default function AdminSidebar() {
             </Link>
           );
         })}
-        <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: '1px solid #eaeaea' }}>
+        <div className={styles.sidebarFooter}>
           <form action={logoutAdmin}>
-            <button type="submit" className={styles.navLink} style={{ color: 'red', display: 'block', width: '100%', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer' }}>
+            <button type="submit" className={styles.logoutBtn}>
               Logout
             </button>
           </form>

@@ -28,29 +28,39 @@ export default function AdminLogin() {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginBox}>
+        <p className={styles.loginEyebrow}>Darwin Garg</p>
         <h1 className={styles.loginTitle}>Admin Login</h1>
-        {error && <p style={{ color: 'red', textAlign: 'center', marginBottom: '15px' }}>{error}</p>}
+        <p className={styles.loginSubtitle}>
+          Sign in to manage homepage, book, journey, and writings content.
+        </p>
+        {error && <p className={styles.loginError}>{error}</p>}
         <form onSubmit={handleLogin}>
           <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="email">Email / Username</label>
-            <input 
-              type="text" 
+            <label className={styles.label} htmlFor="email">
+              Email / Username
+            </label>
+            <input
+              type="text"
               name="email"
-              id="email" 
-              className={styles.input} 
+              id="email"
+              className={styles.input}
               placeholder="admin@example.com or admin"
-              required 
+              required
+              autoComplete="username"
             />
           </div>
           <div className={styles.formGroup}>
-            <label className={styles.label} htmlFor="password">Password</label>
-            <input 
-              type="password" 
+            <label className={styles.label} htmlFor="password">
+              Password
+            </label>
+            <input
+              type="password"
               name="password"
-              id="password" 
-              className={styles.input} 
+              id="password"
+              className={styles.input}
               placeholder="••••••••"
-              required 
+              required
+              autoComplete="current-password"
             />
           </div>
           <button type="submit" className={styles.submitBtn} disabled={loading}>
