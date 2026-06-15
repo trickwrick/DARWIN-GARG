@@ -1,9 +1,9 @@
-import AdminSidebar from '@/components/AdminSidebar';
-import styles from './admin.module.css';
+import AdminLayoutShell from "@/components/admin/AdminLayoutShell";
+import styles from "./admin.module.css";
 
 export const metadata = {
-  title: 'Admin Dashboard - Darwin Garg',
-  description: 'Admin panel for content management',
+  title: "Admin Dashboard - Darwin Garg",
+  description: "Admin panel for content management",
 };
 
 export default function AdminLayout({
@@ -11,10 +11,5 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className={styles.adminLayout}>
-      <AdminSidebar />
-      <main className={styles.mainContent}>{children}</main>
-    </div>
-  );
+  return <AdminLayoutShell>{children}</AdminLayoutShell>;
 }

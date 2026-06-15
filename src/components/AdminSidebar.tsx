@@ -45,14 +45,14 @@ export default function AdminSidebar() {
             </Link>
           );
         })}
-        <div className={styles.sidebarFooter}>
-          <form action={logoutAdmin}>
-            <button type="submit" className={styles.logoutBtn}>
-              Logout
-            </button>
-          </form>
-        </div>
       </nav>
+      <div className={styles.sidebarFooter}>
+        <form action={logoutAdmin}>
+          <button type="submit" className={styles.logoutBtn}>
+            Logout
+          </button>
+        </form>
+      </div>
     </aside>
   );
 }
