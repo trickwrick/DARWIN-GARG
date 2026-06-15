@@ -335,16 +335,6 @@ export default function WritingsPostEditor({
                   Max length 250 characters
                 </span>
               </div>
-
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <label className={styles.label}>Other Meta:</label>
-                <textarea
-                  className={styles.textarea}
-                  rows={3}
-                  value={form.seo.otherMeta}
-                  onChange={(e) => updateSeo("otherMeta", e.target.value)}
-                />
-              </div>
             </section>
           </div>
 
