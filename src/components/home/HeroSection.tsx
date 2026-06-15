@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AUTHOR_IMAGE } from "@/data/images";
 import type { HomepageContent } from "@/data/homepage";
 import styles from "./HeroSection.module.css";
 
@@ -15,8 +14,8 @@ export default function HeroSection({ content }: HeroSectionProps) {
         <div className={styles.portrait}>
           <div className={styles.portraitFrame}>
             <Image
-              src={AUTHOR_IMAGE}
-              alt="Darwin Garg, author of When Gods Must Return"
+              src={content.portraitImage}
+              alt={content.portraitAlt}
               width={510}
               height={680}
               priority

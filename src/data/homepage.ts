@@ -1,4 +1,5 @@
 import { socialLinks as defaultSocialLinks } from "@/data/social";
+import { AUTHOR_IMAGE, BOOK_COVER_FRONT } from "@/data/images";
 
 export type SocialLink = {
   label: string;
@@ -16,6 +17,8 @@ export type HomepageContent = {
     eyebrow: string;
     heading: string;
     tagline: string;
+    portraitImage: string;
+    portraitAlt: string;
     primaryButtonText: string;
     primaryButtonHref: string;
     secondaryButtonText: string;
@@ -26,6 +29,8 @@ export type HomepageContent = {
     title: string;
     subtitle: string;
     description: string;
+    coverImage: string;
+    coverAlt: string;
     linkText: string;
     linkHref: string;
   };
@@ -37,6 +42,8 @@ export type HomepageContent = {
   aboutAuthor: {
     eyebrow: string;
     bio: string;
+    portraitImage: string;
+    portraitAlt: string;
     linkText: string;
     linkHref: string;
   };
@@ -51,6 +58,8 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContent = {
     eyebrow: "Author · Strategist · Storyteller",
     heading: "Darwin Garg",
     tagline: "I write at the meeting of ancient stories and modern chaos.",
+    portraitImage: AUTHOR_IMAGE,
+    portraitAlt: "Darwin Garg, author of When Gods Must Return",
     primaryButtonText: "Read my story",
     primaryButtonHref: "/about",
     secondaryButtonText: "Discover the book",
@@ -62,6 +71,8 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContent = {
     subtitle: "Ancient Wisdom for Modern Chaos",
     description:
       "Ten avatars of Vishnu. Ten great crises of our modern world. One book that maps them onto each other — not as ten separate lessons, but as one system of wisdom our age needs whole.",
+    coverImage: BOOK_COVER_FRONT,
+    coverAlt: "When Gods Must Return book cover",
     linkText: "Read more about the book →",
     linkHref: "/book",
   },
@@ -84,6 +95,8 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContent = {
   aboutAuthor: {
     eyebrow: "About the Author",
     bio: "Born in Agra, schooled in Kanpur, shaped by two decades in the corporate world — and somewhere along the way, drawn back to the older stories. <em>When Gods Must Return</em> is what came from that collision.",
+    portraitImage: AUTHOR_IMAGE,
+    portraitAlt: "Darwin Garg portrait",
     linkText: "Read more about me →",
     linkHref: "/about",
   },

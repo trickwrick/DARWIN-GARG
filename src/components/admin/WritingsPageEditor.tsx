@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { saveWritingsPageContent } from "@/app/actions/writingsPageActions";
 import AdminSavePopup from "@/components/admin/AdminSavePopup";
+import AdminImageUpload from "@/components/admin/AdminImageUpload";
 import EssayBlocksEditor from "@/components/admin/EssayBlocksEditor";
 import { writingCategories, type WritingFilter } from "@/data/writings";
 import {
@@ -272,20 +273,13 @@ export default function WritingsPageEditor({
                 onChange={(e) => updateFeatured("excerpt", e.target.value)}
               />
             </div>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Image path</label>
-              <input
-                className={styles.input}
+            <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+              <AdminImageUpload
+                label="Featured image"
                 value={featured.image}
-                onChange={(e) => updateFeatured("image", e.target.value)}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Image alt</label>
-              <input
-                className={styles.input}
-                value={featured.imageAlt}
-                onChange={(e) => updateFeatured("imageAlt", e.target.value)}
+                onChange={(url) => updateFeatured("image", url)}
+                altValue={featured.imageAlt}
+                onAltChange={(value) => updateFeatured("imageAlt", value)}
               />
             </div>
           </div>
@@ -348,20 +342,13 @@ export default function WritingsPageEditor({
               }
             />
           </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Image path</label>
-            <input
-              className={styles.input}
+          <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+            <AdminImageUpload
+              label="Card image"
               value={data.image}
-              onChange={(e) => updateWriting(index, "image", e.target.value)}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Image alt</label>
-            <input
-              className={styles.input}
-              value={data.imageAlt}
-              onChange={(e) => updateWriting(index, "imageAlt", e.target.value)}
+              onChange={(url) => updateWriting(index, "image", url)}
+              altValue={data.imageAlt}
+              onAltChange={(value) => updateWriting(index, "imageAlt", value)}
             />
           </div>
         </div>
@@ -504,21 +491,14 @@ export default function WritingsPageEditor({
               onChange={(e) => updateEssay(editingEssayIndex, "author", e.target.value)}
             />
           </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Hero image path</label>
-            <input
-              className={styles.input}
+          <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+            <AdminImageUpload
+              label="Hero image"
               value={essay.image}
-              onChange={(e) => updateEssay(editingEssayIndex, "image", e.target.value)}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Image alt</label>
-            <input
-              className={styles.input}
-              value={essay.imageAlt}
-              onChange={(e) =>
-                updateEssay(editingEssayIndex, "imageAlt", e.target.value)
+              onChange={(url) => updateEssay(editingEssayIndex, "image", url)}
+              altValue={essay.imageAlt}
+              onAltChange={(value) =>
+                updateEssay(editingEssayIndex, "imageAlt", value)
               }
             />
           </div>

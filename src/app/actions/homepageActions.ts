@@ -20,6 +20,14 @@ function sanitizeContent(input: HomepageContent): HomepageContent {
       eyebrow: sanitizeString(input.author?.eyebrow, defaults.author.eyebrow),
       heading: sanitizeString(input.author?.heading, defaults.author.heading),
       tagline: sanitizeString(input.author?.tagline, defaults.author.tagline),
+      portraitImage: sanitizeString(
+        input.author?.portraitImage,
+        defaults.author.portraitImage
+      ),
+      portraitAlt: sanitizeString(
+        input.author?.portraitAlt,
+        defaults.author.portraitAlt
+      ),
       primaryButtonText: sanitizeString(
         input.author?.primaryButtonText,
         defaults.author.primaryButtonText
@@ -45,6 +53,11 @@ function sanitizeContent(input: HomepageContent): HomepageContent {
         input.book?.description,
         defaults.book.description
       ),
+      coverImage: sanitizeString(
+        input.book?.coverImage,
+        defaults.book.coverImage
+      ),
+      coverAlt: sanitizeString(input.book?.coverAlt, defaults.book.coverAlt),
       linkText: sanitizeString(input.book?.linkText, defaults.book.linkText),
       linkHref: sanitizeString(input.book?.linkHref, defaults.book.linkHref),
     },
@@ -71,6 +84,14 @@ function sanitizeContent(input: HomepageContent): HomepageContent {
         defaults.aboutAuthor.eyebrow
       ),
       bio: sanitizeString(input.aboutAuthor?.bio, defaults.aboutAuthor.bio),
+      portraitImage: sanitizeString(
+        input.aboutAuthor?.portraitImage,
+        defaults.aboutAuthor.portraitImage
+      ),
+      portraitAlt: sanitizeString(
+        input.aboutAuthor?.portraitAlt,
+        defaults.aboutAuthor.portraitAlt
+      ),
       linkText: sanitizeString(
         input.aboutAuthor?.linkText,
         defaults.aboutAuthor.linkText

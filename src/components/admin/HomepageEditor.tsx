@@ -5,6 +5,7 @@ import Link from "next/link";
 import { saveHomepageContent } from "@/app/actions/homepageActions";
 import type { HomepageContent, SocialLink, Testimonial } from "@/data/homepage";
 import AdminSavePopup from "@/components/admin/AdminSavePopup";
+import AdminImageUpload from "@/components/admin/AdminImageUpload";
 import styles from "@/app/admin/admin.module.css";
 
 type PopupState = {
@@ -201,6 +202,15 @@ export default function HomepageEditor({ initialContent }: HomepageEditorProps) 
                 onChange={(e) => updateAuthor("tagline", e.target.value)}
               />
             </div>
+            <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+              <AdminImageUpload
+                label="Author portrait"
+                value={content.author.portraitImage}
+                onChange={(url) => updateAuthor("portraitImage", url)}
+                altValue={content.author.portraitAlt}
+                onAltChange={(value) => updateAuthor("portraitAlt", value)}
+              />
+            </div>
             <div className={styles.formGroup}>
               <label className={styles.label}>Primary button text</label>
               <input
@@ -274,6 +284,15 @@ export default function HomepageEditor({ initialContent }: HomepageEditorProps) 
                 rows={4}
                 value={content.book.description}
                 onChange={(e) => updateBook("description", e.target.value)}
+              />
+            </div>
+            <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+              <AdminImageUpload
+                label="Book cover"
+                value={content.book.coverImage}
+                onChange={(url) => updateBook("coverImage", url)}
+                altValue={content.book.coverAlt}
+                onAltChange={(value) => updateBook("coverAlt", value)}
               />
             </div>
             <div className={styles.formGroup}>
@@ -386,6 +405,15 @@ export default function HomepageEditor({ initialContent }: HomepageEditorProps) 
               <p className={styles.fieldHint}>
                 You can use simple HTML like &lt;em&gt; for italics.
               </p>
+            </div>
+            <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+              <AdminImageUpload
+                label="About photo"
+                value={content.aboutAuthor.portraitImage}
+                onChange={(url) => updateAboutAuthor("portraitImage", url)}
+                altValue={content.aboutAuthor.portraitAlt}
+                onAltChange={(value) => updateAboutAuthor("portraitAlt", value)}
+              />
             </div>
             <div className={styles.formGroup}>
               <label className={styles.label}>Link text</label>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { saveJourneyPageContent } from "@/app/actions/journeyPageActions";
 import AdminSavePopup from "@/components/admin/AdminSavePopup";
+import AdminImageUpload from "@/components/admin/AdminImageUpload";
 import {
   emptyChapter,
   emptyCoverDraft,
@@ -357,7 +358,7 @@ export default function JourneyPageEditor({
                 <div className={styles.nestedBlock}>
                   <div className={styles.repeatableHeader}>
                     <h4 className={styles.nestedTitle}>Chapter image (optional)</h4>
-                    {chapter.image ? (
+                    {chapter.image?.src ? (
                       <button
                         type="button"
                         className={styles.removeBtn}
@@ -367,38 +368,28 @@ export default function JourneyPageEditor({
                       </button>
                     ) : null}
                   </div>
-                  <div className={styles.editorGrid}>
-                    <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                      <label className={styles.label}>Image path</label>
-                      <input
-                        className={styles.input}
-                        placeholder="/images/book/physical-book.png"
-                        value={chapter.image?.src ?? ""}
-                        onChange={(e) =>
-                          updateChapterImage(index, "src", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>Alt text</label>
-                      <input
-                        className={styles.input}
-                        value={chapter.image?.alt ?? ""}
-                        onChange={(e) =>
-                          updateChapterImage(index, "alt", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>Caption</label>
-                      <input
-                        className={styles.input}
-                        value={chapter.image?.caption ?? ""}
-                        onChange={(e) =>
-                          updateChapterImage(index, "caption", e.target.value)
-                        }
-                      />
-                    </div>
+                  <AdminImageUpload
+                    label="Chapter image"
+                    value={chapter.image?.src ?? ""}
+                    onChange={(url) => {
+                      if (!url) clearChapterImage(index);
+                      else updateChapterImage(index, "src", url);
+                    }}
+                    altValue={chapter.image?.alt ?? ""}
+                    onAltChange={(value) =>
+                      updateChapterImage(index, "alt", value)
+                    }
+                    altLabel="Image alt text"
+                  />
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Caption</label>
+                    <input
+                      className={styles.input}
+                      value={chapter.image?.caption ?? ""}
+                      onChange={(e) =>
+                        updateChapterImage(index, "caption", e.target.value)
+                      }
+                    />
                   </div>
                 </div>
 
@@ -418,52 +409,31 @@ export default function JourneyPageEditor({
                           Remove
                         </button>
                       </div>
-                      <div className={styles.editorGrid}>
-                        <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                          <label className={styles.label}>Image path</label>
-                          <input
-                            className={styles.input}
-                            value={draft.src}
-                            onChange={(e) =>
-                              updateCoverDraft(
-                                index,
-                                draftIndex,
-                                "src",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                        <div className={styles.formGroup}>
-                          <label className={styles.label}>Alt text</label>
-                          <input
-                            className={styles.input}
-                            value={draft.alt}
-                            onChange={(e) =>
-                              updateCoverDraft(
-                                index,
-                                draftIndex,
-                                "alt",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                        <div className={styles.formGroup}>
-                          <label className={styles.label}>Caption</label>
-                          <input
-                            className={styles.input}
-                            value={draft.caption}
-                            onChange={(e) =>
-                              updateCoverDraft(
-                                index,
-                                draftIndex,
-                                "caption",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
+                      <AdminImageUpload
+                        label={`Cover draft ${draftIndex + 1}`}
+                        value={draft.src}
+                        onChange={(url) =>
+                          updateCoverDraft(index, draftIndex, "src", url)
+                        }
+                        altValue={draft.alt}
+                        onAltChange={(value) =>
+                          updateCoverDraft(index, draftIndex, "alt", value)
+                        }
+                      />
+                      <div className={styles.formGroup}>
+                        <label className={styles.label}>Caption</label>
+                        <input
+                          className={styles.input}
+                          value={draft.caption}
+                          onChange={(e) =>
+                            updateCoverDraft(
+                              index,
+                              draftIndex,
+                              "caption",
+                              e.target.value
+                            )
+                          }
+                        />
                       </div>
                     </div>
                   ))}

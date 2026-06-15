@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AUTHOR_IMAGE } from "@/data/images";
 import type { HomepageContent } from "@/data/homepage";
 import styles from "./AboutSection.module.css";
 
@@ -17,8 +16,8 @@ export default function AboutSection({ content }: AboutSectionProps) {
         <div className={styles.photoFrame}>
           <div className={styles.photo}>
             <Image
-              src={AUTHOR_IMAGE}
-              alt="Darwin Garg portrait"
+              src={content.portraitImage}
+              alt={content.portraitAlt}
               width={340}
               height={340}
               sizes="170px"

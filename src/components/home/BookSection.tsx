@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BOOK_COVER_FRONT } from "@/data/images";
 import type { HomepageContent } from "@/data/homepage";
 import styles from "./BookSection.module.css";
 
@@ -17,8 +16,8 @@ export default function BookSection({ content }: BookSectionProps) {
         <div className={styles.cover}>
           <div className={styles.coverFrame}>
             <Image
-              src={BOOK_COVER_FRONT}
-              alt="When Gods Must Return book cover"
+              src={content.coverImage}
+              alt={content.coverAlt}
               width={400}
               height={600}
               sizes="(max-width: 768px) 220px, 255px"
