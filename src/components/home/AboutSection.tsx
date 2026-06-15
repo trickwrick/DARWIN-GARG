@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AUTHOR_IMAGE } from "@/data/images";
+import type { HomepageContent } from "@/data/homepage";
 import styles from "./AboutSection.module.css";
 
-export default function AboutSection() {
+type AboutSectionProps = {
+  content: HomepageContent["aboutAuthor"];
+};
+
+export default function AboutSection({ content }: AboutSectionProps) {
   return (
     <section id="about" className={styles.section}>
       <hr className={styles.rule} />
@@ -23,17 +28,15 @@ export default function AboutSection() {
         </div>
 
         <div className={styles.content}>
-          <p className={styles.eyebrow}>About the Author</p>
+          <p className={styles.eyebrow}>{content.eyebrow}</p>
 
-          <p className={styles.bio}>
-            Born in Agra, schooled in Kanpur, shaped by two decades in the
-            corporate world — and somewhere along the way, drawn back to the
-            older stories. <em>When Gods Must Return</em> is what came from that
-            collision.
-          </p>
+          <p
+            className={styles.bio}
+            dangerouslySetInnerHTML={{ __html: content.bio }}
+          />
 
-          <Link href="/about" className={styles.moreLink}>
-            Read more about me &rarr;
+          <Link href={content.linkHref} className={styles.moreLink}>
+            {content.linkText}
           </Link>
         </div>
       </div>

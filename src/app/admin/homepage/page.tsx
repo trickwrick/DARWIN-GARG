@@ -1,12 +1,8 @@
-import AdminPageShell from "@/components/admin/AdminPageShell";
+import HomepageEditor from "@/components/admin/HomepageEditor";
+import { getHomepageContentForAdmin } from "@/app/actions/homepageActions";
 
-export default function AdminHomepagePage() {
-  return (
-    <AdminPageShell
-      title="Homepage"
-      description="Manage hero, book section, journey levels, testimonials, about, and footer content."
-      publicHref="/"
-      publicLabel="View homepage"
-    />
-  );
+export default async function AdminHomepagePage() {
+  const content = await getHomepageContentForAdmin();
+
+  return <HomepageEditor initialContent={content} />;
 }

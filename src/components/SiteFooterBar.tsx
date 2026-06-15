@@ -1,7 +1,14 @@
-import { socialLinks } from "@/data/social";
+import { socialLinks as defaultSocialLinks } from "@/data/social";
+import type { SocialLink } from "@/data/homepage";
 import styles from "./SiteFooterBar.module.css";
 
-export default function SiteFooterBar() {
+type SiteFooterBarProps = {
+  socialLinks?: SocialLink[];
+};
+
+export default function SiteFooterBar({
+  socialLinks = defaultSocialLinks.map((link) => ({ ...link })),
+}: SiteFooterBarProps) {
   const year = new Date().getFullYear();
 
   return (
@@ -9,7 +16,7 @@ export default function SiteFooterBar() {
       <p className={styles.copyright}>&copy; Darwin Garg &middot; {year}</p>
       <ul className={styles.links}>
         {socialLinks.map((link, index) => (
-          <li key={link.label} className={styles.linkGroup}>
+          <li key={`${link.label}-${link.href}`} className={styles.linkGroup}>
             {index > 0 ? (
               <span className={styles.dot} aria-hidden>
                 &middot;

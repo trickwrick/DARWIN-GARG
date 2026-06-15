@@ -1,9 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import type { WritingsPageContent } from "@/data/writingsPage";
 import styles from "./WritingsNewsletter.module.css";
 
-export default function WritingsNewsletter() {
+type WritingsNewsletterProps = {
+  content: WritingsPageContent["newsletter"];
+};
+
+export default function WritingsNewsletter({ content }: WritingsNewsletterProps) {
   const [email, setEmail] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
@@ -14,13 +19,11 @@ export default function WritingsNewsletter() {
 
   return (
     <section className={styles.newsletter} aria-labelledby="writings-newsletter-heading">
-      <p className={styles.eyebrow}>Stay in touch</p>
+      <p className={styles.eyebrow}>{content.eyebrow}</p>
       <h2 id="writings-newsletter-heading" className={styles.title}>
-        Receive new writings by email
+        {content.title}
       </h2>
-      <p className={styles.note}>
-        Occasional. Considered. Never more than once a month.
-      </p>
+      <p className={styles.note}>{content.note}</p>
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="writings-email" className={styles.srOnly}>
@@ -30,7 +33,7 @@ export default function WritingsNewsletter() {
           id="writings-email"
           type="email"
           name="email"
-          placeholder="your@email.com"
+          placeholder={content.placeholder}
           className={styles.input}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -38,7 +41,7 @@ export default function WritingsNewsletter() {
           autoComplete="email"
         />
         <button type="submit" className={styles.button}>
-          Subscribe
+          {content.buttonText}
         </button>
       </form>
     </section>

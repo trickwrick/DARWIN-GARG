@@ -33,6 +33,12 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# local admin content fallback
+/data/homepage-content.json
+/data/book-page-content.json
+/data/journey-page-content.json
+/data/writings-page-content.json
+
 # vercel
 .vercel
 

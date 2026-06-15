@@ -1,12 +1,8 @@
-import AdminPageShell from "@/components/admin/AdminPageShell";
+import BookPageEditor from "@/components/admin/BookPageEditor";
+import { getBookPageContentForAdmin } from "@/app/actions/bookPageActions";
 
-export default function AdminBookPage() {
-  return (
-    <AdminPageShell
-      title="The Book"
-      description="Manage book page copy, cover details, avatars, reviews, FAQ, and retailer links."
-      publicHref="/book"
-      publicLabel="View book page"
-    />
-  );
+export default async function AdminBookPage() {
+  const content = await getBookPageContentForAdmin();
+
+  return <BookPageEditor initialContent={content} />;
 }

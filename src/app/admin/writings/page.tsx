@@ -1,12 +1,8 @@
-import AdminPageShell from "@/components/admin/AdminPageShell";
+import WritingsPageEditor from "@/components/admin/WritingsPageEditor";
+import { getWritingsPageContentForAdmin } from "@/app/actions/writingsPageActions";
 
-export default function AdminWritingsPage() {
-  return (
-    <AdminPageShell
-      title="Writings"
-      description="Manage featured essay, writings list, filters, and individual essay pages."
-      publicHref="/blog"
-      publicLabel="View writings page"
-    />
-  );
+export default async function AdminWritingsPage() {
+  const content = await getWritingsPageContentForAdmin();
+
+  return <WritingsPageEditor initialContent={content} />;
 }

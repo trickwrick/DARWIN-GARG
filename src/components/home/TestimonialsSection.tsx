@@ -1,21 +1,23 @@
-import { bookReviews } from "@/data/book";
+import type { HomepageContent } from "@/data/homepage";
 import styles from "./TestimonialsSection.module.css";
 
-const testimonials = bookReviews.slice(0, 2);
+type TestimonialsSectionProps = {
+  content: HomepageContent["readerVoices"];
+};
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ content }: TestimonialsSectionProps) {
   return (
     <section id="testimonials" className={styles.section}>
       <hr className={styles.rule} />
 
       <header className={styles.header}>
-        <p className={styles.eyebrow}>Reader Voices</p>
-        <h2 className={styles.title}>What readers are saying</h2>
+        <p className={styles.eyebrow}>{content.eyebrow}</p>
+        <h2 className={styles.title}>{content.title}</h2>
       </header>
 
       <div className={styles.cards}>
-        {testimonials.map((item) => (
-          <blockquote key={item.quote} className={styles.card}>
+        {content.testimonials.map((item) => (
+          <blockquote key={`${item.quote}-${item.attribution}`} className={styles.card}>
             <p className={styles.quote}>&ldquo;{item.quote}&rdquo;</p>
             <cite className={styles.attribution}>
               &mdash; {item.attribution}

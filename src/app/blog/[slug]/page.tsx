@@ -4,7 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import SiteFooterBar from "@/components/SiteFooterBar";
-import { getAllEssaySlugs, getEssay, type EssayBlock } from "@/data/essays";
+import { getEssayBySlug, getAllEssaySlugsFromContent } from "@/lib/writingsPage";
+import type { EssayBlock } from "@/data/essays";
 import styles from "./page.module.css";
 
 type EssayPageProps = {
@@ -12,14 +13,15 @@ type EssayPageProps = {
 };
 
 export async function generateStaticParams() {
-  return getAllEssaySlugs().map((slug) => ({ slug }));
+  const slugs = await getAllEssaySlugsFromContent();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: EssayPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const essay = getEssay(slug);
+  const essay = await getEssayBySlug(slug);
 
   if (!essay) {
     return { title: "Essay not found" };
@@ -68,7 +70,7 @@ function EssayBlockRenderer({ block }: { block: EssayBlock }) {
 
 export default async function EssayPage({ params }: EssayPageProps) {
   const { slug } = await params;
-  const essay = getEssay(slug);
+  const essay = await getEssayBySlug(slug);
 
   if (!essay) {
     notFound();

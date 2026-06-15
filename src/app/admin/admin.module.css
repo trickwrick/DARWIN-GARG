@@ -397,6 +397,370 @@
   cursor: not-allowed;
 }
 
+.editorForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 920px;
+}
+
+.editorSection {
+  background: #fffdf8;
+  padding: 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(139, 115, 85, 0.18);
+  box-shadow: 0 4px 16px rgba(45, 36, 30, 0.04);
+}
+
+.editorSectionTitle {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  color: #2d241e;
+  margin: 0 0 20px;
+}
+
+.editorGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  color: #2d241e;
+  resize: vertical;
+  min-height: 88px;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #8b7355;
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.15);
+}
+
+.fieldHint,
+.sectionNote {
+  margin: 8px 0 0;
+  color: #8b7355;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.sectionNote {
+  margin: -8px 0 16px;
+}
+
+.repeatableList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.repeatableItem {
+  padding: 20px;
+  border-radius: 10px;
+  background: #faf6ee;
+  border: 1px solid rgba(139, 115, 85, 0.15);
+}
+
+.repeatableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.repeatableTitle {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2d241e;
+}
+
+.addBtn {
+  margin-top: 14px;
+  padding: 10px 16px;
+  border: 1px dashed rgba(139, 115, 85, 0.45);
+  border-radius: 8px;
+  background: transparent;
+  color: #8b7355;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.addBtn:hover {
+  background: rgba(139, 115, 85, 0.08);
+}
+
+.removeBtn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #b42318;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.editorActions {
+  position: sticky;
+  bottom: 0;
+  padding: 16px 0 8px;
+  background: linear-gradient(180deg, rgba(245, 241, 230, 0), #f5f1e6 30%);
+}
+
+.editorActions .submitBtn {
+  max-width: 280px;
+}
+
+.successBanner,
+.errorBanner {
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.successBanner {
+  background: #ecfdf3;
+  color: #027a48;
+  border: 1px solid #abefc6;
+}
+
+.errorBanner {
+  background: #fef3f2;
+  color: #b42318;
+  border: 1px solid #fecdca;
+}
+
+.nestedBlock {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(139, 115, 85, 0.15);
+}
+
+.nestedTitle {
+  margin: 0 0 12px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #2d241e;
+}
+
+.nestedItem {
+  margin-bottom: 14px;
+  padding: 14px;
+  border-radius: 8px;
+  background: #fffdf8;
+  border: 1px solid rgba(139, 115, 85, 0.12);
+}
+
+.nestedLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b5d52;
+}
+
+.blockActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.adminCategoryNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.adminCategory,
+.adminCategoryActive {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.adminCategory {
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  background: #fffdf8;
+  color: #6b5d52;
+}
+
+.adminCategory:hover {
+  border-color: #8b7355;
+  color: #2d241e;
+}
+
+.adminCategoryActive {
+  border: 1px solid #3d342c;
+  background: #3d342c;
+  color: #f5f1e6;
+}
+
+.writingAdminCard {
+  padding: 22px;
+  border-radius: 12px;
+  background: #faf6ee;
+  border: 1px solid rgba(139, 115, 85, 0.18);
+}
+
+.writingAdminCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.writingAdminBadge {
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8b7355;
+}
+
+.readEssayBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #8b7355;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.readEssayBtn:hover:not(:disabled) {
+  color: #2d241e;
+}
+
+.readEssayBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.backLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #8b7355;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.backLinkBtn:hover {
+  color: #2d241e;
+}
+
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(45, 36, 30, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.popupBox {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 28px 24px;
+  border-radius: 14px;
+  background: #fffdf8;
+  border: 1px solid rgba(139, 115, 85, 0.2);
+  box-shadow: 0 24px 48px rgba(45, 36, 30, 0.18);
+  text-align: center;
+}
+
+.popupSuccess {
+  border-color: rgba(2, 122, 72, 0.25);
+}
+
+.popupError {
+  border-color: rgba(180, 35, 24, 0.25);
+}
+
+.popupEyebrow {
+  margin: 0 0 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8b7355;
+}
+
+.popupSuccess .popupEyebrow {
+  color: #027a48;
+}
+
+.popupError .popupEyebrow {
+  color: #b42318;
+}
+
+.popupTitle {
+  margin: 0 0 10px;
+  font-family: var(--font-headline);
+  font-size: 1.6rem;
+  color: #2d241e;
+}
+
+.popupMessage {
+  margin: 0 0 24px;
+  color: #6b5d52;
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.popupBtn {
+  min-width: 120px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #3d342c;
+  color: #f5f1e6;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.popupBtn:hover {
+  background: #2d241e;
+}
+
 @media (max-width: 768px) {
   .adminLayout {
     flex-direction: column;
@@ -412,5 +776,9 @@
 
   .pageHeader {
     flex-direction: column;
+  }
+
+  .editorGrid {
+    grid-template-columns: 1fr;
   }
 }

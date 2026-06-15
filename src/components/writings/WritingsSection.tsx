@@ -3,25 +3,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import {
-  featuredWriting,
-  writings,
-  type WritingFilter,
-} from "@/data/writings";
+import { type WritingFilter } from "@/data/writings";
+import type { WritingsPageContent } from "@/data/writingsPage";
+import { writingHref } from "@/data/writingsPage";
 import WritingsFilters from "@/components/writings/WritingsFilters";
 import WritingsNewsletter from "@/components/writings/WritingsNewsletter";
 import styles from "@/app/blog/page.module.css";
 
-export default function WritingsSection() {
+type WritingsSectionProps = {
+  content: WritingsPageContent;
+};
+
+export default function WritingsSection({ content }: WritingsSectionProps) {
   const [activeFilter, setActiveFilter] = useState<WritingFilter>("All");
 
   const showFeatured =
-    activeFilter === "All" || activeFilter === featuredWriting.category;
+    activeFilter === "All" || activeFilter === content.featured.category;
 
   const filteredWritings = useMemo(() => {
-    if (activeFilter === "All") return writings;
-    return writings.filter((item) => item.category === activeFilter);
-  }, [activeFilter]);
+    if (activeFilter === "All") return content.writings;
+    return content.writings.filter((item) => item.category === activeFilter);
+  }, [activeFilter, content.writings]);
 
   return (
     <>
@@ -33,14 +35,17 @@ export default function WritingsSection() {
             <p className={styles.featuredMeta}>
               <span>Featured essay</span>
               <span className={styles.metaDot} aria-hidden="true" />
-              <span>{featuredWriting.date}</span>
+              <span>{content.featured.date}</span>
               <span className={styles.metaDot} aria-hidden="true" />
-              <span>{featuredWriting.readTime}</span>
+              <span>{content.featured.readTime}</span>
             </p>
-            <h2 className={styles.featuredTitle}>{featuredWriting.title}</h2>
-            <p className={styles.featuredExcerpt}>{featuredWriting.excerpt}</p>
-            <Link href={featuredWriting.href} className={styles.featuredLink}>
-              <span>Read the essay</span>
+            <h2 className={styles.featuredTitle}>{content.featured.title}</h2>
+            <p className={styles.featuredExcerpt}>{content.featured.excerpt}</p>
+            <Link
+              href={writingHref(content.featured.slug)}
+              className={styles.featuredLink}
+            >
+              <span>{content.featured.linkText}</span>
               <span className={styles.linkArrow} aria-hidden="true">
                 &rarr;
               </span>
@@ -48,14 +53,14 @@ export default function WritingsSection() {
           </div>
 
           <Link
-            href={featuredWriting.href}
+            href={writingHref(content.featured.slug)}
             className={styles.featuredImageLink}
-            aria-label={`Read featured essay: ${featuredWriting.title}`}
+            aria-label={`Read featured essay: ${content.featured.title}`}
           >
             <div className={styles.featuredImage}>
               <Image
-                src={featuredWriting.image}
-                alt={featuredWriting.imageAlt}
+                src={content.featured.image}
+                alt={content.featured.imageAlt}
                 width={480}
                 height={640}
                 sizes="(max-width: 768px) 100vw, 320px"
@@ -71,7 +76,7 @@ export default function WritingsSection() {
         <section className={styles.grid} aria-label="More writings">
           {filteredWritings.map((card) => (
             <article key={card.id} className={styles.card}>
-              <Link href={card.href} className={styles.cardLinkWrap}>
+              <Link href={writingHref(card.slug)} className={styles.cardLinkWrap}>
                 <div className={styles.cardImage}>
                   <Image
                     src={card.image}
@@ -103,12 +108,10 @@ export default function WritingsSection() {
           ))}
         </section>
       ) : (
-        <p className={styles.emptyState}>
-          More pieces in this category are on the way.
-        </p>
+        <p className={styles.emptyState}>{content.emptyState}</p>
       )}
 
-      <WritingsNewsletter />
+      <WritingsNewsletter content={content.newsletter} />
     </>
   );
 }

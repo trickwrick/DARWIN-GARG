@@ -5,13 +5,7 @@ import Navbar from "@/components/Navbar";
 import BookCover from "@/components/book/BookCover";
 import SiteFooterBar from "@/components/SiteFooterBar";
 import { AVATAR_IMAGES } from "@/data/images";
-import {
-  AMAZON_LINK,
-  avatarCrises,
-  bookExcerpt,
-  bookFaq,
-  bookReviews,
-} from "@/data/book";
+import { getBookPageContent } from "@/lib/bookPage";
 import RetailerButtons from "@/components/retailers/RetailerButtons";
 import styles from "./page.module.css";
 
@@ -27,26 +21,43 @@ export const metadata: Metadata = {
   },
 };
 
-const bookJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Book",
-  name: "When Gods Must Return",
-  alternateName: "Ancient Wisdom for Modern Chaos",
-  author: {
-    "@type": "Person",
-    name: "Darwin Garg",
-  },
-  description:
-    "Ten avatars of Vishnu mapped to ten defining crises of our time — ancient wisdom for modern chaos.",
-  url: "https://darwingarg.com/book",
-  offers: {
-    "@type": "Offer",
-    url: AMAZON_LINK,
-    availability: "https://schema.org/InStock",
-  },
-};
+function renderParagraphs(paragraphs: string[], className: string) {
+  return paragraphs.map((paragraph) => (
+    <p
+      key={paragraph}
+      className={className}
+      dangerouslySetInnerHTML={{ __html: paragraph }}
+    />
+  ));
+}
 
-export default function BookPage() {
+function getAvatarImage(name: string) {
+  return (
+    AVATAR_IMAGES[name as keyof typeof AVATAR_IMAGES] ?? AVATAR_IMAGES.Matsya
+  );
+}
+
+export default async function BookPage() {
+  const content = await getBookPageContent();
+
+  const bookJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    name: content.hero.title,
+    alternateName: content.hero.tagline,
+    author: {
+      "@type": "Person",
+      name: content.hero.authorName,
+    },
+    description: content.hero.description,
+    url: "https://darwingarg.com/book",
+    offers: {
+      "@type": "Offer",
+      url: content.hero.amazonLink,
+      availability: "https://schema.org/InStock",
+    },
+  };
+
   return (
     <div className={styles.page}>
       <script
@@ -65,97 +76,73 @@ export default function BookPage() {
           </div>
 
           <div className={styles.content}>
-            <p className={styles.eyebrow}>A debut work of nonfiction</p>
-            <h1 className={styles.title}>When Gods Must Return</h1>
-            <p className={styles.tagline}>Ancient Wisdom for Modern Chaos</p>
+            <p className={styles.eyebrow}>{content.hero.eyebrow}</p>
+            <h1 className={styles.title}>{content.hero.title}</h1>
+            <p className={styles.tagline}>{content.hero.tagline}</p>
             <p className={styles.authorByline}>
               By{" "}
-              <Link href="/about" className={styles.authorLink}>
-                Darwin Garg
+              <Link href={content.hero.authorLink} className={styles.authorLink}>
+                {content.hero.authorName}
               </Link>{" "}
-              — from Agra to New Jersey, by way of two decades in the corporate
-              world.
+              {content.hero.authorSuffix}
             </p>
-            <p className={styles.rating} aria-label="5 out of 5 stars from 5 reviews">
+            <p
+              className={styles.rating}
+              aria-label="5 out of 5 stars from 5 reviews"
+            >
               <span className={styles.stars} aria-hidden>
                 ★★★★★
               </span>{" "}
-              5.0 · 5 reader reviews
+              {content.hero.ratingText}
             </p>
-            <p className={styles.description}>
-              Ten avatars of Vishnu. Ten great crises of our modern world. One
-              book that maps them onto each other — not as ten separate lessons,
-              but as one system of wisdom our age needs whole.
-            </p>
+            <p className={styles.description}>{content.hero.description}</p>
 
             <div className={styles.actions}>
               <a
-                href={AMAZON_LINK}
+                href={content.hero.amazonLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.btnPrimary}
               >
-                Buy on Amazon
+                {content.hero.primaryButtonText}
               </a>
-              <Link href="#retailers" className={styles.btnOutline}>
-                All retailers
+              <Link
+                href={content.hero.secondaryButtonHref}
+                className={styles.btnOutline}
+              >
+                {content.hero.secondaryButtonText}
               </Link>
             </div>
           </div>
         </section>
 
         <section className={styles.premise} aria-label="The premise">
-          <p className={styles.premiseEyebrow}>The premise</p>
-          <h2 className={styles.premiseTitle}>What this book argues</h2>
+          <p className={styles.premiseEyebrow}>{content.premise.eyebrow}</p>
+          <h2 className={styles.premiseTitle}>{content.premise.title}</h2>
           <div className={styles.premiseProse}>
-            <p>
-              We live in an age of converging crises — climate, AI, inequality,
-              loneliness, the loss of meaning. We&apos;ve answered them with more
-              frameworks, more podcasts, more books of advice. What we&apos;ve
-              lost is wisdom.
-            </p>
-            <p>
-              The Dashavatar isn&apos;t ten gods. It&apos;s ten archetypes of how
-              to meet chaos — encoded over thousands of years into the stories we
-              now treat as just stories. <em>When Gods Must Return</em> argues
-              that our age doesn&apos;t need one of these wisdoms. It needs all
-              ten, working together.
-            </p>
+            {renderParagraphs(content.premise.paragraphs, "")}
           </div>
         </section>
 
         <section className={styles.audience} aria-label="Who this book is for">
-          <p className={styles.sectionEyebrow}>Who it&apos;s for</p>
-          <h2 className={styles.sectionTitle}>Ancient wisdom, modern reader</h2>
+          <p className={styles.sectionEyebrow}>{content.audience.eyebrow}</p>
+          <h2 className={styles.sectionTitle}>{content.audience.title}</h2>
           <div className={styles.audienceProse}>
-            <p>
-              You don&apos;t need a religious background or prior knowledge of
-              Hindu tradition. Through stories of ordinary people facing
-              extraordinary modern dilemmas, the book shows how timeless avatar
-              wisdom speaks directly to where we are right now.
-            </p>
-            <p>
-              Especially for readers of Karen Armstrong, Joseph Campbell, and
-              Devdutt Pattanaik — and anyone searching for a framework that
-              holds more than one crisis at a time.
-            </p>
+            {renderParagraphs(content.audience.paragraphs, "")}
           </div>
         </section>
 
         <section className={styles.structure} aria-label="Ten avatars, ten crises">
-          <p className={styles.structureEyebrow}>Structure</p>
-          <h2 className={styles.structureTitle}>Ten avatars · ten crises</h2>
-          <p className={styles.structureIntro}>
-            Each avatar embodies a distinct form of wisdom the world urgently
-            needed — mapped here to the crisis it speaks to today.
-          </p>
+          <p className={styles.structureEyebrow}>{content.structure.eyebrow}</p>
+          <h2 className={styles.structureTitle}>{content.structure.title}</h2>
+          <p className={styles.structureIntro}>{content.structure.intro}</p>
 
           <div className={styles.avatarGrid}>
-            {avatarCrises.map((item) => (
+            {content.structure.avatars.map((item) => (
               <div key={item.name} className={styles.avatarCard}>
                 <div className={styles.avatarImageWrap}>
                   <Image
-                    src={AVATAR_IMAGES[item.name]}
+                    src={getAvatarImage(item.name)}
                     alt={`${item.name} avatar illustration`}
                     fill
                     sizes="(max-width: 640px) 50vw, 180px"
@@ -170,28 +157,18 @@ export default function BookPage() {
         </section>
 
         <section className={styles.inside} aria-label="Inside the book">
-          <p className={styles.sectionEyebrow}>Inside the book</p>
-          <h2 className={styles.sectionTitle}>Stories, not sermons</h2>
+          <p className={styles.sectionEyebrow}>{content.inside.eyebrow}</p>
+          <h2 className={styles.sectionTitle}>{content.inside.title}</h2>
           <div className={styles.insideProse}>
-            <p>
-              A journalist drowning in noise learns what Matsya knew about
-              navigation. A parent in burnout finds what Kurma understood about
-              bearing weight without breaking. A leader facing impossible choices
-              discovers what Krishna meant when there is no clean answer.
-            </p>
-            <p>
-              This isn&apos;t a book that picks one solution for one crisis. Its
-              deepest insight is that the crises are interconnected — and so must
-              be the wisdom we bring to them.
-            </p>
+            {renderParagraphs(content.inside.paragraphs, "")}
           </div>
         </section>
 
         <section className={styles.toc} aria-label="Table of contents">
-          <p className={styles.sectionEyebrow}>Contents</p>
-          <h2 className={styles.sectionTitle}>Ten chapters, one arc</h2>
+          <p className={styles.sectionEyebrow}>{content.toc.eyebrow}</p>
+          <h2 className={styles.sectionTitle}>{content.toc.title}</h2>
           <ol className={styles.tocList}>
-            {avatarCrises.map((item, index) => (
+            {content.structure.avatars.map((item, index) => (
               <li key={item.name} className={styles.tocItem}>
                 <span className={styles.tocNumber}>
                   {String(index + 1).padStart(2, "0")}
@@ -206,29 +183,32 @@ export default function BookPage() {
         </section>
 
         <section className={styles.excerpt} aria-label="An excerpt">
-          <p className={styles.sectionEyebrow}>An excerpt</p>
-          <h2 className={styles.sectionTitle}>Read from the book</h2>
+          <p className={styles.sectionEyebrow}>{content.excerpt.eyebrow}</p>
+          <h2 className={styles.sectionTitle}>{content.excerpt.title}</h2>
 
           <blockquote className={styles.liftedCard}>
-            {bookExcerpt.map((paragraph) => (
+            {content.excerpt.paragraphs.map((paragraph) => (
               <p key={paragraph} className={styles.excerptText}>
                 {paragraph}
               </p>
             ))}
           </blockquote>
 
-          <Link href="/contact" className={styles.sampleLink}>
-            Request a longer sample &rarr;
+          <Link href={content.excerpt.linkHref} className={styles.sampleLink}>
+            {content.excerpt.linkText}
           </Link>
         </section>
 
         <section className={styles.reviews} aria-label="Reviews">
-          <p className={styles.sectionEyebrow}>Reviews</p>
-          <h2 className={styles.sectionTitle}>What readers are saying</h2>
+          <p className={styles.sectionEyebrow}>{content.reviews.eyebrow}</p>
+          <h2 className={styles.sectionTitle}>{content.reviews.title}</h2>
 
           <div className={styles.reviewsGrid}>
-            {bookReviews.map((review) => (
-              <blockquote key={review.quote} className={styles.reviewCard}>
+            {content.reviews.items.map((review) => (
+              <blockquote
+                key={`${review.quote}-${review.attribution}`}
+                className={styles.reviewCard}
+              >
                 <p className={styles.reviewQuote}>&ldquo;{review.quote}&rdquo;</p>
                 <footer className={styles.reviewAttribution}>
                   &mdash; {review.attribution}
@@ -239,10 +219,10 @@ export default function BookPage() {
         </section>
 
         <section className={styles.faq} aria-label="Frequently asked questions">
-          <p className={styles.sectionEyebrow}>Questions</p>
-          <h2 className={styles.sectionTitle}>Before you buy</h2>
+          <p className={styles.sectionEyebrow}>{content.faq.eyebrow}</p>
+          <h2 className={styles.sectionTitle}>{content.faq.title}</h2>
           <dl className={styles.faqList}>
-            {bookFaq.map((item) => (
+            {content.faq.items.map((item) => (
               <div key={item.question} className={styles.faqItem}>
                 <dt className={styles.faqQuestion}>{item.question}</dt>
                 <dd className={styles.faqAnswer}>{item.answer}</dd>
@@ -252,33 +232,23 @@ export default function BookPage() {
         </section>
 
         <section className={styles.explore} aria-label="Explore further">
-          <p className={styles.sectionEyebrow}>Go deeper</p>
-          <h2 className={styles.sectionTitle}>The book doesn&apos;t end here</h2>
+          <p className={styles.sectionEyebrow}>{content.explore.eyebrow}</p>
+          <h2 className={styles.sectionTitle}>{content.explore.title}</h2>
           <ul className={styles.exploreLinks}>
-            <li>
-              <Link href="/journey" className={styles.exploreLink}>
-                How the book was written &rarr;
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog" className={styles.exploreLink}>
-                Essays and excerpts &rarr;
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className={styles.exploreLink}>
-                About the author &rarr;
-              </Link>
-            </li>
+            {content.explore.links.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className={styles.exploreLink}>
+                  {item.text}
+                </Link>
+              </li>
+            ))}
           </ul>
         </section>
 
         <section className={styles.press} aria-label="Speaking and media">
-          <p className={styles.pressText}>
-            Book clubs, podcasts, panels, and corporate conversations welcome.
-          </p>
-          <Link href="/contact" className={styles.pressLink}>
-            Invite Darwin to speak &rarr;
+          <p className={styles.pressText}>{content.press.text}</p>
+          <Link href={content.press.linkHref} className={styles.pressLink}>
+            {content.press.linkText}
           </Link>
         </section>
       </main>
@@ -288,10 +258,8 @@ export default function BookPage() {
         className={styles.retailers}
         aria-label="Available worldwide"
       >
-        <h2 className={styles.retailersTitle}>Available worldwide</h2>
-        <p className={styles.retailersFormats}>
-          Paperback &middot; Hardcover &middot; Ebook
-        </p>
+        <h2 className={styles.retailersTitle}>{content.retailers.title}</h2>
+        <p className={styles.retailersFormats}>{content.retailers.formats}</p>
 
         <RetailerButtons showExtraRetailers className={styles.retailerButtons} />
       </section>

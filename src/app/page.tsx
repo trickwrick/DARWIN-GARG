@@ -6,6 +6,7 @@ import JourneySection from "@/components/home/JourneySection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import AboutSection from "@/components/home/AboutSection";
 import HomeFooter from "@/components/home/HomeFooter";
+import { getHomepageContent } from "@/lib/homepage";
 
 export const metadata: Metadata = {
   title: "Darwin Garg | When Gods Must Return",
@@ -13,18 +14,20 @@ export const metadata: Metadata = {
     "Author Darwin Garg writes at the meeting of ancient stories and modern chaos.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const content = await getHomepageContent();
+
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-cream">
-        <HeroSection />
-        <BookSection />
+        <HeroSection content={content.author} />
+        <BookSection content={content.book} />
         <JourneySection />
-        <TestimonialsSection />
-        <AboutSection />
+        <TestimonialsSection content={content.readerVoices} />
+        <AboutSection content={content.aboutAuthor} />
       </main>
-      <HomeFooter />
+      <HomeFooter content={content.footer} socialLinks={content.socialLinks} />
     </>
   );
 }

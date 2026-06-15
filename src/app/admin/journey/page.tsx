@@ -1,12 +1,8 @@
-import AdminPageShell from "@/components/admin/AdminPageShell";
+import JourneyPageEditor from "@/components/admin/JourneyPageEditor";
+import { getJourneyPageContentForAdmin } from "@/app/actions/journeyPageActions";
 
-export default function AdminJourneyPage() {
-  return (
-    <AdminPageShell
-      title="The Journey"
-      description="Manage journey hero, timeline levels, chapter content, images, and CTA."
-      publicHref="/journey"
-      publicLabel="View journey page"
-    />
-  );
+export default async function AdminJourneyPage() {
+  const content = await getJourneyPageContentForAdmin();
+
+  return <JourneyPageEditor initialContent={content} />;
 }

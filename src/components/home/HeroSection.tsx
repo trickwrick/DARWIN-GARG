@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AUTHOR_IMAGE } from "@/data/images";
+import type { HomepageContent } from "@/data/homepage";
 import styles from "./HeroSection.module.css";
 
-export default function HeroSection() {
+type HeroSectionProps = {
+  content: HomepageContent["author"];
+};
+
+export default function HeroSection({ content }: HeroSectionProps) {
   return (
     <section id="home" className={styles.hero}>
       <div className={styles.grid}>
@@ -22,20 +27,18 @@ export default function HeroSection() {
         </div>
 
         <div className={styles.content}>
-          <p className={styles.eyebrow}>Author · Strategist · Storyteller</p>
+          <p className={styles.eyebrow}>{content.eyebrow}</p>
 
-          <h1 className={styles.heading}>Darwin Garg</h1>
+          <h1 className={styles.heading}>{content.heading}</h1>
 
-          <p className={styles.tagline}>
-            I write at the meeting of ancient stories and modern chaos.
-          </p>
+          <p className={styles.tagline}>{content.tagline}</p>
 
           <div className={styles.buttons}>
-            <Link href="/about" className={styles.btnPrimary}>
-              Read my story
+            <Link href={content.primaryButtonHref} className={styles.btnPrimary}>
+              {content.primaryButtonText}
             </Link>
-            <Link href="/book" className={styles.btnOutline}>
-              Discover the book
+            <Link href={content.secondaryButtonHref} className={styles.btnOutline}>
+              {content.secondaryButtonText}
             </Link>
           </div>
         </div>
