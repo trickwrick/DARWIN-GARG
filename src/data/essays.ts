@@ -12,6 +12,21 @@ export type EssayBlock =
   | { type: "quote"; text: string; attribution?: string }
   | { type: "list"; items: string[] };
 
+export type EssayFaq = {
+  id: string;
+  question: string;
+  answerHtml: string;
+};
+
+export type EssaySeo = {
+  metaTitle: string;
+  metaKeywords: string;
+  metaDescription: string;
+  otherMeta: string;
+};
+
+export type WritingStatus = "ACTIVE" | "INACTIVE";
+
 export type Essay = {
   slug: string;
   category: string;
@@ -24,6 +39,11 @@ export type Essay = {
   imageCaption?: string;
   author: string;
   blocks: EssayBlock[];
+  bodyHtml?: string;
+  faqs?: EssayFaq[];
+  seo?: EssaySeo;
+  tags?: string[];
+  status?: WritingStatus;
 };
 
 export const essays: Record<string, Essay> = {

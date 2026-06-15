@@ -27,12 +27,19 @@ export async function generateMetadata({
     return { title: "Essay not found" };
   }
 
+  const metaTitle = essay.seo?.metaTitle || `${essay.title} | Darwin Garg`;
+  const metaDescription = essay.seo?.metaDescription || essay.dek;
+  const keywords = essay.seo?.metaKeywords
+    ? essay.seo.metaKeywords.split(",").map((item) => item.trim())
+    : undefined;
+
   return {
-    title: `${essay.title} | Darwin Garg`,
-    description: essay.dek,
+    title: metaTitle,
+    description: metaDescription,
+    keywords,
     openGraph: {
-      title: essay.title,
-      description: essay.dek,
+      title: essay.seo?.metaTitle || essay.title,
+      description: metaDescription,
       type: "article",
     },
   };
@@ -124,10 +131,34 @@ export default async function EssayPage({ params }: EssayPageProps) {
         </figure>
 
         <article className={styles.article}>
-          {essay.blocks.map((block, index) => (
-            <EssayBlockRenderer key={`${block.type}-${index}`} block={block} />
-          ))}
+          {essay.bodyHtml?.trim() ? (
+            <div
+              className={styles.richBody}
+              dangerouslySetInnerHTML={{ __html: essay.bodyHtml }}
+            />
+          ) : (
+            essay.blocks.map((block, index) => (
+              <EssayBlockRenderer key={`${block.type}-${index}`} block={block} />
+            ))
+          )}
         </article>
+
+        {essay.faqs && essay.faqs.length > 0 ? (
+          <section className={styles.faqSection} aria-label="Frequently asked questions">
+            <h2 className={styles.faqTitle}>Frequently asked questions</h2>
+            <div className={styles.faqList}>
+              {essay.faqs.map((faq) => (
+                <details key={faq.id} className={styles.faqItem}>
+                  <summary className={styles.faqQuestion}>{faq.question}</summary>
+                  <div
+                    className={styles.faqAnswer}
+                    dangerouslySetInnerHTML={{ __html: faq.answerHtml }}
+                  />
+                </details>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className={styles.cta} aria-label="Read the book">
           <p className={styles.ctaLabel}>The book</p>

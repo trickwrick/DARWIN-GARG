@@ -8,6 +8,7 @@ import {
   type EssayBlock,
   type WritingsPageContent,
   type WritingCategory,
+  type WritingStatus,
 } from "@/data/writingsPage";
 import { getWritingsPageContent } from "@/lib/writingsPage";
 import { persistWritingsPageContent } from "@/lib/writingsPageStorage";
@@ -68,6 +69,11 @@ function sanitizeEssay(input: Essay, fallback: Essay): Essay {
     imageCaption: input.imageCaption?.trim() || fallback.imageCaption,
     author: sanitizeString(input.author, fallback.author),
     blocks: blocks.length ? blocks : fallback.blocks,
+    bodyHtml: typeof input.bodyHtml === "string" ? input.bodyHtml : fallback.bodyHtml,
+    faqs: Array.isArray(input.faqs) ? input.faqs : fallback.faqs,
+    seo: input.seo ?? fallback.seo,
+    tags: Array.isArray(input.tags) ? input.tags : fallback.tags,
+    status: input.status === "INACTIVE" ? "INACTIVE" : "ACTIVE",
   };
 }
 
@@ -114,6 +120,7 @@ function sanitizeContent(input: WritingsPageContent): WritingsPageContent {
         description: sanitizeString(item.description, ""),
         image: sanitizeString(item.image, ""),
         imageAlt: sanitizeString(item.imageAlt, ""),
+        status: (item.status === "INACTIVE" ? "INACTIVE" : "ACTIVE") as WritingStatus,
       }))
       .filter((item) => item.slug && item.title)
       .slice(0, 20),

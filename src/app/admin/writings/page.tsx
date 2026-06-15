@@ -1,8 +1,8 @@
-import WritingsPageEditor from "@/components/admin/WritingsPageEditor";
+import WritingsListings from "@/components/admin/WritingsListings";
 import { getWritingsPageContentForAdmin } from "@/app/actions/writingsPageActions";
 
 export default async function AdminWritingsPage() {
   const content = await getWritingsPageContentForAdmin();
 
-  return <WritingsPageEditor initialContent={content} />;
+  return <WritingsListings content={content} />;
 }

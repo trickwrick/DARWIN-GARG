@@ -1,11 +1,11 @@
-import { essays, type Essay, type EssayBlock } from "@/data/essays";
+import { essays, type Essay, type EssayBlock, type EssayFaq, type EssaySeo, type WritingStatus } from "@/data/essays";
 import {
   featuredWriting,
   writings,
   type WritingCategory,
 } from "@/data/writings";
 
-export type { Essay, EssayBlock, WritingCategory };
+export type { Essay, EssayBlock, EssayFaq, EssaySeo, WritingStatus, WritingCategory };
 
 export type WritingCard = {
   id: string;
@@ -16,7 +16,39 @@ export type WritingCard = {
   description: string;
   image: string;
   imageAlt: string;
+  status?: WritingStatus;
 };
+
+export type WritingsPostForm = {
+  slug: string;
+  title: string;
+  date: string;
+  category: WritingCategory;
+  shortDescription: string;
+  bodyHtml: string;
+  readTime: string;
+  image: string;
+  imageAlt: string;
+  author: string;
+  tags: string[];
+  status: WritingStatus;
+  isFeatured: boolean;
+  faqs: EssayFaq[];
+  seo: EssaySeo;
+};
+
+export const SUGGESTED_WRITING_TAGS = [
+  "Dashavatar framework",
+  "Ancient wisdom",
+  "Modern crises",
+  "Mythology",
+  "Leadership",
+  "Mental health",
+  "Climate",
+  "Misinformation",
+  "Book excerpt",
+  "Interview",
+];
 
 export type FeaturedWriting = {
   slug: string;
@@ -116,6 +148,174 @@ export function emptyWritingCard(): WritingCard {
   };
 }
 
+export function emptyPostForm(): WritingsPostForm {
+  return {
+    slug: "",
+    title: "",
+    date: "",
+    category: "Essays",
+    shortDescription: "",
+    bodyHtml: "",
+    readTime: "5 min read",
+    image: "",
+    imageAlt: "",
+    author: "Darwin Garg",
+    tags: [],
+    status: "ACTIVE",
+    isFeatured: false,
+    faqs: [],
+    seo: {
+      metaTitle: "",
+      metaKeywords: "",
+      metaDescription: "",
+      otherMeta: "",
+    },
+  };
+}
+
+export function emptyFaq(): EssayFaq {
+  return {
+    id: `faq-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    question: "",
+    answerHtml: "",
+  };
+}
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+export function essayBlocksToHtml(blocks: EssayBlock[]): string {
+  const parts: string[] = [];
+
+  for (const block of blocks) {
+    switch (block.type) {
+      case "paragraph":
+        if (block.text.trim()) {
+          parts.push(`<p>${escapeHtml(block.text)}</p>`);
+        }
+        break;
+      case "heading":
+        if (block.text.trim()) {
+          parts.push(`<h2>${escapeHtml(block.text)}</h2>`);
+        }
+        break;
+      case "quote": {
+        const quote = escapeHtml(block.text);
+        const attribution = block.attribution
+          ? `<p><em>${escapeHtml(block.attribution)}</em></p>`
+          : "";
+        parts.push(`<blockquote><p>${quote}</p>${attribution}</blockquote>`);
+        break;
+      }
+      case "list":
+        if (block.items.length) {
+          const items = block.items
+            .map((item) => `<li>${escapeHtml(item)}</li>`)
+            .join("");
+          parts.push(`<ul>${items}</ul>`);
+        }
+        break;
+    }
+  }
+
+  return parts.join("");
+}
+
+function resolveBodyHtml(essay: Essay): string {
+  if (essay.bodyHtml?.trim()) {
+    return essay.bodyHtml;
+  }
+
+  if (essay.blocks?.length) {
+    return essayBlocksToHtml(essay.blocks);
+  }
+
+  return "";
+}
+
+function resolveSeoFromEssay(essay: Essay): EssaySeo {
+  const tags = essay.tags ?? [];
+
+  return {
+    metaTitle:
+      essay.seo?.metaTitle?.trim() || essay.title.trim().slice(0, 70),
+    metaKeywords:
+      essay.seo?.metaKeywords?.trim() ||
+      tags.join(", ").slice(0, 160),
+    metaDescription:
+      essay.seo?.metaDescription?.trim() || essay.dek.trim().slice(0, 250),
+    otherMeta: essay.seo?.otherMeta?.trim() || "",
+  };
+}
+
+export function normalizePostForm(
+  form: Partial<WritingsPostForm> | null | undefined
+): WritingsPostForm {
+  const base = emptyPostForm();
+  if (!form) return base;
+
+  return {
+    ...base,
+    ...form,
+    slug: form.slug ?? "",
+    title: form.title ?? "",
+    date: form.date ?? "",
+    category: WRITING_CATEGORIES.includes(form.category as WritingCategory)
+      ? (form.category as WritingCategory)
+      : "Essays",
+    shortDescription: form.shortDescription ?? "",
+    bodyHtml: form.bodyHtml ?? "",
+    readTime: form.readTime ?? "5 min read",
+    image: form.image ?? "",
+    imageAlt: form.imageAlt ?? "",
+    author: form.author ?? "Darwin Garg",
+    tags: Array.isArray(form.tags) ? form.tags : [],
+    status: form.status === "INACTIVE" ? "INACTIVE" : "ACTIVE",
+    isFeatured: Boolean(form.isFeatured),
+    faqs: Array.isArray(form.faqs)
+      ? form.faqs.map((faq) => ({
+          id: faq.id || emptyFaq().id,
+          question: faq.question ?? "",
+          answerHtml: faq.answerHtml ?? "",
+        }))
+      : [],
+    seo: {
+      metaTitle: form.seo?.metaTitle ?? "",
+      metaKeywords: form.seo?.metaKeywords ?? "",
+      metaDescription: form.seo?.metaDescription ?? "",
+      otherMeta: form.seo?.otherMeta ?? "",
+    },
+  };
+}
+
+export function essayToPostForm(
+  essay: Essay,
+  options: { isFeatured: boolean }
+): WritingsPostForm {
+  return normalizePostForm({
+    slug: essay.slug,
+    title: essay.title,
+    date: essay.date,
+    category: essay.category as WritingCategory,
+    shortDescription: essay.dek,
+    bodyHtml: resolveBodyHtml(essay),
+    readTime: essay.readTime,
+    image: essay.image,
+    imageAlt: essay.imageAlt,
+    author: essay.author,
+    tags: essay.tags ?? [],
+    status: essay.status ?? "ACTIVE",
+    isFeatured: options.isFeatured,
+    faqs: essay.faqs ?? [],
+    seo: resolveSeoFromEssay(essay),
+  });
+}
+
 export function emptyEssay(): Essay {
   return {
     slug: "",
@@ -128,6 +328,16 @@ export function emptyEssay(): Essay {
     imageAlt: "",
     author: "Darwin Garg",
     blocks: [{ type: "paragraph", text: "" }],
+    bodyHtml: "",
+    faqs: [],
+    tags: [],
+    status: "ACTIVE",
+    seo: {
+      metaTitle: "",
+      metaKeywords: "",
+      metaDescription: "",
+      otherMeta: "",
+    },
   };
 }
 
