@@ -261,7 +261,12 @@ export default async function BookPage() {
         <h2 className={styles.retailersTitle}>{content.retailers.title}</h2>
         <p className={styles.retailersFormats}>{content.retailers.formats}</p>
 
-        <RetailerButtons showExtraRetailers className={styles.retailerButtons} />
+        <RetailerButtons
+          showExtraRetailers
+          className={styles.retailerButtons}
+          stores={content.retailers.stores}
+          extra={content.retailers.extra}
+        />
       </section>
 
       <footer>

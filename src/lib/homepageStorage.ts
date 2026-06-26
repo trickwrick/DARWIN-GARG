@@ -28,6 +28,18 @@ export function mergeWithDefaults(
       ...DEFAULT_HOMEPAGE_CONTENT.aboutAuthor,
       ...partial.aboutAuthor,
     },
+    makingOf: {
+      ...DEFAULT_HOMEPAGE_CONTENT.makingOf,
+      ...partial.makingOf,
+      chapters:
+        partial.makingOf?.chapters?.length
+          ? partial.makingOf.chapters
+          : DEFAULT_HOMEPAGE_CONTENT.makingOf.chapters,
+    },
+    newsletter: {
+      ...DEFAULT_HOMEPAGE_CONTENT.newsletter,
+      ...partial.newsletter,
+    },
     footer: { ...DEFAULT_HOMEPAGE_CONTENT.footer, ...partial.footer },
     socialLinks:
       partial.socialLinks?.length

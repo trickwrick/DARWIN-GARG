@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import type { RetailerMarket, RetailerRegion, RetailerWithCities } from "@/data/book";
+import type { RetailerMarket, RetailerRegion, RetailerStore } from "@/data/bookPage";
 import styles from "./RetailerButtons.module.css";
 
 type RetailerHoverButtonProps = {
-  retailer: RetailerWithCities;
+  retailer: RetailerStore;
   variant?: "primary" | "outline";
 };
 
@@ -15,13 +15,13 @@ const REGION_FLAG: Record<RetailerRegion, string> = {
   UK: "🇬🇧",
 };
 
-const ICON_CLASS: Record<RetailerWithCities["accent"], string> = {
+const ICON_CLASS: Record<RetailerStore["accent"], string> = {
   amazon: styles.retailerIconAmazon,
   barnes: styles.retailerIconBarnes,
   flipkart: styles.retailerIconFlipkart,
 };
 
-const ICON_LABEL: Record<RetailerWithCities["accent"], string> = {
+const ICON_LABEL: Record<RetailerStore["accent"], string> = {
   amazon: "a",
   barnes: "B",
   flipkart: "F",

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { retailers, retailersWithCities } from "@/data/book";
+import type { RetailerStore, SimpleRetailerLink } from "@/data/bookPage";
+import { retailersWithCities, retailers } from "@/data/book";
 import RetailerHoverButton from "@/components/retailers/RetailerHoverButton";
 import styles from "./RetailerButtons.module.css";
 
@@ -7,21 +8,35 @@ type RetailerButtonsProps = {
   showAllLink?: boolean;
   showExtraRetailers?: boolean;
   className?: string;
+  stores?: RetailerStore[];
+  extra?: SimpleRetailerLink[];
 };
 
 export default function RetailerButtons({
   showAllLink = false,
   showExtraRetailers = false,
   className,
+  stores,
+  extra,
 }: RetailerButtonsProps) {
-  const extraRetailers = retailers.filter(
-    (retailer) =>
-      !retailersWithCities.some((item) => item.label === retailer.label),
-  );
+  const mainStores =
+    stores ??
+    retailersWithCities.map((item) => ({
+      label: item.label,
+      href: item.href,
+      accent: item.accent,
+      markets: item.markets.map((market) => ({ ...market })),
+    }));
+
+  const extraLinks =
+    extra ??
+    retailers
+      .filter((item) => !mainStores.some((store) => store.label === item.label))
+      .map((item) => ({ label: item.label, href: item.href }));
 
   return (
     <div className={`${styles.row} ${className ?? ""}`.trim()}>
-      {retailersWithCities.map((retailer, index) => (
+      {mainStores.map((retailer, index) => (
         <RetailerHoverButton
           key={retailer.label}
           retailer={retailer}
@@ -30,7 +45,7 @@ export default function RetailerButtons({
       ))}
 
       {showExtraRetailers
-        ? extraRetailers.map((retailer) => (
+        ? extraLinks.map((retailer) => (
             <a
               key={retailer.label}
               href={retailer.href}

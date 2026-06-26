@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logoutAdmin } from "@/app/actions/authActions";
+import { getPendingContactInquiryCountForAdmin } from "@/app/actions/contactInquiryActions";
+import { ADMIN_QUERIES_UPDATED_EVENT } from "@/lib/adminQueriesEvents";
 import styles from "@/app/admin/admin.module.css";
 
 const navItems = [
@@ -11,6 +13,9 @@ const navItems = [
   { name: "Homepage", path: "/admin/homepage" },
   { name: "The Book", path: "/admin/book" },
   { name: "The Journey", path: "/admin/journey" },
+  { name: "About", path: "/admin/about" },
+  { name: "Connect", path: "/admin/connect" },
+  { name: "Queries", path: "/admin/queries" },
 ];
 
 const writingsSubItems = [
@@ -63,11 +68,42 @@ export default function AdminSidebar() {
   const pathname = usePathname();
   const writingsOpenDefault = isWritingsSection(pathname);
   const [writingsOpen, setWritingsOpen] = useState(writingsOpenDefault);
+  const [pendingQueryCount, setPendingQueryCount] = useState(0);
 
   useEffect(() => {
     if (isWritingsSection(pathname)) {
       setWritingsOpen(true);
     }
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname === "/admin/login") return;
+
+    let cancelled = false;
+
+    const loadPendingCount = async () => {
+      try {
+        const count = await getPendingContactInquiryCountForAdmin();
+        if (!cancelled) setPendingQueryCount(count);
+      } catch {
+        if (!cancelled) setPendingQueryCount(0);
+      }
+    };
+
+    void loadPendingCount();
+
+    const handleUpdate = () => {
+      void loadPendingCount();
+    };
+
+    window.addEventListener(ADMIN_QUERIES_UPDATED_EVENT, handleUpdate);
+    const intervalId = window.setInterval(loadPendingCount, 30000);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener(ADMIN_QUERIES_UPDATED_EVENT, handleUpdate);
+      window.clearInterval(intervalId);
+    };
   }, [pathname]);
 
   if (pathname === "/admin/login") {
@@ -91,7 +127,17 @@ export default function AdminSidebar() {
               href={item.path}
               className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
             >
-              {item.name}
+              <span>{item.name}</span>
+              {item.path === "/admin/queries" && pendingQueryCount > 0 ? (
+                <span
+                  className={styles.navBadge}
+                  aria-label={`${pendingQueryCount} pending ${
+                    pendingQueryCount === 1 ? "query" : "queries"
+                  }`}
+                >
+                  {pendingQueryCount > 99 ? "99+" : pendingQueryCount}
+                </span>
+              ) : null}
             </Link>
           );
         })}

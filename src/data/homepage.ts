@@ -12,6 +12,11 @@ export type Testimonial = {
   attribution: string;
 };
 
+export type MakingOfChapter = {
+  label: string;
+  title: string;
+};
+
 export type HomepageContent = {
   author: {
     eyebrow: string;
@@ -46,6 +51,20 @@ export type HomepageContent = {
     portraitAlt: string;
     linkText: string;
     linkHref: string;
+  };
+  makingOf: {
+    eyebrow: string;
+    title: string;
+    chapters: MakingOfChapter[];
+    linkText: string;
+    linkHref: string;
+  };
+  newsletter: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    placeholder: string;
+    buttonText: string;
   };
   footer: {
     message: string;
@@ -99,6 +118,27 @@ export const DEFAULT_HOMEPAGE_CONTENT: HomepageContent = {
     portraitAlt: "Darwin Garg portrait",
     linkText: "Read more about me →",
     linkHref: "/about",
+  },
+  makingOf: {
+    eyebrow: "The Making Of",
+    title: "A book takes a road to find you",
+    chapters: [
+      { label: "Level One", title: "The seed of an idea" },
+      { label: "Level Two", title: "Finding the framework" },
+      { label: "Level Three", title: "The writing years" },
+      { label: "Level Four", title: "The discipline of restraint" },
+      { label: "Level Five", title: "A face for the book" },
+    ],
+    linkText: "Read the full journey",
+    linkHref: "/journey",
+  },
+  newsletter: {
+    eyebrow: "Stay Connected",
+    title: "Join the Journey",
+    description:
+      "Receive insights on ancient wisdom, new articles, and updates on When Gods Must Return.",
+    placeholder: "your@email.com",
+    buttonText: "Subscribe",
   },
   footer: {
     message:

@@ -90,8 +90,41 @@ export function mergeBookPageWithDefaults(
           : DEFAULT_BOOK_PAGE_CONTENT.explore.links,
     },
     press: { ...DEFAULT_BOOK_PAGE_CONTENT.press, ...partial.press },
-    retailers: { ...DEFAULT_BOOK_PAGE_CONTENT.retailers, ...partial.retailers },
+    retailers: {
+      ...DEFAULT_BOOK_PAGE_CONTENT.retailers,
+      ...partial.retailers,
+      stores: mergeRetailerStores(partial.retailers?.stores),
+      extra:
+        partial.retailers?.extra?.length
+          ? partial.retailers.extra
+          : DEFAULT_BOOK_PAGE_CONTENT.retailers.extra,
+    },
   };
+}
+
+function mergeRetailerStores(
+  stores: BookPageContent["retailers"]["stores"] | undefined
+): BookPageContent["retailers"]["stores"] {
+  if (!stores?.length) {
+    return DEFAULT_BOOK_PAGE_CONTENT.retailers.stores;
+  }
+
+  return stores.map((store, index) => {
+    const defaultStore =
+      DEFAULT_BOOK_PAGE_CONTENT.retailers.stores.find(
+        (item) => item.label === store.label
+      ) ?? DEFAULT_BOOK_PAGE_CONTENT.retailers.stores[index];
+
+    return {
+      label: store.label || defaultStore?.label || "",
+      href: store.href || defaultStore?.href || "",
+      accent: store.accent || defaultStore?.accent || "amazon",
+      markets:
+        store.markets?.length
+          ? store.markets
+          : defaultStore?.markets.map((market) => ({ ...market })) ?? [],
+    };
+  });
 }
 
 async function readFromMongo(): Promise<BookPageContent | null> {

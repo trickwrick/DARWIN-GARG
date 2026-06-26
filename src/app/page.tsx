@@ -23,7 +23,7 @@ export default async function Home() {
       <main className="min-h-screen bg-cream">
         <HeroSection content={content.author} />
         <BookSection content={content.book} />
-        <JourneySection />
+        <JourneySection content={content.makingOf} />
         <TestimonialsSection content={content.readerVoices} />
         <AboutSection content={content.aboutAuthor} />
       </main>

@@ -1,4 +1,26 @@
-import { AMAZON_LINK, avatarCrises, bookExcerpt, bookFaq, bookReviews } from "@/data/book";
+import { AMAZON_LINK, avatarCrises, bookExcerpt, bookFaq, bookReviews, retailers, retailersWithCities } from "@/data/book";
+
+export type RetailerAccent = "amazon" | "barnes" | "flipkart";
+export type RetailerRegion = "US" | "IN" | "UK";
+
+export type RetailerMarket = {
+  name: string;
+  region: RetailerRegion;
+  href: string;
+  inStock: boolean;
+};
+
+export type RetailerStore = {
+  label: string;
+  href: string;
+  accent: RetailerAccent;
+  markets: RetailerMarket[];
+};
+
+export type SimpleRetailerLink = {
+  label: string;
+  href: string;
+};
 
 export type BookReview = {
   quote: string;
@@ -90,6 +112,8 @@ export type BookPageContent = {
   retailers: {
     title: string;
     formats: string;
+    stores: RetailerStore[];
+    extra: SimpleRetailerLink[];
   };
 };
 
@@ -179,5 +203,16 @@ export const DEFAULT_BOOK_PAGE_CONTENT: BookPageContent = {
   retailers: {
     title: "Available worldwide",
     formats: "Paperback · Hardcover · Ebook",
+    stores: retailersWithCities.map((item) => ({
+      label: item.label,
+      href: item.href,
+      accent: item.accent,
+      markets: item.markets.map((market) => ({ ...market })),
+    })),
+    extra: retailers
+      .filter(
+        (item) => !retailersWithCities.some((store) => store.label === item.label)
+      )
+      .map((item) => ({ label: item.label, href: item.href })),
   },
 };

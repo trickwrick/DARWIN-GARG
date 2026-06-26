@@ -18,7 +18,11 @@ export default function WritingsNewsletter({ content }: WritingsNewsletterProps)
   }
 
   return (
-    <section className={styles.newsletter} aria-labelledby="writings-newsletter-heading">
+    <section
+      id="newsletter"
+      className={styles.newsletter}
+      aria-labelledby="writings-newsletter-heading"
+    >
       <p className={styles.eyebrow}>{content.eyebrow}</p>
       <h2 id="writings-newsletter-heading" className={styles.title}>
         {content.title}

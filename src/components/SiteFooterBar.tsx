@@ -31,7 +31,7 @@ export default function SiteFooterBar({
           <span className={styles.dot} aria-hidden>
             &middot;
           </span>
-          <a href="/#newsletter">Newsletter</a>
+          <a href="/contact#newsletter">Newsletter</a>
         </li>
       </ul>
     </div>

@@ -1,30 +1,49 @@
-import Link from 'next/link';
-import styles from './admin.module.css';
+import Link from "next/link";
+import { getPendingContactInquiryCountForAdmin } from "@/app/actions/contactInquiryActions";
+import styles from "./admin.module.css";
 
 const sections = [
   {
-    title: 'Homepage',
-    description: 'Hero, book section, journey levels, about, testimonials',
-    href: '/admin/homepage',
+    title: "Homepage",
+    description: "Hero, book, making of, testimonials, footer",
+    href: "/admin/homepage",
   },
   {
-    title: 'The Book',
-    description: 'Book page copy, avatars, reviews, FAQ, retailers',
-    href: '/admin/book',
+    title: "The Book",
+    description: "Book page copy, avatars, reviews, FAQ, retailer links",
+    href: "/admin/book",
   },
   {
-    title: 'The Journey',
-    description: 'Timeline levels, chapter content, images, CTA',
-    href: '/admin/journey',
+    title: "The Journey",
+    description: "Timeline levels, chapter content, images, CTA",
+    href: "/admin/journey",
   },
   {
-    title: 'Writings',
-    description: 'Featured essay, writings list, essay pages',
-    href: '/admin/writings',
+    title: "About",
+    description: "Full about page — bio, story, photos, CTA",
+    href: "/admin/about",
+  },
+  {
+    title: "Connect",
+    description: "Contact page copy, cards, form labels, social links",
+    href: "/admin/connect",
+  },
+  {
+    title: "Queries",
+    description: "Contact form submissions from the Connect page",
+    href: "/admin/queries",
+    showPendingBadge: true,
+  },
+  {
+    title: "Writings",
+    description: "Blog listings, add/edit posts, categories, tags",
+    href: "/admin/writings",
   },
 ];
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const pendingQueryCount = await getPendingContactInquiryCountForAdmin();
+
   return (
     <div>
       <div className={styles.pageHeader}>
@@ -39,7 +58,14 @@ export default function AdminDashboard() {
       <div className={styles.statsGrid}>
         {sections.map((section) => (
           <Link key={section.href} href={section.href} className={styles.sectionCard}>
-            <h2 className={styles.sectionCardTitle}>{section.title}</h2>
+            <h2 className={styles.sectionCardTitle}>
+              {section.title}
+              {section.showPendingBadge && pendingQueryCount > 0 ? (
+                <span className={styles.cardBadge}>
+                  {pendingQueryCount > 99 ? "99+" : pendingQueryCount}
+                </span>
+              ) : null}
+            </h2>
             <p className={styles.sectionCardText}>{section.description}</p>
             <span className={styles.sectionCardLink}>Open editor &rarr;</span>
           </Link>

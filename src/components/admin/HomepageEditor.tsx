@@ -134,6 +134,55 @@ export default function HomepageEditor({ initialContent }: HomepageEditorProps) 
     }));
   };
 
+  const updateMakingOf = (
+    field: keyof HomepageContent["makingOf"],
+    value: string
+  ) => {
+    setContent((prev) => ({
+      ...prev,
+      makingOf: { ...prev.makingOf, [field]: value },
+    }));
+  };
+
+  const updateMakingOfChapter = (
+    index: number,
+    field: "label" | "title",
+    value: string
+  ) => {
+    setContent((prev) => ({
+      ...prev,
+      makingOf: {
+        ...prev.makingOf,
+        chapters: prev.makingOf.chapters.map((item, i) =>
+          i === index ? { ...item, [field]: value } : item
+        ),
+      },
+    }));
+  };
+
+  const addMakingOfChapter = () => {
+    setContent((prev) => ({
+      ...prev,
+      makingOf: {
+        ...prev.makingOf,
+        chapters: [
+          ...prev.makingOf.chapters,
+          { label: `Level ${prev.makingOf.chapters.length + 1}`, title: "" },
+        ],
+      },
+    }));
+  };
+
+  const removeMakingOfChapter = (index: number) => {
+    setContent((prev) => ({
+      ...prev,
+      makingOf: {
+        ...prev.makingOf,
+        chapters: prev.makingOf.chapters.filter((_, i) => i !== index),
+      },
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -156,8 +205,8 @@ export default function HomepageEditor({ initialContent }: HomepageEditorProps) 
         <div>
           <h1 className={styles.pageTitle}>Homepage</h1>
           <p className={styles.pageDescription}>
-            Edit Author, The Book, Reader Voices, About the Author, and social
-            links shown on the homepage.
+            Edit Author, The Book, Making Of, Reader Voices, About snippet,
+            and social links shown on the homepage.
           </p>
         </div>
         <Link href="/" className={styles.viewSiteBtn} target="_blank">
@@ -312,6 +361,91 @@ export default function HomepageEditor({ initialContent }: HomepageEditorProps) 
               />
             </div>
           </div>
+        </section>
+
+        <section className={styles.editorSection}>
+          <h2 className={styles.editorSectionTitle}>
+            The Making Of (homepage preview)
+          </h2>
+          <p className={styles.sectionNote}>
+            This is the journey preview on the homepage. Full journey content is
+            edited under The Journey in the sidebar.
+          </p>
+          <div className={styles.editorGrid}>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Eyebrow</label>
+              <input
+                className={styles.input}
+                value={content.makingOf.eyebrow}
+                onChange={(e) => updateMakingOf("eyebrow", e.target.value)}
+              />
+            </div>
+            <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+              <label className={styles.label}>Title</label>
+              <input
+                className={styles.input}
+                value={content.makingOf.title}
+                onChange={(e) => updateMakingOf("title", e.target.value)}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Link text</label>
+              <input
+                className={styles.input}
+                value={content.makingOf.linkText}
+                onChange={(e) => updateMakingOf("linkText", e.target.value)}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Link URL</label>
+              <input
+                className={styles.input}
+                value={content.makingOf.linkHref}
+                onChange={(e) => updateMakingOf("linkHref", e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={styles.repeatableList}>
+            {content.makingOf.chapters.map((chapter, index) => (
+              <div key={index} className={styles.repeatableItem}>
+                <div className={styles.repeatableHeader}>
+                  <h3 className={styles.repeatableTitle}>Chapter {index + 1}</h3>
+                  <button
+                    type="button"
+                    className={styles.removeBtn}
+                    onClick={() => removeMakingOfChapter(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+                <div className={styles.editorGrid}>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Label</label>
+                    <input
+                      className={styles.input}
+                      value={chapter.label}
+                      onChange={(e) =>
+                        updateMakingOfChapter(index, "label", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Title</label>
+                    <input
+                      className={styles.input}
+                      value={chapter.title}
+                      onChange={(e) =>
+                        updateMakingOfChapter(index, "title", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <button type="button" className={styles.addBtn} onClick={addMakingOfChapter}>
+            + Add chapter card
+          </button>
         </section>
 
         <section className={styles.editorSection}>

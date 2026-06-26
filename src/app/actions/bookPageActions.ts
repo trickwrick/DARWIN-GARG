@@ -137,6 +137,40 @@ function sanitizeContent(input: BookPageContent): BookPageContent {
     retailers: {
       title: sanitizeString(input.retailers?.title, defaults.retailers.title),
       formats: sanitizeString(input.retailers?.formats, defaults.retailers.formats),
+      stores: (input.retailers?.stores ?? [])
+        .map((store, index) => ({
+          label: sanitizeString(store.label, defaults.retailers.stores[index]?.label ?? ""),
+          href: sanitizeString(store.href, defaults.retailers.stores[index]?.href ?? ""),
+          accent:
+            store.accent === "amazon" ||
+            store.accent === "barnes" ||
+            store.accent === "flipkart"
+              ? store.accent
+              : defaults.retailers.stores[index]?.accent ?? "amazon",
+          markets: (store.markets ?? [])
+            .map((market) => ({
+              name: sanitizeString(market.name, ""),
+              region:
+                market.region === "US" ||
+                market.region === "IN" ||
+                market.region === "UK"
+                  ? market.region
+                  : "US",
+              href: sanitizeString(market.href, ""),
+              inStock: market.inStock !== false,
+            }))
+            .filter((market) => market.name && market.href)
+            .slice(0, 6),
+        }))
+        .filter((store) => store.label && store.href)
+        .slice(0, 8),
+      extra: (input.retailers?.extra ?? [])
+        .map((item) => ({
+          label: sanitizeString(item.label, ""),
+          href: sanitizeString(item.href, ""),
+        }))
+        .filter((item) => item.label && item.href)
+        .slice(0, 8),
     },
   };
 }
@@ -160,11 +194,15 @@ export async function saveBookPageContent(input: BookPageContent) {
   if (!content.explore.links.length) {
     content.explore.links = DEFAULT_BOOK_PAGE_CONTENT.explore.links;
   }
+  if (!content.retailers.stores.length) {
+    content.retailers.stores = DEFAULT_BOOK_PAGE_CONTENT.retailers.stores;
+  }
 
   const result = await persistBookPageContent(content);
 
   if (result.success) {
     revalidatePath("/book");
+    revalidatePath("/");
     revalidatePath("/admin/book");
   }
 

@@ -4,7 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { saveBookPageContent } from "@/app/actions/bookPageActions";
 import AdminSavePopup from "@/components/admin/AdminSavePopup";
-import type { BookPageContent } from "@/data/bookPage";
+import type {
+  BookPageContent,
+  RetailerMarket,
+  RetailerRegion,
+  RetailerStore,
+} from "@/data/bookPage";
 import styles from "@/app/admin/admin.module.css";
 
 type PopupState = {
@@ -219,6 +224,111 @@ export default function BookPageEditor({ initialContent }: BookPageEditorProps) 
       explore: {
         ...prev.explore,
         links: prev.explore.links.filter((_, i) => i !== index),
+      },
+    }));
+  };
+
+  const emptyRetailerMarket = (): RetailerMarket => ({
+    name: "",
+    region: "US",
+    href: "",
+    inStock: true,
+  });
+
+  const emptyRetailerStore = (): RetailerStore => ({
+    label: "",
+    href: "",
+    accent: "amazon",
+    markets: [emptyRetailerMarket()],
+  });
+
+  const updateRetailerStore = (
+    storeIndex: number,
+    field: keyof Omit<RetailerStore, "markets">,
+    value: string
+  ) => {
+    setContent((prev) => ({
+      ...prev,
+      retailers: {
+        ...prev.retailers,
+        stores: prev.retailers.stores.map((store, i) =>
+          i === storeIndex ? { ...store, [field]: value } : store
+        ),
+      },
+    }));
+  };
+
+  const updateRetailerMarket = (
+    storeIndex: number,
+    marketIndex: number,
+    field: keyof RetailerMarket,
+    value: string | boolean
+  ) => {
+    setContent((prev) => ({
+      ...prev,
+      retailers: {
+        ...prev.retailers,
+        stores: prev.retailers.stores.map((store, i) =>
+          i === storeIndex
+            ? {
+                ...store,
+                markets: store.markets.map((market, j) =>
+                  j === marketIndex ? { ...market, [field]: value } : market
+                ),
+              }
+            : store
+        ),
+      },
+    }));
+  };
+
+  const addRetailerMarket = (storeIndex: number) => {
+    setContent((prev) => ({
+      ...prev,
+      retailers: {
+        ...prev.retailers,
+        stores: prev.retailers.stores.map((store, i) =>
+          i === storeIndex
+            ? { ...store, markets: [...store.markets, emptyRetailerMarket()] }
+            : store
+        ),
+      },
+    }));
+  };
+
+  const removeRetailerMarket = (storeIndex: number, marketIndex: number) => {
+    setContent((prev) => ({
+      ...prev,
+      retailers: {
+        ...prev.retailers,
+        stores: prev.retailers.stores.map((store, i) =>
+          i === storeIndex
+            ? {
+                ...store,
+                markets: store.markets.filter((_, j) => j !== marketIndex),
+              }
+            : store
+        ),
+      },
+    }));
+  };
+
+  const addRetailerStore = () => {
+    setContent((prev) => ({
+      ...prev,
+      retailers: {
+        ...prev.retailers,
+        stores: [...prev.retailers.stores, emptyRetailerStore()],
+      },
+    }));
+  };
+
+  const removeRetailerStore = (storeIndex: number) => {
+    setContent((prev) => ({
+      ...prev,
+      retailers: {
+        ...prev.retailers,
+        stores: prev.retailers.stores.filter((_, i) => i !== storeIndex),
       },
     }));
   };
@@ -588,16 +698,225 @@ export default function BookPageEditor({ initialContent }: BookPageEditorProps) 
 
         <section className={styles.editorSection}>
           <h2 className={styles.editorSectionTitle}>Retailers Section</h2>
+          <p className={styles.sectionNote}>
+            Footer and book page retailer buttons. Under each store, add
+            &quot;Shop by country&quot; links shown in the hover dropdown.
+          </p>
           <div className={styles.editorGrid}>
             <div className={styles.formGroup}>
               <label className={styles.label}>Title</label>
-              <input className={styles.input} value={content.retailers.title} onChange={(e) => setContent((prev) => ({ ...prev, retailers: { ...prev.retailers, title: e.target.value } }))} />
+              <input
+                className={styles.input}
+                value={content.retailers.title}
+                onChange={(e) =>
+                  setContent((prev) => ({
+                    ...prev,
+                    retailers: { ...prev.retailers, title: e.target.value },
+                  }))
+                }
+              />
             </div>
             <div className={styles.formGroup}>
               <label className={styles.label}>Formats</label>
-              <input className={styles.input} value={content.retailers.formats} onChange={(e) => setContent((prev) => ({ ...prev, retailers: { ...prev.retailers, formats: e.target.value } }))} />
+              <input
+                className={styles.input}
+                value={content.retailers.formats}
+                onChange={(e) =>
+                  setContent((prev) => ({
+                    ...prev,
+                    retailers: { ...prev.retailers, formats: e.target.value },
+                  }))
+                }
+              />
             </div>
           </div>
+
+          <div className={styles.repeatableList}>
+            {content.retailers.stores.map((store, storeIndex) => (
+              <div key={storeIndex} className={styles.repeatableItem}>
+                <div className={styles.repeatableHeader}>
+                  <h3 className={styles.repeatableTitle}>
+                    {store.label || `Retailer ${storeIndex + 1}`}
+                  </h3>
+                  {content.retailers.stores.length > 1 ? (
+                    <button
+                      type="button"
+                      className={styles.removeBtn}
+                      onClick={() => removeRetailerStore(storeIndex)}
+                    >
+                      Remove retailer
+                    </button>
+                  ) : null}
+                </div>
+                <div className={styles.editorGrid}>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Button label</label>
+                    <input
+                      className={styles.input}
+                      value={store.label}
+                      onChange={(e) =>
+                        updateRetailerStore(storeIndex, "label", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Main shop URL</label>
+                    <input
+                      className={styles.input}
+                      placeholder="https://..."
+                      value={store.href}
+                      onChange={(e) =>
+                        updateRetailerStore(storeIndex, "href", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Button style</label>
+                    <select
+                      className={styles.input}
+                      value={store.accent}
+                      onChange={(e) =>
+                        updateRetailerStore(storeIndex, "accent", e.target.value)
+                      }
+                    >
+                      <option value="amazon">Amazon</option>
+                      <option value="barnes">Barnes &amp; Noble</option>
+                      <option value="flipkart">Flipkart</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className={styles.nestedBlock}>
+                  <h4 className={styles.nestedTitle}>Shop by country</h4>
+                  <p className={styles.sectionNote}>
+                    Each row appears in the dropdown when visitors hover or tap
+                    this retailer button.
+                  </p>
+
+                  {store.markets.map((market, marketIndex) => (
+                    <div key={marketIndex} className={styles.nestedItem}>
+                      <div className={styles.repeatableHeader}>
+                        <h5 className={styles.nestedItemTitle}>
+                          Country {marketIndex + 1}
+                        </h5>
+                        {store.markets.length > 1 ? (
+                          <button
+                            type="button"
+                            className={styles.removeBtn}
+                            onClick={() =>
+                              removeRetailerMarket(storeIndex, marketIndex)
+                            }
+                          >
+                            Remove
+                          </button>
+                        ) : null}
+                      </div>
+                      <div className={styles.editorGrid}>
+                        <div className={styles.formGroup}>
+                          <label className={styles.label}>Country name</label>
+                          <input
+                            className={styles.input}
+                            placeholder="United States"
+                            value={market.name}
+                            onChange={(e) =>
+                              updateRetailerMarket(
+                                storeIndex,
+                                marketIndex,
+                                "name",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <label className={styles.label}>Region code</label>
+                          <select
+                            className={styles.input}
+                            value={market.region}
+                            onChange={(e) =>
+                              updateRetailerMarket(
+                                storeIndex,
+                                marketIndex,
+                                "region",
+                                e.target.value as RetailerRegion
+                              )
+                            }
+                          >
+                            <option value="US">US</option>
+                            <option value="IN">IN</option>
+                            <option value="UK">UK</option>
+                          </select>
+                        </div>
+                        <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                          <label className={styles.label}>Country shop link</label>
+                          <input
+                            className={styles.input}
+                            placeholder="https://..."
+                            value={market.href}
+                            onChange={(e) =>
+                              updateRetailerMarket(
+                                storeIndex,
+                                marketIndex,
+                                "href",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div className={styles.formGroup}>
+                          <label className={styles.checkboxLabel}>
+                            <input
+                              type="checkbox"
+                              checked={market.inStock}
+                              onChange={(e) =>
+                                updateRetailerMarket(
+                                  storeIndex,
+                                  marketIndex,
+                                  "inStock",
+                                  e.target.checked
+                                )
+                              }
+                            />
+                            Show &quot;In stock&quot; badge
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    className={styles.addBtn}
+                    onClick={() => addRetailerMarket(storeIndex)}
+                  >
+                    + Add country link
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <button type="button" className={styles.addBtn} onClick={addRetailerStore}>
+            + Add retailer button
+          </button>
+
+          <h3 className={styles.nestedTitle}>Extra retailer links</h3>
+          <div className={styles.repeatableList}>
+            {content.retailers.extra.map((item, index) => (
+              <div key={index} className={styles.repeatableItem}>
+                <div className={styles.editorGrid}>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Label</label>
+                    <input className={styles.input} value={item.label} onChange={(e) => setContent((prev) => ({ ...prev, retailers: { ...prev.retailers, extra: prev.retailers.extra.map((link, i) => i === index ? { ...link, label: e.target.value } : link) } }))} />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>URL</label>
+                    <input className={styles.input} value={item.href} onChange={(e) => setContent((prev) => ({ ...prev, retailers: { ...prev.retailers, extra: prev.retailers.extra.map((link, i) => i === index ? { ...link, href: e.target.value } : link) } }))} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <button type="button" className={styles.addBtn} onClick={() => setContent((prev) => ({ ...prev, retailers: { ...prev.retailers, extra: [...prev.retailers.extra, { label: "", href: "" }] } }))}>+ Add extra retailer</button>
         </section>
 
         <div className={styles.editorActions}>

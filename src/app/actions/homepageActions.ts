@@ -101,6 +101,50 @@ function sanitizeContent(input: HomepageContent): HomepageContent {
         defaults.aboutAuthor.linkHref
       ),
     },
+    makingOf: {
+      eyebrow: sanitizeString(input.makingOf?.eyebrow, defaults.makingOf.eyebrow),
+      title: sanitizeString(input.makingOf?.title, defaults.makingOf.title),
+      chapters: (input.makingOf?.chapters ?? [])
+        .map((item, index) => ({
+          label: sanitizeString(
+            item.label,
+            defaults.makingOf.chapters[index]?.label ?? ""
+          ),
+          title: sanitizeString(
+            item.title,
+            defaults.makingOf.chapters[index]?.title ?? ""
+          ),
+        }))
+        .filter((item) => item.label && item.title)
+        .slice(0, 8),
+      linkText: sanitizeString(
+        input.makingOf?.linkText,
+        defaults.makingOf.linkText
+      ),
+      linkHref: sanitizeString(
+        input.makingOf?.linkHref,
+        defaults.makingOf.linkHref
+      ),
+    },
+    newsletter: {
+      eyebrow: sanitizeString(
+        input.newsletter?.eyebrow,
+        defaults.newsletter.eyebrow
+      ),
+      title: sanitizeString(input.newsletter?.title, defaults.newsletter.title),
+      description: sanitizeString(
+        input.newsletter?.description,
+        defaults.newsletter.description
+      ),
+      placeholder: sanitizeString(
+        input.newsletter?.placeholder,
+        defaults.newsletter.placeholder
+      ),
+      buttonText: sanitizeString(
+        input.newsletter?.buttonText,
+        defaults.newsletter.buttonText
+      ),
+    },
     footer: {
       message: sanitizeString(input.footer?.message, defaults.footer.message),
     },
@@ -129,6 +173,9 @@ export async function saveHomepageContent(input: HomepageContent) {
 
   if (!content.socialLinks.length) {
     content.socialLinks = DEFAULT_HOMEPAGE_CONTENT.socialLinks;
+  }
+  if (!content.makingOf.chapters.length) {
+    content.makingOf.chapters = DEFAULT_HOMEPAGE_CONTENT.makingOf.chapters;
   }
 
   const result = await persistHomepageContent(content);

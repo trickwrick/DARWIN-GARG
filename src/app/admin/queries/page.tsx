@@ -1,48 +1,22 @@
-import styles from '../admin.module.css';
+import styles from "../admin.module.css";
+import QueriesList from "@/components/admin/QueriesList";
+import { getContactInquiriesForAdmin } from "@/app/actions/contactInquiryActions";
 
-export default function AdminQueries() {
+export default async function AdminQueries() {
+  const inquiries = await getContactInquiriesForAdmin();
+
   return (
     <div>
       <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>User Queries</h1>
+        <div>
+          <h1 className={styles.pageTitle}>User Queries</h1>
+          <p className={styles.pageDescription}>
+            Contact form submissions from the Connect page.
+          </p>
+        </div>
       </div>
 
-      <div className={styles.tableContainer}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Subject</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Rahul Rathor</td>
-              <td>rahul@example.com</td>
-              <td>Bulk Order Inquiry</td>
-              <td>Oct 24, 2026</td>
-              <td><span style={{ color: 'orange' }}>Pending</span></td>
-              <td>
-                <button className={styles.actionBtn}>View / Reply</button>
-              </td>
-            </tr>
-            <tr>
-              <td>John Doe</td>
-              <td>john@example.com</td>
-              <td>Speaking Engagement</td>
-              <td>Oct 23, 2026</td>
-              <td><span style={{ color: 'green' }}>Resolved</span></td>
-              <td>
-                <button className={styles.actionBtn}>View</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <QueriesList initialInquiries={inquiries} />
     </div>
   );
 }
