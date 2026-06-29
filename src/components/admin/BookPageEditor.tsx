@@ -510,38 +510,6 @@ export default function BookPageEditor({ initialContent }: BookPageEditorProps) 
         {paragraphSection("Inside the Book", "inside")}
 
         <section className={styles.editorSection}>
-          <h2 className={styles.editorSectionTitle}>Table of Contents</h2>
-          <div className={styles.editorGrid}>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Eyebrow</label>
-              <input
-                className={styles.input}
-                value={content.toc.eyebrow}
-                onChange={(e) =>
-                  setContent((prev) => ({
-                    ...prev,
-                    toc: { ...prev.toc, eyebrow: e.target.value },
-                  }))
-                }
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label className={styles.label}>Section title</label>
-              <input
-                className={styles.input}
-                value={content.toc.title}
-                onChange={(e) =>
-                  setContent((prev) => ({
-                    ...prev,
-                    toc: { ...prev.toc, title: e.target.value },
-                  }))
-                }
-              />
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.editorSection}>
           <h2 className={styles.editorSectionTitle}>Excerpt</h2>
           <div className={styles.editorGrid}>
             <div className={styles.formGroup}>
@@ -699,8 +667,8 @@ export default function BookPageEditor({ initialContent }: BookPageEditorProps) 
         <section className={styles.editorSection}>
           <h2 className={styles.editorSectionTitle}>Retailers Section</h2>
           <p className={styles.sectionNote}>
-            Footer and book page retailer buttons. Under each store, add
-            &quot;Shop by country&quot; links shown in the hover dropdown.
+            Shown on the book page and homepage footer. Under each store, add
+            &quot;Shop by country&quot; links for the hover dropdown.
           </p>
           <div className={styles.editorGrid}>
             <div className={styles.formGroup}>

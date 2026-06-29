@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import SiteFooterBar from "@/components/SiteFooterBar";
+import GlobalSiteFooterBar from "@/components/GlobalSiteFooterBar";
 import JourneyTimeline from "@/components/journey/JourneyTimeline";
 import { getJourneyPageContent } from "@/lib/journeyPage";
 import styles from "./page.module.css";
@@ -41,7 +41,7 @@ export default async function JourneyPage() {
       </main>
 
       <footer>
-        <SiteFooterBar />
+        <GlobalSiteFooterBar />
       </footer>
     </div>
   );

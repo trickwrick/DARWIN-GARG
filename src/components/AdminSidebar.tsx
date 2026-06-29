@@ -69,11 +69,13 @@ export default function AdminSidebar() {
   const writingsOpenDefault = isWritingsSection(pathname);
   const [writingsOpen, setWritingsOpen] = useState(writingsOpenDefault);
   const [pendingQueryCount, setPendingQueryCount] = useState(0);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     if (isWritingsSection(pathname)) {
       setWritingsOpen(true);
     }
+    setMobileOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -113,7 +115,32 @@ export default function AdminSidebar() {
   const writingsSectionActive = isWritingsSection(pathname);
 
   return (
-    <aside className={styles.sidebar}>
+    <>
+      <header className={styles.adminMobileBar}>
+        <span className={styles.adminMobileBrand}>Darwin Garg</span>
+        <button
+          type="button"
+          className={styles.adminMobileMenuBtn}
+          onClick={() => setMobileOpen((open) => !open)}
+          aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? "Close admin menu" : "Open admin menu"}
+        >
+          {mobileOpen ? "✕" : "☰"}
+        </button>
+      </header>
+
+      {mobileOpen ? (
+        <button
+          type="button"
+          className={styles.adminOverlay}
+          onClick={() => setMobileOpen(false)}
+          aria-label="Close admin menu"
+        />
+      ) : null}
+
+      <aside
+        className={`${styles.sidebar} ${mobileOpen ? styles.sidebarOpen : ""}`}
+      >
       <div className={styles.sidebarHeader}>
         <p className={styles.sidebarEyebrow}>Darwin Garg</p>
         <h2 className={styles.sidebarTitle}>Admin Panel</h2>
@@ -126,6 +153,7 @@ export default function AdminSidebar() {
               key={item.path}
               href={item.path}
               className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
+              onClick={() => setMobileOpen(false)}
             >
               <span>{item.name}</span>
               {item.path === "/admin/queries" && pendingQueryCount > 0 ? (
@@ -176,6 +204,7 @@ export default function AdminSidebar() {
                     className={`${styles.navSubLink} ${
                       isActive ? styles.navSubLinkActive : ""
                     }`}
+                    onClick={() => setMobileOpen(false)}
                   >
                     <span className={styles.navSubDash}>-</span>
                     {item.name}
@@ -194,5 +223,6 @@ export default function AdminSidebar() {
         </form>
       </div>
     </aside>
+    </>
   );
 }

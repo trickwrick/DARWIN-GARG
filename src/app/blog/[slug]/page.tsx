@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
-import SiteFooterBar from "@/components/SiteFooterBar";
+import GlobalSiteFooterBar from "@/components/GlobalSiteFooterBar";
 import { getEssayBySlug, getAllEssaySlugsFromContent } from "@/lib/writingsPage";
 import type { EssayBlock } from "@/data/essays";
 import styles from "./page.module.css";
@@ -174,7 +174,7 @@ export default async function EssayPage({ params }: EssayPageProps) {
       </main>
 
       <footer>
-        <SiteFooterBar />
+        <GlobalSiteFooterBar />
       </footer>
     </div>
   );

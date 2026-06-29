@@ -27,8 +27,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className={styles.header}>
-      <nav className={styles.nav} aria-label="Main navigation">
+    <>
+      <header className={styles.header}>
+        <nav className={styles.nav} aria-label="Main navigation">
         <Link
           href="/"
           className={styles.logo}
@@ -88,6 +89,8 @@ export default function Navbar() {
           </ul>
         </div>
       )}
-    </header>
+      </header>
+      <div className={styles.headerSpacer} aria-hidden="true" />
+    </>
   );
 }

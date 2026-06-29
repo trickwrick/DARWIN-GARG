@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
-import SiteFooterBar from "@/components/SiteFooterBar";
+import GlobalSiteFooterBar from "@/components/GlobalSiteFooterBar";
 import WritingsSection from "@/components/writings/WritingsSection";
 import { getWritingsPageContent } from "@/lib/writingsPage";
 import styles from "./page.module.css";
@@ -29,7 +29,7 @@ export default async function WritingsPage() {
       </main>
 
       <footer>
-        <SiteFooterBar />
+        <GlobalSiteFooterBar />
       </footer>
     </div>
   );

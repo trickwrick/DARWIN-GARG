@@ -4,6 +4,13 @@
   font-family: var(--font-sans);
 }
 
+.loginLayout {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background-color: #f5f1e6;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -594,8 +601,11 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  box-sizing: border-box;
   background-color: #f5f1e6;
-  padding: 24px;
+  padding: 24px 16px;
 }
 
 .loginBox {
@@ -606,6 +616,11 @@
   border: 1px solid rgba(139, 115, 85, 0.2);
   width: 100%;
   max-width: 420px;
+  box-sizing: border-box;
+}
+
+.loginBox form {
+  width: 100%;
 }
 
 .loginEyebrow {
@@ -656,6 +671,8 @@
 
 .input {
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 12px 16px;
   border: 1px solid rgba(139, 115, 85, 0.3);
   border-radius: 8px;
@@ -1608,14 +1625,96 @@
   color: #2d241e;
 }
 
+.adminMenuBtn,
+.adminOverlay,
+.adminMobileBar {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .adminMobileBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 110;
+    height: 56px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    background-color: #3d342c;
+    border-bottom: 1px solid rgba(232, 223, 208, 0.15);
+    box-shadow: 0 4px 20px rgba(26, 19, 17, 0.18);
+  }
+
+  .adminMobileBrand {
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f5f1e6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .adminMobileMenuBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgba(232, 223, 208, 0.22);
+    border-radius: 8px;
+    background: transparent;
+    color: #f5f1e6;
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .adminOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 115;
+    background: rgba(26, 19, 17, 0.45);
+  }
+
   .sidebar {
-    width: min(260px, 78vw);
+    width: min(280px, 86vw);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 120;
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
   }
 
   .mainContent {
-    margin-left: min(260px, 78vw);
-    padding: 24px 16px;
+    margin-left: 0;
+    padding: 64px 16px 24px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .loginContainer {
+    padding: 20px 16px;
+  }
+
+  .loginBox {
+    padding: 28px 20px;
+    max-width: none;
+  }
+
+  .loginTitle {
+    font-size: 1.65rem;
+    margin-bottom: 22px;
   }
 
   .pageHeader {

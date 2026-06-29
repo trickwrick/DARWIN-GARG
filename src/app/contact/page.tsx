@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
-import HomeFooter from "@/components/home/HomeFooter";
+import GlobalSiteFooterBar from "@/components/GlobalSiteFooterBar";
 import ContactNewsletter from "@/components/contact/ContactNewsletter";
 import ContactForm from "@/components/contact/ContactForm";
 import { getContactPageContent } from "@/lib/contactPage";
@@ -66,7 +66,7 @@ export default async function ContactPage() {
         <ContactNewsletter content={content.newsletter} />
       </main>
 
-      <HomeFooter socialLinks={content.socialLinks} />
+      <GlobalSiteFooterBar />
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default async function Home() {
         <TestimonialsSection content={content.readerVoices} />
         <AboutSection content={content.aboutAuthor} />
       </main>
-      <HomeFooter content={content.footer} socialLinks={content.socialLinks} />
+      <HomeFooter />
     </>
   );
 }

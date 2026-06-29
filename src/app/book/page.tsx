@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import BookCover from "@/components/book/BookCover";
-import SiteFooterBar from "@/components/SiteFooterBar";
+import GlobalSiteFooterBar from "@/components/GlobalSiteFooterBar";
 import { AVATAR_IMAGES } from "@/data/images";
 import { getBookPageContent } from "@/lib/bookPage";
 import RetailerButtons from "@/components/retailers/RetailerButtons";
@@ -164,24 +164,6 @@ export default async function BookPage() {
           </div>
         </section>
 
-        <section className={styles.toc} aria-label="Table of contents">
-          <p className={styles.sectionEyebrow}>{content.toc.eyebrow}</p>
-          <h2 className={styles.sectionTitle}>{content.toc.title}</h2>
-          <ol className={styles.tocList}>
-            {content.structure.avatars.map((item, index) => (
-              <li key={item.name} className={styles.tocItem}>
-                <span className={styles.tocNumber}>
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div className={styles.tocText}>
-                  <p className={styles.tocName}>{item.name}</p>
-                  <p className={styles.tocCrisis}>{item.crisis}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
-
         <section className={styles.excerpt} aria-label="An excerpt">
           <p className={styles.sectionEyebrow}>{content.excerpt.eyebrow}</p>
           <h2 className={styles.sectionTitle}>{content.excerpt.title}</h2>
@@ -221,14 +203,14 @@ export default async function BookPage() {
         <section className={styles.faq} aria-label="Frequently asked questions">
           <p className={styles.sectionEyebrow}>{content.faq.eyebrow}</p>
           <h2 className={styles.sectionTitle}>{content.faq.title}</h2>
-          <dl className={styles.faqList}>
+          <div className={styles.faqList}>
             {content.faq.items.map((item) => (
-              <div key={item.question} className={styles.faqItem}>
-                <dt className={styles.faqQuestion}>{item.question}</dt>
-                <dd className={styles.faqAnswer}>{item.answer}</dd>
-              </div>
+              <details key={item.question} className={styles.faqItem}>
+                <summary className={styles.faqQuestion}>{item.question}</summary>
+                <div className={styles.faqAnswer}>{item.answer}</div>
+              </details>
             ))}
-          </dl>
+          </div>
         </section>
 
         <section className={styles.explore} aria-label="Explore further">
@@ -270,7 +252,7 @@ export default async function BookPage() {
       </section>
 
       <footer>
-        <SiteFooterBar />
+        <GlobalSiteFooterBar />
       </footer>
     </div>
   );

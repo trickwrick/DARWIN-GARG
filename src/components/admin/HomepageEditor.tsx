@@ -584,8 +584,8 @@ export default function HomepageEditor({ initialContent }: HomepageEditorProps) 
         <section className={styles.editorSection}>
           <h2 className={styles.editorSectionTitle}>Social links</h2>
           <p className={styles.sectionNote}>
-            Facebook, Instagram, LinkedIn, and other links shown in the homepage
-            footer bar.
+            Facebook, Instagram, LinkedIn, and other links shown in the footer
+            bar on every page.
           </p>
 
           <div className={styles.repeatableList}>

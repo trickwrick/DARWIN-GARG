@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import SiteFooterBar from "@/components/SiteFooterBar";
+import GlobalSiteFooterBar from "@/components/GlobalSiteFooterBar";
 import { getAboutPageContent } from "@/lib/aboutPage";
 import styles from "./page.module.css";
 
@@ -103,7 +103,7 @@ export default async function AboutPage() {
       </main>
 
       <footer>
-        <SiteFooterBar />
+        <GlobalSiteFooterBar />
       </footer>
     </div>
   );

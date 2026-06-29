@@ -7,17 +7,15 @@ import styles from "./HomeFooter.module.css";
 
 type HomeFooterProps = {
   content?: HomepageContent["footer"];
-  socialLinks?: HomepageContent["socialLinks"];
 };
 
 export default async function HomeFooter({
   content,
-  socialLinks,
 }: HomeFooterProps = {}) {
   const homepage = await getHomepageContent();
   const bookPage = await getBookPageContent();
   const footerContent = content ?? homepage.footer;
-  const footerLinks = socialLinks ?? homepage.socialLinks;
+  const footerLinks = homepage.socialLinks;
 
   return (
     <footer className={styles.footer}>

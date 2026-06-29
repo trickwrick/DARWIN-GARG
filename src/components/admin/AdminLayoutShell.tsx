@@ -12,16 +12,14 @@ export default function AdminLayoutShell({
   const pathname = usePathname();
   const isLogin = pathname === "/admin/login";
 
+  if (isLogin) {
+    return <div className={styles.loginLayout}>{children}</div>;
+  }
+
   return (
     <div className={styles.adminLayout}>
       <AdminSidebar />
-      <main
-        className={`${styles.mainContent} ${
-          isLogin ? styles.mainContentFull : ""
-        }`}
-      >
-        {children}
-      </main>
+      <main className={styles.mainContent}>{children}</main>
     </div>
   );
 }
