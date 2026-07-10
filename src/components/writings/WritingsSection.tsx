@@ -18,7 +18,8 @@ export default function WritingsSection({ content }: WritingsSectionProps) {
   const [activeFilter, setActiveFilter] = useState<WritingFilter>("All");
 
   const showFeatured =
-    activeFilter === "All" || activeFilter === content.featured.category;
+    Boolean(content.featured?.slug) &&
+    (activeFilter === "All" || activeFilter === content.featured.category);
 
   const filteredWritings = useMemo(() => {
     if (activeFilter === "All") return content.writings;
