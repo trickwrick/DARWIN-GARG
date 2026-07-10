@@ -688,6 +688,29 @@
   box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.15);
 }
 
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordToggleBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8b7355;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.passwordToggleBtn:hover {
+  color: #2d241e;
+}
+
 .submitBtn {
   width: 100%;
   background: #3d342c;
