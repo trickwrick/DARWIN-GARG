@@ -17,7 +17,7 @@ export function mergeWritingsPageWithDefaults(
     hero: { ...DEFAULT_WRITINGS_PAGE_CONTENT.hero, ...partial.hero },
     featured: { ...DEFAULT_WRITINGS_PAGE_CONTENT.featured, ...partial.featured },
     writings:
-      partial.writings?.length
+      partial.writings !== undefined
         ? partial.writings
         : DEFAULT_WRITINGS_PAGE_CONTENT.writings,
     emptyState:
@@ -27,7 +27,7 @@ export function mergeWritingsPageWithDefaults(
       ...partial.newsletter,
     },
     essays:
-      partial.essays?.length
+      partial.essays !== undefined
         ? partial.essays
         : DEFAULT_WRITINGS_PAGE_CONTENT.essays,
   };

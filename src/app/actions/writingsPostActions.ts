@@ -198,12 +198,7 @@ export async function saveWritingPost(input: {
 
   const updated = applyPostToContent(content, form, oldSlug);
 
-  if (!updated.writings.length) {
-    updated.writings = DEFAULT_WRITINGS_PAGE_CONTENT.writings;
-  }
-  if (!updated.essays.length) {
-    updated.essays = DEFAULT_WRITINGS_PAGE_CONTENT.essays;
-  }
+  // Removed fallback to defaults to allow empty lists if the user deleted all but one post
 
   const result = await persistWritingsPageContent(updated);
 
@@ -228,7 +223,10 @@ export async function deleteWritingPost(slug: string) {
   const content = await getWritingsPageContent();
 
   const essayExists = content.essays.some((e) => e.slug === slug);
-  if (!essayExists) {
+  const writingExists = content.writings.some((w) => w.slug === slug);
+  const isFeatured = content.featured.slug === slug;
+
+  if (!essayExists && !writingExists && !isFeatured) {
     return { success: false, message: "Writing not found." };
   }
 
@@ -249,6 +247,18 @@ export async function deleteWritingPost(slug: string) {
         image: fallback.image,
         imageAlt: fallback.imageAlt,
         excerpt: fallback.description,
+      };
+    } else {
+      featured = {
+        slug: "",
+        title: "",
+        category: "Essays",
+        date: "",
+        image: "",
+        imageAlt: "",
+        excerpt: "",
+        readTime: "",
+        linkText: "",
       };
     }
   }

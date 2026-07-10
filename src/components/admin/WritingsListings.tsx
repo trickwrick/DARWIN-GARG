@@ -30,17 +30,19 @@ function buildListingRows(content: WritingsPageContent): ListingRow[] {
   const statusForSlug = (slug: string) =>
     content.essays.find((essay) => essay.slug === slug)?.status ?? "ACTIVE";
 
-  rows.push({
-    id: "featured",
-    slug: featuredSlug,
-    title: content.featured.title,
-    category: content.featured.category,
-    image: content.featured.image,
-    imageAlt: content.featured.imageAlt,
-    date: content.featured.date,
-    isFeatured: true,
-    status: statusForSlug(featuredSlug),
-  });
+  if (featuredSlug) {
+    rows.push({
+      id: "featured",
+      slug: featuredSlug,
+      title: content.featured.title,
+      category: content.featured.category,
+      image: content.featured.image,
+      imageAlt: content.featured.imageAlt,
+      date: content.featured.date,
+      isFeatured: true,
+      status: statusForSlug(featuredSlug),
+    });
+  }
 
   for (const writing of content.writings) {
     if (writing.slug === featuredSlug) continue;
