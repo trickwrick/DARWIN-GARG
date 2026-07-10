@@ -219,3 +219,49 @@ export async function saveWritingPost(input: {
 
   return result;
 }
+
+export async function deleteWritingPost(slug: string) {
+  if (!slug) {
+    return { success: false, message: "Slug is required." };
+  }
+
+  const content = await getWritingsPageContent();
+
+  const essayExists = content.essays.some((e) => e.slug === slug);
+  if (!essayExists) {
+    return { success: false, message: "Writing not found." };
+  }
+
+  const essays = content.essays.filter((e) => e.slug !== slug);
+  const writings = content.writings.filter((w) => w.slug !== slug);
+
+  // If deleted post was featured, fall back to the first remaining writing
+  let featured = { ...content.featured };
+  if (featured.slug === slug) {
+    const fallback = writings[0];
+    if (fallback) {
+      featured = {
+        ...featured,
+        slug: fallback.slug,
+        title: fallback.title,
+        category: fallback.category,
+        date: fallback.date,
+        image: fallback.image,
+        imageAlt: fallback.imageAlt,
+        excerpt: fallback.description,
+      };
+    }
+  }
+
+  const updated: WritingsPageContent = { ...content, essays, writings, featured };
+
+  const result = await persistWritingsPageContent(updated);
+
+  if (result.success) {
+    revalidatePath("/blog");
+    revalidatePath(`/blog/${slug}`);
+    revalidatePath("/admin/writings");
+  }
+
+  return result;
+}

@@ -1369,6 +1369,39 @@
   color: #f5f1e6;
 }
 
+.listingsActionGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.listingsDeleteBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(198, 40, 40, 0.25);
+  border-radius: 8px;
+  background: #fff8f8;
+  color: #c62828;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.listingsDeleteBtn:hover {
+  background: #c62828;
+  border-color: #c62828;
+  color: #fff;
+}
+
+.listingsDeleteBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
 .postTopBar {
   display: flex;
   justify-content: space-between;

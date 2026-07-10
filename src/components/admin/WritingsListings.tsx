@@ -1,8 +1,10 @@
 "use client";
 
+import { useTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { WritingsPageContent } from "@/data/writingsPage";
+import { deleteWritingPost } from "@/app/actions/writingsPostActions";
 import styles from "@/app/admin/admin.module.css";
 
 type WritingsListingsProps = {
@@ -78,6 +80,28 @@ function PencilIcon() {
   );
 }
 
+function TrashIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="3 6 5 6 21 6" />
+      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+      <path d="M10 11v6" />
+      <path d="M14 11v6" />
+      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+    </svg>
+  );
+}
+
 function StarIcon({ filled }: { filled: boolean }) {
   return (
     <svg
@@ -96,6 +120,17 @@ function StarIcon({ filled }: { filled: boolean }) {
 
 export default function WritingsListings({ content }: WritingsListingsProps) {
   const rows = buildListingRows(content);
+  const [isPending, startTransition] = useTransition();
+
+  function handleDelete(slug: string, title: string) {
+    if (!window.confirm(`Delete "${title}"? This cannot be undone.`)) return;
+    startTransition(async () => {
+      const result = await deleteWritingPost(slug);
+      if (!result.success) {
+        alert(result.message ?? "Failed to delete.");
+      }
+    });
+  }
 
   return (
     <div>
@@ -176,14 +211,26 @@ export default function WritingsListings({ content }: WritingsListingsProps) {
                   </td>
                   <td className={styles.listingsCellDate}>{row.date}</td>
                   <td>
-                    <Link
-                      href={`/admin/writings/${row.slug}/edit`}
-                      className={styles.listingsEditBtn}
-                      aria-label={`Edit ${row.title}`}
-                      title="Edit"
-                    >
-                      <PencilIcon />
-                    </Link>
+                    <div className={styles.listingsActionGroup}>
+                      <Link
+                        href={`/admin/writings/${row.slug}/edit`}
+                        className={styles.listingsEditBtn}
+                        aria-label={`Edit ${row.title}`}
+                        title="Edit"
+                      >
+                        <PencilIcon />
+                      </Link>
+                      <button
+                        className={styles.listingsDeleteBtn}
+                        aria-label={`Delete ${row.title}`}
+                        title="Delete"
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => handleDelete(row.slug, row.title)}
+                      >
+                        <TrashIcon />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
