@@ -6,6 +6,10 @@ type JourneySectionProps = {
   content: HomepageContent["makingOf"];
 };
 
+function levelAnchor(label: string) {
+  return label.toLowerCase().replace(/\s+/g, "-");
+}
+
 export default function JourneySection({ content }: JourneySectionProps) {
   return (
     <section id="journey" className={styles.section}>
@@ -18,10 +22,14 @@ export default function JourneySection({ content }: JourneySectionProps) {
 
       <div className={styles.cards}>
         {content.chapters.map((chapter) => (
-          <article key={chapter.label} className={styles.card}>
+          <Link
+            key={chapter.label}
+            href={`/journey#${levelAnchor(chapter.label)}`}
+            className={styles.card}
+          >
             <p className={styles.cardLabel}>{chapter.label}</p>
             <h3 className={styles.cardTitle}>{chapter.title}</h3>
-          </article>
+          </Link>
         ))}
       </div>
 

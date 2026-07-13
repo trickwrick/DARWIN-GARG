@@ -54,8 +54,11 @@ export default function JourneyTimeline({ chapters }: JourneyTimelineProps) {
           {chapters.map((chapter, index) => {
             const side = index % 2 === 0 ? "right" : "left";
 
+            const anchor = chapter.label.toLowerCase().replace(/\s+/g, "-");
+
             return (
               <li
+                id={anchor}
                 key={chapter.label}
                 className={`${styles.milestone} ${styles[side]}`}
               >

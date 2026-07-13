@@ -47,10 +47,28 @@
 }
 
 .card {
+  display: block;
   background-color: #3d342c;
   border-left: 2px solid #a68b5b;
   padding: 1.35rem 1.25rem 1.5rem;
   border-radius: 0 4px 4px 0;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  background-color: #4a4036;
+  border-left-color: #c4a574;
+  transform: translateY(-2px);
+}
+
+.card:focus-visible {
+  outline: 2px solid #a68b5b;
+  outline-offset: 3px;
 }
 
 .cardLabel {

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import BookCover from "@/components/book/BookCover";
+import BookFaq from "@/components/book/BookFaq";
 import GlobalSiteFooterBar from "@/components/GlobalSiteFooterBar";
 import { AVATAR_IMAGES } from "@/data/images";
 import { getBookPageContent } from "@/lib/bookPage";
@@ -203,14 +204,7 @@ export default async function BookPage() {
         <section className={styles.faq} aria-label="Frequently asked questions">
           <p className={styles.sectionEyebrow}>{content.faq.eyebrow}</p>
           <h2 className={styles.sectionTitle}>{content.faq.title}</h2>
-          <div className={styles.faqList}>
-            {content.faq.items.map((item) => (
-              <details key={item.question} className={styles.faqItem}>
-                <summary className={styles.faqQuestion}>{item.question}</summary>
-                <div className={styles.faqAnswer}>{item.answer}</div>
-              </details>
-            ))}
-          </div>
+          <BookFaq items={content.faq.items} />
         </section>
 
         <section className={styles.explore} aria-label="Explore further">

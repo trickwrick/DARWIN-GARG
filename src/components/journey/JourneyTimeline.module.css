@@ -71,6 +71,7 @@
   align-items: start;
   position: relative;
   padding-top: 1.35rem;
+  scroll-margin-top: 5.5rem;
 }
 
 .milestone:first-child {
