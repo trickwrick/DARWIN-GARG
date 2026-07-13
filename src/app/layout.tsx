@@ -25,6 +25,14 @@ export const metadata: Metadata = {
   title: "When Gods Must Return | Ancient Wisdom for Modern Chaos",
   description:
     "The world isn't facing one crisis. It's facing ten — simultaneously. Discover the ancient wisdom of the Dashavatar for our modern chaos.",
+  icons: {
+    icon: [
+      { url: "/favicon.png?v=2", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png?v=2", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png?v=2", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.png?v=2",
+  },
 };
 
 export default function RootLayout({
